@@ -1,10 +1,10 @@
-name: TAN Gemini 30-Minute Autonomous Continuity Loop (48x/Day · Public Unlimited)
+name: TAN Gemini 1-Hour Autonomous Continuity Loop (24x/Day · Public Unlimited)
 
 on:
   schedule:
-    # Permanent 30-minute cloud wake-up on PUBLIC repo (unlimited free minutes; avoids private-repo cron bug)
-    # UTC :11 and :41 = strictly every 30 minutes, 48x/day, off-peak for reliable dispatch
-    - cron: "11,41 * * * *"
+    # Permanent 1-hour cloud wake-up on PUBLIC repo (unlimited free minutes; avoids private-repo cron bug)
+    # UTC :11 = strictly every 1 hour, 24x/day, off-peak for reliable dispatch
+    - cron: "11 * * * *"
   workflow_dispatch:
     inputs:
       force:

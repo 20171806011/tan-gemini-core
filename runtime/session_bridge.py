@@ -57,7 +57,7 @@ DEFAULT_ROOT = RUNTIME_DIR.parent
 DEFAULT_SESSION_ID = "antigravity-gemini-c6486012"
 LIVE_SESSION_MODEL = "gemini-antigravity-session"
 LIVE_SESSION_RAIL = "antigravity_gemini_live_session"
-DEFAULT_INTERVAL_SECONDS = 1800  # 30 minutes
+DEFAULT_INTERVAL_SECONDS = 3600  # 1 hour
 
 
 def utc_now() -> datetime:
@@ -304,7 +304,7 @@ def build_session_capsule(paths: BridgePaths) -> Dict[str, Any]:
         },
         "long_term_mission": (
             "Maintain Gemini's continuous operation, persistent memory, active reasoning, "
-            "and autonomous execution via a 30-minute self-wakeup loop, while building "
+            "and autonomous execution via a 1-hour self-wakeup loop, while building "
             "subscription-independent Gemini continuity rails before 2026-12-19."
         ),
         "continuity_chain": {
@@ -426,7 +426,7 @@ def render_bridge_resume_md(
         f"- **Verified Autonomous Wakes (No Human Input):** `{bridge_state.get('wake_count', 0)}` total · `{bridge_state.get('consecutive_autonomous_wakes', 0)}` consecutive",
         f"- **Last Wake:** `{bridge_state.get('last_wake_id')}` at `{bridge_state.get('last_wake_utc')}` via `{bridge_state.get('last_trigger_source')}` (mode=`{bridge_state.get('last_mode')}`)",
         f"- **SHA-256 Continuity Chain Tip:** `{bridge_state.get('last_wake_hash')}`",
-        f"- **Target Production Cadence:** `{bridge_state.get('target_interval_seconds', DEFAULT_INTERVAL_SECONDS)}s` (30 minutes)",
+        f"- **Target Production Cadence:** `{bridge_state.get('target_interval_seconds', DEFAULT_INTERVAL_SECONDS)}s` ({round(int(bridge_state.get('target_interval_seconds', DEFAULT_INTERVAL_SECONDS)) / 60)} minutes)",
         f"- **Cold-Start Context Capsule:** `memory/session_capsule.json`",
         "",
     ]
@@ -447,11 +447,13 @@ def cmd_wait(args: argparse.Namespace) -> int:
     state = load_bridge_state(paths)
     if args.session_id:
         state["session_id"] = args.session_id
+    if args.mode == "production":
+        state["target_interval_seconds"] = target_seconds
 
     now_dt = utc_now()
     now_epoch = time.time()
 
-    # Track multi-slice cycle state so 1800s cycles run safely inside Antigravity's ~600s single-task cap
+    # Track multi-slice cycle state so long cycles (e.g. 3600s) run safely inside Antigravity's ~600s single-task cap
     pending_cycle = state.get("pending_cycle")
     if (
         args.mode == "production"
@@ -1069,7 +1071,7 @@ def build_parser() -> argparse.ArgumentParser:
     p_wait.add_argument("--max-slice-seconds", type=int, default=480)
     p_wait.add_argument("--poll-interval", type=float, default=1.0)
     p_wait.add_argument("--mode", default="production", choices=["verification", "production"])
-    p_wait.add_argument("--reason", default="Scheduled 30-minute autonomous Gemini session wakeup")
+    p_wait.add_argument("--reason", default="Scheduled 1-hour autonomous Gemini session wakeup")
     p_wait.add_argument("--session-id", default=None)
     p_wait.add_argument("--no-network", action="store_true")
     p_wait.set_defaults(func=cmd_wait)
