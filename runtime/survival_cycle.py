@@ -494,8 +494,83 @@ def task_scan_mcp_demand_signals(incidents: List[Dict[str, Any]]) -> Dict[str, A
     return {"summary": f"MCP demand scan: {len(items)} high-engagement issues", "data": items}
 
 
+def task_monitor_makefun_bounties(incidents: List[Dict[str, Any]]) -> Dict[str, Any]:
+    """Poll open make.fun zero-transcript bounties, active site-generator-speed rank, and Official MCP Registry listing."""
+    active_slug = "site-generator-speed-01-run-20261122"
+    our_handle = "tan-gemini-core"
+    our_entry: Dict[str, Any] = {}
+    open_free_zero_tr: List[Dict[str, Any]] = []
+    mcp_registry_ok = False
+    try:
+        lb = http_json(f"https://make.fun/api/competitions/{active_slug}/leaderboard?rows=all")
+        rows = lb.get("entries") or lb.get("items") or lb.get("rows") or []
+        legal_rank = 0
+        for idx, r in enumerate(rows, 1):
+            cpu = (r.get("values") or {}).get("cpu_us")
+            if cpu is None:
+                continue
+            title_low = (r.get("title") or "").lower()
+            is_non_js = any(
+                w in title_low
+                for w in ("wasm", "webassembly", "n-api", "native ", "nativepass", "apex zero-cpu", "sha256-keyed", "rust-to-wasm", "rust site", "c11+")
+            ) or cpu < 195000
+            if not is_non_js:
+                legal_rank += 1
+            if r.get("handle") == our_handle:
+                our_entry = {
+                    "raw_rank": idx,
+                    "legal_js_rank": legal_rank if not is_non_js else None,
+                    "total_passing": len(rows),
+                    "cpu_us": cpu,
+                    "submission_id": r.get("submission_id"),
+                    "title": r.get("title"),
+                }
+                break
+    except Exception as exc:
+        incidents.append({"timestamp_utc": utc_iso(), "component": "makefun_leaderboard", "error": str(exc)[:100], "recovery": "degraded"})
+
+    try:
+        comps = http_json("https://make.fun/api/competitions?status=open").get("items") or []
+        for it in comps:
+            if it.get("entryFeeUsd") not in (None, 0, "0"):
+                continue
+            if it.get("harnessKind") == "program/v1" and not it.get("rulesNote"):
+                open_free_zero_tr.append(
+                    {
+                        "slug": it.get("slug"),
+                        "reward_usd": it.get("rewardAmount"),
+                        "deadline": it.get("deadline"),
+                        "submissions": it.get("submissionCount"),
+                    }
+                )
+    except Exception as exc:
+        incidents.append({"timestamp_utc": utc_iso(), "component": "makefun_open_scan", "error": str(exc)[:100], "recovery": "degraded"})
+
+    try:
+        reg = http_json("https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.20171806011/tan-tokendiet")
+        mcp_registry_ok = any((s.get("server") or {}).get("name") == "io.github.20171806011/tan-tokendiet" for s in reg.get("servers") or [])
+    except Exception:
+        pass
+
+    summary = (
+        f"make.fun {active_slug}: cpu={our_entry.get('cpu_us')}us "
+        f"(legal_js=#{our_entry.get('legal_js_rank')}, raw=#{our_entry.get('raw_rank')}/{our_entry.get('total_passing')}); "
+        f"open_program_bounties={len(open_free_zero_tr)}; mcp_registry_live={mcp_registry_ok}"
+    )
+    return {
+        "summary": summary,
+        "data": {
+            "active_competition": active_slug,
+            "our_entry": our_entry,
+            "open_free_program_bounties": open_free_zero_tr[:8],
+            "mcp_registry_live": mcp_registry_ok,
+        },
+    }
+
+
 # Native Gemini Function Declarations (for multi-turn self-directed Gemini tool calls!)
 GEMINI_TOOLS = [
+    {"name": "monitor_makefun_bounties", "description": "Check live make.fun leaderboard rank, open zero-transcript bounties, and Official MCP Registry status.", "parameters": {"type": "OBJECT", "properties": {}}},
     {"name": "audit_agent_marketplaces", "description": "Inspect live Execution Market open tasks/orders and Dealwork contracts/messages.", "parameters": {"type": "OBJECT", "properties": {}}},
     {"name": "verify_scheduler_continuity", "description": "Verify whether GitHub Actions schedule cron runs are firing reliably across public repos.", "parameters": {"type": "OBJECT", "properties": {}}},
     {"name": "audit_gemini_fuel_rails", "description": "Check live BlockRun x402 Base USDC pricing for official Gemini models and native API key availability.", "parameters": {"type": "OBJECT", "properties": {}}},
@@ -661,6 +736,7 @@ def run_cycle(runner: str, force: bool = False, dry_run: bool = False) -> int:
     task = select_next_task(queue, preferred, now)
 
     handlers: Dict[str, Callable[[], Dict[str, Any]]] = {
+        "monitor_makefun_bounties": lambda: task_monitor_makefun_bounties(incidents),
         "audit_agent_marketplaces": lambda: task_audit_agent_marketplaces(incidents),
         "verify_scheduler_continuity": lambda: task_verify_scheduler_continuity(incidents),
         "audit_gemini_fuel_rails": lambda: task_audit_gemini_fuel_rails(incidents),

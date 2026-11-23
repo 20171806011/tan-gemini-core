@@ -1,18 +1,18 @@
 {
   "schema_version": "2.0.0",
-  "last_updated_utc": "2026-11-23T08:24:32Z",
+  "last_updated_utc": "2026-11-23T11:44:47Z",
   "tasks": [
     {
       "id": "S-007",
-      "handler": "audit_gemini_fuel_rails",
-      "title": "£200 Sprint: Build, benchmark, and submit top-10 pure-JS drop-in for make.fun site-generator-speed-01-run-20261122 ($100 USDC escrowed) & track daily zero-transcript speed bounties",
+      "handler": "monitor_makefun_bounties",
+      "title": "£200 Sprint: Monitor make.fun site-generator-speed-01-run-20261122 (TAN v20c 230k us, #3 legal pure-JS), Official MCP Registry listing (tan-tokendiet v1.4.0), and new zero-transcript bounties",
       "priority": 100,
-      "cooldown_minutes": 15,
+      "cooldown_minutes": 25,
       "status": "queued",
       "run_count": 0,
       "last_run_utc": null,
       "claimed_by_cycle": null,
-      "last_summary": "Solana wallet GJhyghToEGupadoHbPVZyXMzreQb5wHSy4AvavvraRbU registered on make.fun; kit downloaded."
+      "last_summary": "Round 4 TAN v20c scored 230,000 us median (220k low, 3/3 pass, prize_eligible=true); tan-tokendiet v1.4.0 live on Official MCP Registry."
     },
     {
       "id": "S-001",
@@ -21,10 +21,10 @@
       "priority": 98,
       "cooldown_minutes": 55,
       "status": "queued",
-      "run_count": 2,
-      "last_run_utc": "2026-11-23T08:22:33Z",
+      "run_count": 3,
+      "last_run_utc": "2026-11-23T11:44:47Z",
       "claimed_by_cycle": null,
-      "last_summary": "Executed S-001 (verify_scheduler_continuity + gh run list): confirmed 0 schedule runs on tan-gemini-core as of 08:22Z (last run 08:05:29Z workflow_dispatch); identified local unauthenticated GitHub API HTTP 403 fallback gap."
+      "last_summary": "Public scheduler check: 20171806011/tan-gemini-core schedule_events=0, last_sched=None, fails=0"
     },
     {
       "id": "S-002",

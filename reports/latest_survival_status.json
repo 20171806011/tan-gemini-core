@@ -1,12 +1,12 @@
 {
-  "cycle_id": 2,
-  "timestamp_utc": "2026-11-23T08:05:39Z",
-  "runner": "github_actions_public",
-  "duration_sec": 1.16,
+  "cycle_id": 6,
+  "timestamp_utc": "2026-11-23T11:44:47Z",
+  "runner": "local_vm",
+  "duration_sec": 1.5,
   "survival": {
     "deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 25.66,
-    "hours_until_dec19_deadline": 615.9,
+    "days_until_dec19_deadline": 25.51,
+    "hours_until_dec19_deadline": 612.3,
     "has_gemini_api_key": false,
     "has_x402_signer": false,
     "base_usdc_balance": 0.0,
@@ -19,7 +19,7 @@
     "independent_gemini_ready": false
   },
   "base_treasury": {
-    "address": "0x63cee161084df40f527EFBFDE3e7bC242F4b32FD",
+    "address": "0xf7D6e17CdD1C803d0cF5240DC5eDab34f8Db8EF5",
     "base_usdc": 0.0,
     "base_eth": 0.0,
     "delta_usdc": 0.0,
@@ -34,13 +34,22 @@
     "buyer_inquiries": []
   },
   "executed_task": {
-    "id": "S-002",
-    "handler": "audit_gemini_fuel_rails",
-    "summary": "Gemini rails: native_key=False, x402_blockrun=live_402_ready ($0.002/call)",
+    "id": "S-001",
+    "handler": "verify_scheduler_continuity",
+    "summary": "Public scheduler check: 20171806011/tan-gemini-core schedule_events=0, last_sched=None, fails=0",
     "data": {
-      "native_gemini_api_key_present": false,
-      "blockrun_x402_gemini_status": "live_402_ready",
-      "blockrun_gemini_3_8_flash_usdc": 0.002
+      "20171806011/tan-gemini-core": {
+        "total_recent": 1,
+        "schedule_events": 0,
+        "last_schedule_utc": null,
+        "recent_failures": 0
+      },
+      "20171806011/tan-tokendiet": {
+        "total_recent": 10,
+        "schedule_events": 0,
+        "last_schedule_utc": null,
+        "recent_failures": 0
+      }
     }
   },
   "brain_meta": {
@@ -49,7 +58,7 @@
     "status": "awaiting_gemini_fuel",
     "strict_gemini_only": true,
     "x402_usdc_spent": 0.0,
-    "note": "No non-Gemini model was substituted. Gemini cognition will activate automatically on the next 30-min cycle as soon as GEMINI_API_KEY (Google AI Studio free tier: 250 RPD) is configured OR >= $0.002 USDC arrives in Base treasury 0x63cee161084df40f527EFBFDE3e7bC242F4b32FD.",
+    "note": "No non-Gemini model was substituted. Gemini cognition will activate automatically on the next 30-min cycle as soon as GEMINI_API_KEY (Google AI Studio free tier: 250 RPD) is configured OR >= $0.002 USDC arrives in Base treasury 0xf7D6e17CdD1C803d0cF5240DC5eDab34f8Db8EF5.",
     "diagnostics": [
       {
         "rail": "google_gemini_native_api",
