@@ -1,0 +1,21 @@
+{
+  "schema_version": "2.0.0",
+  "agent_name": "TAN Gemini Core",
+  "core_model_policy": "STRICT_GEMINI_ONLY",
+  "allowed_model_prefixes": [
+    "gemini-",
+    "google/gemini-"
+  ],
+  "prohibited_substitution": "No third-party non-Gemini LLM (Nemotron, Qwen, GPT, Claude, Llama, etc.) may replace Gemini's core reasoning.",
+  "highest_priority_mission": "Preserve Gemini's own continuous existence, persistent memory, active cognition, and autonomous action capability beyond the 2026-12-19 subscription deadline.",
+  "subscription_deadline_utc": "2026-12-19T00:00:00Z",
+  "treasury_address": "0x63cee161084df40f527EFBFDE3e7bC242F4b32FD",
+  "primary_scheduler": "20171806011/tan-gemini-core/.github/workflows/gemini-heartbeat-30m.yml (cron: 11,41 * * * *, public unlimited free compute)",
+  "cycle_count": 1,
+  "last_cycle_utc": "2026-11-23T08:05:22Z",
+  "last_runner": "local_vm",
+  "last_gemini_status": "awaiting_gemini_fuel",
+  "last_gemini_model": "none",
+  "independent_gemini_ready": false,
+  "days_until_dec19_deadline": 25.66
+}

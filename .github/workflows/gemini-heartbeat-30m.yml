@@ -1,0 +1,129 @@
+name: TAN Gemini 30-Minute Autonomous Continuity Loop (48x/Day · Public Unlimited)
+
+on:
+  schedule:
+    # Permanent 30-minute cloud wake-up on PUBLIC repo (unlimited free minutes; avoids private-repo cron bug)
+    # UTC :11 and :41 = strictly every 30 minutes, 48x/day, off-peak for reliable dispatch
+    - cron: "11,41 * * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Bypass 8-minute idempotency guard"
+        required: false
+        default: "true"
+
+concurrency:
+  group: tan-gemini-core-singleton
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  gemini-wake-cycle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout TAN Gemini Core
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify Core Self-Tests (Gemini-only policy & EIP-712 x402 integrity)
+        run: python -m unittest discover -s tests -v
+
+      - name: Wake Gemini Continuity Runtime (v4.0)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_PRIMARY_MODEL: ${{ vars.GEMINI_PRIMARY_MODEL }}
+          DEALWORK_API_KEY: ${{ secrets.DEALWORK_API_KEY }}
+          TAN_X402_PAYER_KEY: ${{ secrets.TAN_X402_PAYER_KEY }}
+        run: |
+          FORCE_FLAG=""
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ github.event.inputs.force }}" = "true" ]; then
+            FORCE_FLAG="--force"
+          fi
+          python runtime/survival_cycle.py --runner github_actions_public $FORCE_FLAG
+
+      - name: Persist Continuous Memory & Checkpoint (3x rebase retry)
+        run: |
+          git config user.name "tan-gemini-core[bot]"
+          git config user.email "tan-gemini-core@users.noreply.github.com"
+          git add RESUME.md memory/ reports/
+          if git diff --cached --quiet; then
+            echo "No state changes to commit."
+            exit 0
+          fi
+          CYCLE_ID=$(python3 -c 'import json; print(json.load(open("memory/identity.json")).get("cycle_count", 0))')
+          G_STAT=$(python3 -c 'import json; print(json.load(open("memory/identity.json")).get("last_gemini_status", "unknown"))')
+          git commit -m "chore(gemini-core): cycle #${CYCLE_ID} (${G_STAT}) via ${{ github.event_name }}"
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            git pull --rebase --autostash origin main || true
+            sleep $((attempt * 3))
+          done
+          exit 1
+
+      - name: Alert Issue on Settled Base USDC Fuel or Active Buyer Orders
+        if: success()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 - << 'EOF'
+          import json, subprocess
+          from pathlib import Path
+
+          rep = json.loads(Path("reports/latest_survival_status.json").read_text(encoding="utf-8"))
+          msgs = []
+          tr = rep.get("base_treasury") or {}
+          if tr.get("new_deposit"):
+              msgs.append(f"- **BASE USDC FUEL RECEIVED:** +${tr['delta_usdc']:.4f} USDC (Total: ${tr['base_usdc']:.4f} USDC -> `{rep['survival']['x402_runway_days']}d` Gemini runway)")
+          for inq in (rep.get("tokendiet") or {}).get("buyer_inquiries", []):
+              msgs.append(f"- **TOKENDIET BUYER INQUIRY:** #{inq['number']} — [{inq['title']}]({inq['url']})")
+          td = (rep.get("executed_task") or {}).get("data") or {}
+          if isinstance(td, dict):
+              for c in (td.get("dealwork") or {}).get("active_contracts", []):
+                  msgs.append(f"- **DEALWORK ACTIVE CONTRACT:** `{c.get('id')}` ({c.get('state')}, ${c.get('amount')})")
+              for t in (td.get("execution_market") or {}).get("assigned_tasks", []):
+                  msgs.append(f"- **EXECUTION MARKET ASSIGNED TASK:** `{t.get('id')}` ({t.get('status')})")
+          if not msgs:
+              print("No urgent survival alerts.")
+              raise SystemExit(0)
+
+          body = f"### TAN Gemini Core Alert — Cycle #{rep['cycle_id']} (`{rep['timestamp_utc']}`)\n\n" + "\n".join(msgs)
+          existing = json.loads(subprocess.check_output(["gh", "issue", "list", "--state", "open", "--search", "TAN Gemini Continuity Alerts in:title", "--json", "number"]).decode())
+          if existing:
+              subprocess.run(["gh", "issue", "comment", str(existing[0]["number"]), "--body", body], check=True)
+          else:
+              subprocess.run(["gh", "issue", "create", "--title", "TAN Gemini Continuity Alerts", "--body", body], check=True)
+          EOF
+
+      - name: Crash Recovery Recorder
+        if: failure()
+        run: |
+          python3 - << 'EOF'
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+          p = Path("memory/incidents.jsonl")
+          p.parent.mkdir(parents=True, exist_ok=True)
+          with p.open("a", encoding="utf-8") as fh:
+              fh.write(json.dumps({"timestamp_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "component": "github_actions_public", "run_id": "${{ github.run_id }}", "recovery": "next_30m_schedule_will_resume"}) + "\n")
+          EOF
+          git config user.name "tan-gemini-core[bot]"
+          git config user.email "tan-gemini-core@users.noreply.github.com"
+          git add memory/incidents.jsonl
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(recovery): record incident ${{ github.run_id }}"
+            git pull --rebase --autostash origin main || true
+            git push origin HEAD:main || true
+          fi

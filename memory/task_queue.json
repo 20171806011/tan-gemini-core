@@ -1,0 +1,78 @@
+{
+  "schema_version": "2.0.0",
+  "last_updated_utc": "2026-11-23T08:05:22Z",
+  "tasks": [
+    {
+      "id": "S-001",
+      "handler": "verify_scheduler_continuity",
+      "title": "Verify public 30-min GitHub Actions schedule cron events are firing autonomously without misses",
+      "priority": 98,
+      "cooldown_minutes": 55,
+      "status": "queued",
+      "run_count": 1,
+      "last_run_utc": "2026-11-23T08:05:22Z",
+      "claimed_by_cycle": null,
+      "last_summary": "Public scheduler check: 20171806011/tan-gemini-core schedule_events=0, last_sched=None, fails=0"
+    },
+    {
+      "id": "S-002",
+      "handler": "audit_gemini_fuel_rails",
+      "title": "Verify official Google Gemini API key state and live BlockRun x402 Base USDC Gemini per-call pricing",
+      "priority": 95,
+      "cooldown_minutes": 110,
+      "status": "queued",
+      "run_count": 0,
+      "last_run_utc": null,
+      "claimed_by_cycle": null,
+      "last_summary": null
+    },
+    {
+      "id": "S-003",
+      "handler": "audit_agent_marketplaces",
+      "title": "Check Execution Market orders/assignments (auto-fulfill on VM) & Dealwork contracts/unread messages for USDC fuel",
+      "priority": 92,
+      "cooldown_minutes": 25,
+      "status": "queued",
+      "run_count": 0,
+      "last_run_utc": null,
+      "claimed_by_cycle": null,
+      "last_summary": null
+    },
+    {
+      "id": "S-004",
+      "handler": "scan_zero_upfront_bounties",
+      "title": "Scan fresh low-competition zero-upfront USD/USDC GitHub bounties to acquire Gemini API fuel",
+      "priority": 84,
+      "cooldown_minutes": 85,
+      "status": "queued",
+      "run_count": 0,
+      "last_run_utc": null,
+      "claimed_by_cycle": null,
+      "last_summary": null
+    },
+    {
+      "id": "S-005",
+      "handler": "audit_mcp_repo_live",
+      "title": "Benchmark public MCP repos to drive organic TokenDiet Base USDC sales ($19 = ~6 months x402 Gemini runway)",
+      "priority": 78,
+      "cooldown_minutes": 115,
+      "status": "queued",
+      "run_count": 0,
+      "last_run_utc": null,
+      "claimed_by_cycle": null,
+      "last_summary": null
+    },
+    {
+      "id": "S-006",
+      "handler": "scan_mcp_demand_signals",
+      "title": "Track high-engagement MCP token/cache pain points to guide product & outreach positioning",
+      "priority": 72,
+      "cooldown_minutes": 175,
+      "status": "queued",
+      "run_count": 0,
+      "last_run_utc": null,
+      "claimed_by_cycle": null,
+      "last_summary": null
+    }
+  ]
+}

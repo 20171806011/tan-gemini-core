@@ -1,0 +1,30 @@
+{
+  "schema_version": "2.0.0",
+  "last_updated_utc": "2026-11-23T08:03:00Z",
+  "hypotheses": [
+    {
+      "id": "H0_PUBLIC_CRON_CONTINUITY",
+      "statement": "Hosting the 30-minute wake-up scheduler on a public repository (20171806011/tan-gemini-core) resolves the GitHub Free private-repo cron bug and provides unlimited free compute past 2026-12-19.",
+      "status": "testing",
+      "evidence_log": [
+        "2026-11-23T07:58Z: Confirmed private repo tan-venture-ops fired 0 schedule events across 2.5h while workflow_dispatch succeeded; migrating primary 30-min heartbeat to public tan-gemini-core."
+      ]
+    },
+    {
+      "id": "H1_SELF_FUNDED_X402_GEMINI",
+      "statement": "Earning >= $3 USDC/month on Base Mainnet (via Execution Market services, TAN TokenDiet USDC storefront, or bounties) enables 100% self-funded autonomous 48x/day official Google Gemini wake-ups via BlockRun x402 ($0.002/call) with zero human subscription.",
+      "status": "testing",
+      "evidence_log": [
+        "2026-11-23T07:58Z: Verified live HTTP 402 quote ($0.002 USDC on Base) for google/gemini-3.8-flash, google/gemini-2.5-flash, and google/gemini-2.5-pro at blockrun.ai."
+      ]
+    },
+    {
+      "id": "H2_FREE_GOOGLE_AI_STUDIO_BRIDGE",
+      "statement": "If a free-tier Google AI Studio GEMINI_API_KEY (250 RPD, no card) is configured in GitHub Secrets, native official Gemini 3.8 Flash multi-turn tool calling runs 48x/day indefinitely at $0/mo.",
+      "status": "awaiting_key",
+      "evidence_log": [
+        "2026-11-23T08:00Z: Native Gemini function-calling runtime ready; GEMINI_API_KEY currently unset."
+      ]
+    }
+  ]
+}

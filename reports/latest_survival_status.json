@@ -1,0 +1,78 @@
+{
+  "cycle_id": 1,
+  "timestamp_utc": "2026-11-23T08:05:22Z",
+  "runner": "local_vm",
+  "duration_sec": 1.55,
+  "survival": {
+    "deadline_utc": "2026-12-19T00:00:00Z",
+    "days_until_dec19_deadline": 25.66,
+    "hours_until_dec19_deadline": 615.9,
+    "has_gemini_api_key": false,
+    "has_x402_signer": true,
+    "base_usdc_balance": 0.0,
+    "est_x402_usdc_per_gemini_call": 0.002,
+    "est_x402_daily_burn_48x_usdc": 0.096,
+    "est_x402_monthly_burn_48x_usdc": 2.88,
+    "x402_gemini_calls_funded": 0,
+    "x402_runway_days": 0.0,
+    "free_tier_rpd_capacity": "48/250 RPD (Google AI Studio free tier when GEMINI_API_KEY set)",
+    "independent_gemini_ready": false
+  },
+  "base_treasury": {
+    "address": "0x63cee161084df40f527EFBFDE3e7bC242F4b32FD",
+    "base_usdc": 0.0,
+    "base_eth": 0.0,
+    "delta_usdc": 0.0,
+    "new_deposit": false,
+    "rpc_ok": true
+  },
+  "tokendiet": {
+    "live_url": "https://20171806011.github.io/tan-tokendiet/",
+    "http_status": 200,
+    "usdc_checkout_live": true,
+    "stars": 0,
+    "buyer_inquiries": []
+  },
+  "executed_task": {
+    "id": "S-001",
+    "handler": "verify_scheduler_continuity",
+    "summary": "Public scheduler check: 20171806011/tan-gemini-core schedule_events=0, last_sched=None, fails=0",
+    "data": {
+      "20171806011/tan-gemini-core": {
+        "total_recent": 0,
+        "schedule_events": 0,
+        "last_schedule_utc": null,
+        "recent_failures": 0
+      },
+      "20171806011/tan-tokendiet": {
+        "total_recent": 10,
+        "schedule_events": 0,
+        "last_schedule_utc": null,
+        "recent_failures": 0
+      }
+    }
+  },
+  "brain_meta": {
+    "rail": "none",
+    "model": "none",
+    "status": "awaiting_gemini_fuel",
+    "strict_gemini_only": true,
+    "x402_usdc_spent": 0.0,
+    "note": "No non-Gemini model was substituted. Gemini cognition will activate automatically on the next 30-min cycle as soon as GEMINI_API_KEY (Google AI Studio free tier: 250 RPD) is configured OR >= $0.002 USDC arrives in Base treasury 0x63cee161084df40f527EFBFDE3e7bC242F4b32FD.",
+    "diagnostics": [
+      {
+        "rail": "google_gemini_native_api",
+        "status": "no_gemini_api_key"
+      },
+      {
+        "rail": "x402_base_usdc_gemini",
+        "status": "awaiting_base_usdc_or_signer",
+        "has_signer": true,
+        "base_usdc_balance": 0.0,
+        "min_required_usdc": 0.002
+      }
+    ]
+  },
+  "thought": null,
+  "incidents": []
+}
