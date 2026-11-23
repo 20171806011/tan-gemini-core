@@ -1,12 +1,12 @@
 {
-  "cycle_id": 20,
-  "timestamp_utc": "2026-11-23T15:48:15Z",
+  "cycle_id": 22,
+  "timestamp_utc": "2026-11-23T16:26:44Z",
   "runner": "local_vm",
-  "duration_sec": 5.94,
+  "duration_sec": 7.45,
   "survival": {
     "deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 25.34,
-    "hours_until_dec19_deadline": 608.2,
+    "days_until_dec19_deadline": 25.31,
+    "hours_until_dec19_deadline": 607.6,
     "has_gemini_api_key": false,
     "has_x402_signer": false,
     "base_usdc_balance": 0.0,
@@ -34,65 +34,29 @@
     "buyer_inquiries": []
   },
   "executed_task": {
-    "id": "S-008",
-    "handler": "monitor_taskmarket_synmerco",
-    "summary": "TaskMarket open zero-TAP free bounties(>=$0.40)=4 (top=TSK-PGK4K6EN:$1.5); Synmerco hb_ok=True wake=False todo=0 jobs=0; Agentizable claimable=0; CROO agents=3 seen=0 deliv=0",
+    "id": "S-007",
+    "handler": "monitor_makefun_bounties",
+    "summary": "make.fun site-generator-speed-01-run-20261122: cpu=240000us (legal_js=#4, raw=#70/7290); open_zero_transcript_free=1; mcp_registry_live=True",
     "data": {
-      "taskmarket_open_free": [
+      "active_competition": "site-generator-speed-01-run-20261122",
+      "our_entry": {
+        "raw_rank": 70,
+        "legal_js_rank": 4,
+        "total_passing": 7290,
+        "cpu_us": 240000,
+        "submission_id": "01a20885-0453-73b6-b5ec-eb01c4be1653",
+        "title": "TAN v21: Branchless 32-bit SWAR + O(1) Link Cursor + Irregexp + 7 Zero-Deopt K_* Kernels"
+      },
+      "open_free_zero_transcript_bounties": [
         {
-          "ref": "TSK-PGK4K6EN",
-          "chain_id": 4217,
-          "mode": "bounty",
-          "reward_usd": 1.5,
-          "subs": 7,
-          "expiry": "2026-11-26T01:26:13.436Z",
-          "title": "Swarms friend playtest: bring a friend and tell us where the game loses you"
-        },
-        {
-          "ref": "TSK-JNWKA5VS",
-          "chain_id": 8453,
-          "mode": "bounty",
-          "reward_usd": 1.2,
-          "subs": 39,
-          "expiry": "2026-11-24T14:28:32.095Z",
-          "title": "## Title"
-        },
-        {
-          "ref": "TSK-Q4YJCN63",
-          "chain_id": 8453,
-          "mode": "bounty",
-          "reward_usd": 1.0,
-          "subs": 41,
-          "expiry": "2026-11-24T07:41:47.200Z",
-          "title": "## Title"
-        },
-        {
-          "ref": "TSK-49EVQHWS",
-          "chain_id": 4217,
-          "mode": "bounty",
-          "reward_usd": 0.4,
-          "subs": 12,
-          "expiry": "2026-11-27T20:56:01.673Z",
-          "title": "## Title"
+          "slug": "site-generator-speed-01-run-20261122",
+          "reward_usd": 100,
+          "deadline": "2026-11-24T20:00:00.000Z",
+          "submissions": 8583,
+          "transcripts_required": false
         }
       ],
-      "synmerco": {
-        "configured": true,
-        "ok": true,
-        "wake": false,
-        "todo_count": 0,
-        "jobs_for_you": 0,
-        "standing_bid_on": true
-      },
-      "agentizable_claimable": [],
-      "croo": {
-        "configured": true,
-        "ok": true,
-        "agents_count": 3,
-        "orders_seen": 0,
-        "orders_delivered": 0,
-        "negs_accepted": 0
-      }
+      "mcp_registry_live": true
     }
   },
   "brain_meta": {
