@@ -1,0 +1,11 @@
+{
+  "event_id": "EVT-1795422169097-77f11eab",
+  "created_at_utc": "2026-11-23T08:22:49Z",
+  "source": "local_http_webhook",
+  "reason": "Verification Wake #3/3: Event-driven HTTP POST /wake trigger",
+  "priority": "high",
+  "payload": {
+    "verification_step": 3,
+    "channel": "http_127_0_0_1_18790"
+  }
+}

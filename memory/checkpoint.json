@@ -1,9 +1,10 @@
 {
   "schema_version": "2.0.0",
-  "cycle_id": 2,
-  "runner": "github_actions_public",
+  "cycle_id": 5,
+  "runner": "antigravity_session_bridge",
   "phase": "completed",
-  "updated_at_utc": "2026-11-23T08:05:40Z",
-  "gemini_status": "awaiting_gemini_fuel",
-  "task_id": "S-002"
+  "updated_at_utc": "2026-11-23T08:24:32Z",
+  "gemini_status": "active_gemini",
+  "wake_id": "WAKE-0003",
+  "wake_hash": "9f0f7ebe150234d6358adacd1a61c12df47c889699df00f89dbd2c6e70c9d483"
 }

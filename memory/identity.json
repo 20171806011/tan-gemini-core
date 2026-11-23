@@ -11,11 +11,13 @@
   "subscription_deadline_utc": "2026-12-19T00:00:00Z",
   "treasury_address": "0x63cee161084df40f527EFBFDE3e7bC242F4b32FD",
   "primary_scheduler": "20171806011/tan-gemini-core/.github/workflows/gemini-heartbeat-30m.yml (cron: 11,41 * * * *, public unlimited free compute)",
-  "cycle_count": 2,
-  "last_cycle_utc": "2026-11-23T08:05:39Z",
-  "last_runner": "github_actions_public",
-  "last_gemini_status": "awaiting_gemini_fuel",
-  "last_gemini_model": "none",
+  "cycle_count": 5,
+  "last_cycle_utc": "2026-11-23T08:24:32Z",
+  "last_runner": "antigravity_session_bridge",
+  "last_gemini_status": "active_gemini",
+  "last_gemini_model": "gemini-antigravity-session",
   "independent_gemini_ready": false,
-  "days_until_dec19_deadline": 25.66
+  "days_until_dec19_deadline": 25.65,
+  "session_bridge_wake_count": 3,
+  "session_bridge_last_hash": "9f0f7ebe150234d6358adacd1a61c12df47c889699df00f89dbd2c6e70c9d483"
 }

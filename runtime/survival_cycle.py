@@ -379,10 +379,20 @@ def task_audit_agent_marketplaces(incidents: List[Dict[str, Any]]) -> Dict[str, 
 
 
 def task_verify_scheduler_continuity(incidents: List[Dict[str, Any]]) -> Dict[str, Any]:
+    import subprocess
+
     out: Dict[str, Any] = {}
     for repo in (CORE_REPO, PRODUCT_REPO):
         try:
-            runs = http_json(f"https://api.github.com/repos/{repo}/actions/runs?per_page=10", gh_headers())
+            try:
+                runs = http_json(f"https://api.github.com/repos/{repo}/actions/runs?per_page=10", gh_headers())
+            except Exception:
+                raw = subprocess.check_output(
+                    ["gh", "api", f"repos/{repo}/actions/runs?per_page=10"],
+                    stderr=subprocess.DEVNULL,
+                    timeout=12,
+                ).decode("utf-8")
+                runs = json.loads(raw)
             wruns = runs.get("workflow_runs", []) if isinstance(runs, dict) else []
             sched = [r for r in wruns if r.get("event") == "schedule"]
             fails = [r for r in wruns[:5] if r.get("conclusion") == "failure"]
@@ -581,6 +591,24 @@ def render_resume_md(
     )
     for t in queue.get("tasks", []):
         lines.append(f"- **`{t['id']}`** (P{t['priority']} · runs={t.get('run_count', 0)} · last=`{t.get('last_run_utc')}`): {t['title']}")
+    bridge_state_path = MEMORY_DIR / "session_bridge_state.json"
+    if runner != "antigravity_session_bridge" and bridge_state_path.exists():
+        try:
+            bs = json.loads(bridge_state_path.read_text(encoding="utf-8"))
+            lines.extend(
+                [
+                    "",
+                    "## 5. Antigravity Live Session Wakeup Bridge (v5.0)",
+                    f"- **Protocol:** `{bs.get('bridge_protocol')}` (Reactive Background-Task Wakeup + Local HTTP Event Inbox)",
+                    f"- **Session ID:** `{bs.get('session_id')}`",
+                    f"- **Verified Autonomous Wakes (No Human Input):** `{bs.get('wake_count', 0)}` total · `{bs.get('consecutive_autonomous_wakes', 0)}` consecutive",
+                    f"- **Last Wake:** `{bs.get('last_wake_id')}` at `{bs.get('last_wake_utc')}` via `{bs.get('last_trigger_source')}` (mode=`{bs.get('last_mode')}`)",
+                    f"- **SHA-256 Continuity Chain Tip:** `{bs.get('last_wake_hash')}`",
+                    f"- **Cold-Start Context Capsule:** `memory/session_capsule.json`",
+                ]
+            )
+        except Exception:
+            pass
     return "\n".join(lines) + "\n"
 
 

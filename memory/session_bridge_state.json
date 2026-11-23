@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "bridge_protocol": "antigravity_reactive_task_wakeup_v1",
+  "session_id": "antigravity-gemini-c6486012",
+  "target_interval_seconds": 1800,
+  "wake_count": 3,
+  "consecutive_autonomous_wakes": 3,
+  "last_wake_id": "WAKE-0003",
+  "last_wake_utc": "2026-11-23T08:24:32Z",
+  "last_wake_hash": "9f0f7ebe150234d6358adacd1a61c12df47c889699df00f89dbd2c6e70c9d483",
+  "last_mode": "verification",
+  "last_trigger_source": "inbox_event",
+  "active_waiter": null,
+  "verification_status": {
+    "verified": true,
+    "verified_consecutive_wakes": 3,
+    "verified_at_utc": "2026-11-23T08:24:34Z",
+    "chain_tip_hash": "9f0f7ebe150234d6358adacd1a61c12df47c889699df00f89dbd2c6e70c9d483"
+  }
+}
