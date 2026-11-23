@@ -750,11 +750,12 @@ async def handle_agent_sweep(client: Any, agent_cfg: dict[str, Any], delivered_i
                     res = await client.accept_negotiation(nid)
                     accepted_negs.add(nid)
                     stats["negs_accepted"] += 1
+                    order_obj = getattr(res, "order", None)
                     append_order_log({
                         "event": "negotiation_accepted",
                         "agent": agent_cfg["name"],
                         "negotiation_id": nid,
-                        "order_id": getattr(res.order, "order_id", ""),
+                        "order_id": getattr(order_obj, "order_id", getattr(res, "order_id", "")),
                     })
                 except Exception as exc:
                     log.warning("[%s] accept_negotiation(%s) err: %s", agent_cfg["name"], nid, exc)
@@ -772,8 +773,8 @@ async def handle_agent_sweep(client: Any, agent_cfg: dict[str, Any], delivered_i
             if oid and st in ("paid", "locked", "in_progress") and oid not in delivered_ids:
                 nid = getattr(order, "negotiation_id", "")
                 sid = getattr(order, "service_id", "")
-                req_text = ""
-                if nid:
+                req_text = getattr(order, "requirements", "") or ""
+                if nid and not req_text:
                     try:
                         neg = await client.get_negotiation(nid)
                         req_text = getattr(neg, "requirements", "") or ""
