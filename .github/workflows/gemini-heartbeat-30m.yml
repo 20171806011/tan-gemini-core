@@ -44,6 +44,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_PRIMARY_MODEL: ${{ vars.GEMINI_PRIMARY_MODEL }}
           DEALWORK_API_KEY: ${{ secrets.DEALWORK_API_KEY }}
+          SYNMERCO_API_KEY: ${{ secrets.SYNMERCO_API_KEY }}
           TAN_X402_PAYER_KEY: ${{ secrets.TAN_X402_PAYER_KEY }}
         run: |
           FORCE_FLAG=""

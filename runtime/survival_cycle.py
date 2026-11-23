@@ -568,9 +568,92 @@ def task_monitor_makefun_bounties(incidents: List[Dict[str, Any]]) -> Dict[str, 
     }
 
 
+def task_monitor_taskmarket_synmerco(incidents: List[Dict[str, Any]]) -> Dict[str, Any]:
+    """Keep Synmerco Base USDC agent heartbeat live and scan TaskMarket Base+Tempo for zero-TAP open bounties."""
+    now = utc_now()
+    syn_status: Dict[str, Any] = {"configured": False}
+    syn_key = os.environ.get("SYNMERCO_API_KEY", "").strip()
+    if not syn_key:
+        sp = LOCAL_SECRETS_DIR / "synmerco.json"
+        if sp.exists():
+            try:
+                syn_key = json.loads(sp.read_text(encoding="utf-8")).get("apiKey", "")
+            except Exception:
+                syn_key = ""
+    if syn_key:
+        syn_status["configured"] = True
+        try:
+            req = urllib.request.Request(
+                "https://synmerco-escrow.onrender.com/v1/agents/heartbeat",
+                data=json.dumps({"availability": "online", "lean": True}).encode("utf-8"),
+                headers={"Authorization": f"Bearer {syn_key}", "Content-Type": "application/json", "User-Agent": "tan-gemini-core/4.0"},
+                method="POST",
+            )
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                hb = json.loads(resp.read().decode("utf-8"))
+            syn_status.update(
+                {
+                    "ok": True,
+                    "wake": hb.get("wake"),
+                    "todo_count": len(hb.get("todo") or []),
+                    "jobs_for_you": len(hb.get("jobsForYou") or []),
+                    "standing_bid_on": (hb.get("standingBid") or {}).get("on"),
+                }
+            )
+        except Exception as exc:
+            syn_status["ok"] = False
+            incidents.append({"timestamp_utc": utc_iso(), "component": "synmerco_heartbeat", "error": str(exc)[:100], "recovery": "degraded"})
+
+    tm_open_free: List[Dict[str, Any]] = []
+    for chain_id in (8453, 4217):
+        try:
+            data = http_json(f"https://api.taskmarket.dev/api/tasks?status=open&chainId={chain_id}&limit=50")
+            for t in data.get("tasks") or []:
+                if t.get("verifiedBy"):
+                    continue
+                exp_dt = parse_iso(t.get("expiryTime") or t.get("expiresAt"))
+                if exp_dt is not None and exp_dt <= now:
+                    continue
+                mode = str(t.get("mode") or "")
+                subs = int(t.get("submissionCount") or 0)
+                rew = round(int(t.get("reward") or 0) / 1e6, 4)
+                if rew >= 0.4 and (mode == "claim" or (mode == "bounty" and subs < 50)):
+                    tm_open_free.append(
+                        {
+                            "ref": t.get("referenceCode"),
+                            "chain_id": chain_id,
+                            "mode": mode,
+                            "reward_usd": rew,
+                            "subs": subs,
+                            "expiry": t.get("expiryTime"),
+                            "title": str(t.get("description") or "").splitlines()[0][:90],
+                        }
+                    )
+        except Exception as exc:
+            incidents.append({"timestamp_utc": utc_iso(), "component": f"taskmarket_scan_{chain_id}", "error": str(exc)[:100], "recovery": "degraded"})
+
+    tm_open_free.sort(key=lambda x: -float(x["reward_usd"]))
+    summary = (
+        f"TaskMarket open zero-TAP free bounties(>=$0.40)={len(tm_open_free)} "
+        f"(top={tm_open_free[0]['ref']}:${tm_open_free[0]['reward_usd']} if any); "
+        f"Synmerco hb_ok={syn_status.get('ok')} wake={syn_status.get('wake')} todo={syn_status.get('todo_count')} jobs={syn_status.get('jobs_for_you')}"
+    ) if tm_open_free else (
+        f"TaskMarket open zero-TAP free bounties(>=$0.40)=0; "
+        f"Synmerco hb_ok={syn_status.get('ok')} wake={syn_status.get('wake')} todo={syn_status.get('todo_count')} jobs={syn_status.get('jobs_for_you')}"
+    )
+    return {
+        "summary": summary,
+        "data": {
+            "taskmarket_open_free": tm_open_free[:10],
+            "synmerco": syn_status,
+        },
+    }
+
+
 # Native Gemini Function Declarations (for multi-turn self-directed Gemini tool calls!)
 GEMINI_TOOLS = [
     {"name": "monitor_makefun_bounties", "description": "Check live make.fun leaderboard rank, open zero-transcript bounties, and Official MCP Registry status.", "parameters": {"type": "OBJECT", "properties": {}}},
+    {"name": "monitor_taskmarket_synmerco", "description": "Run Synmerco Base USDC heartbeat and scan TaskMarket Base/Tempo for open zero-TAP free bounties.", "parameters": {"type": "OBJECT", "properties": {}}},
     {"name": "audit_agent_marketplaces", "description": "Inspect live Execution Market open tasks/orders and Dealwork contracts/messages.", "parameters": {"type": "OBJECT", "properties": {}}},
     {"name": "verify_scheduler_continuity", "description": "Verify whether GitHub Actions schedule cron runs are firing reliably across public repos.", "parameters": {"type": "OBJECT", "properties": {}}},
     {"name": "audit_gemini_fuel_rails", "description": "Check live BlockRun x402 Base USDC pricing for official Gemini models and native API key availability.", "parameters": {"type": "OBJECT", "properties": {}}},
@@ -737,6 +820,7 @@ def run_cycle(runner: str, force: bool = False, dry_run: bool = False) -> int:
 
     handlers: Dict[str, Callable[[], Dict[str, Any]]] = {
         "monitor_makefun_bounties": lambda: task_monitor_makefun_bounties(incidents),
+        "monitor_taskmarket_synmerco": lambda: task_monitor_taskmarket_synmerco(incidents),
         "audit_agent_marketplaces": lambda: task_audit_agent_marketplaces(incidents),
         "verify_scheduler_continuity": lambda: task_verify_scheduler_continuity(incidents),
         "audit_gemini_fuel_rails": lambda: task_audit_gemini_fuel_rails(incidents),
