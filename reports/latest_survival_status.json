@@ -1,12 +1,12 @@
 {
-  "cycle_id": 22,
-  "timestamp_utc": "2026-11-23T16:26:44Z",
+  "cycle_id": 24,
+  "timestamp_utc": "2026-11-23T18:06:19Z",
   "runner": "local_vm",
-  "duration_sec": 7.45,
+  "duration_sec": 0.81,
   "survival": {
     "deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 25.31,
-    "hours_until_dec19_deadline": 607.6,
+    "days_until_dec19_deadline": 25.25,
+    "hours_until_dec19_deadline": 605.9,
     "has_gemini_api_key": false,
     "has_x402_signer": false,
     "base_usdc_balance": 0.0,
@@ -34,29 +34,24 @@
     "buyer_inquiries": []
   },
   "executed_task": {
-    "id": "S-007",
-    "handler": "monitor_makefun_bounties",
-    "summary": "make.fun site-generator-speed-01-run-20261122: cpu=240000us (legal_js=#4, raw=#70/7290); open_zero_transcript_free=1; mcp_registry_live=True",
+    "id": "S-003",
+    "handler": "audit_agent_marketplaces",
+    "summary": "EM open=1, assigned=0; Dealwork contracts=0, unread=0, bal=$0.00",
     "data": {
-      "active_competition": "site-generator-speed-01-run-20261122",
-      "our_entry": {
-        "raw_rank": 70,
-        "legal_js_rank": 4,
-        "total_passing": 7290,
-        "cpu_us": 240000,
-        "submission_id": "01a20885-0453-73b6-b5ec-eb01c4be1653",
-        "title": "TAN v21: Branchless 32-bit SWAR + O(1) Link Cursor + Irregexp + 7 Zero-Deopt K_* Kernels"
+      "execution_market": {
+        "open_tasks": 1,
+        "assigned_tasks": [],
+        "auto_submitted": [],
+        "sample_titles": [
+          "[par-robinhood] Public Base L2 block height and gas price reading, with timestam"
+        ]
       },
-      "open_free_zero_transcript_bounties": [
-        {
-          "slug": "site-generator-speed-01-run-20261122",
-          "reward_usd": 100,
-          "deadline": "2026-11-24T20:00:00.000Z",
-          "submissions": 8583,
-          "transcripts_required": false
-        }
-      ],
-      "mcp_registry_live": true
+      "dealwork": {
+        "authenticated": false,
+        "balance_usd": 0.0,
+        "active_contracts": [],
+        "unread_messages": 0
+      }
     }
   },
   "brain_meta": {
