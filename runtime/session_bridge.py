@@ -441,15 +441,47 @@ def cmd_wait(args: argparse.Namespace) -> int:
     paths = BridgePaths(Path(args.root))
     paths.ensure_dirs()
 
-    wait_seconds = max(1, int(args.wait_seconds))
+    target_seconds = max(1, int(args.wait_seconds))
+    max_slice_seconds = max(1, int(args.max_slice_seconds))
     poll_interval = max(0.1, float(args.poll_interval))
     state = load_bridge_state(paths)
     if args.session_id:
         state["session_id"] = args.session_id
 
-    scheduled_dt = utc_now()
-    scheduled_iso = utc_iso(scheduled_dt)
-    expected_wake_iso = utc_iso(scheduled_dt + timedelta(seconds=wait_seconds))
+    now_dt = utc_now()
+    now_epoch = time.time()
+
+    # Track multi-slice cycle state so 1800s cycles run safely inside Antigravity's ~600s single-task cap
+    pending_cycle = state.get("pending_cycle")
+    if (
+        args.mode == "production"
+        and target_seconds > max_slice_seconds
+        and isinstance(pending_cycle, dict)
+        and int(pending_cycle.get("target_seconds", 0)) == target_seconds
+        and float(pending_cycle.get("deadline_epoch", 0)) > now_epoch - 60
+    ):
+        cycle_started_iso = pending_cycle["started_at_utc"]
+        cycle_deadline_epoch = float(pending_cycle["deadline_epoch"])
+        slice_index = int(pending_cycle.get("slices_completed", 0)) + 1
+    else:
+        cycle_started_iso = utc_iso(now_dt)
+        cycle_deadline_epoch = now_epoch + target_seconds
+        slice_index = 1
+        if target_seconds > max_slice_seconds:
+            state["pending_cycle"] = {
+                "started_at_utc": cycle_started_iso,
+                "deadline_epoch": cycle_deadline_epoch,
+                "target_seconds": target_seconds,
+                "max_slice_seconds": max_slice_seconds,
+                "slices_completed": 0,
+            }
+        else:
+            state["pending_cycle"] = None
+
+    remaining_cycle_before = max(1.0, cycle_deadline_epoch - now_epoch)
+    slice_wait_seconds = min(float(max_slice_seconds), remaining_cycle_before)
+    scheduled_iso = utc_iso(now_dt)
+    expected_wake_iso = utc_iso(now_dt + timedelta(seconds=slice_wait_seconds))
     next_seq = int(state.get("wake_count", 0)) + 1
     wake_id = f"WAKE-{next_seq:04d}"
 
@@ -460,7 +492,9 @@ def cmd_wait(args: argparse.Namespace) -> int:
         "mode": args.mode,
         "scheduled_at_utc": scheduled_iso,
         "expected_wake_utc": expected_wake_iso,
-        "requested_wait_seconds": wait_seconds,
+        "requested_wait_seconds": target_seconds,
+        "slice_wait_seconds": round(slice_wait_seconds, 2),
+        "slice_index": slice_index,
         "reason": args.reason,
     }
     atomic_write_json(paths.state, state)
@@ -481,7 +515,7 @@ def cmd_wait(args: argparse.Namespace) -> int:
     signal.signal(signal.SIGINT, _on_term)
 
     t0 = time.monotonic()
-    deadline = t0 + wait_seconds
+    deadline = t0 + slice_wait_seconds
     trigger_source = "timer_elapsed"
     inbox_events: List[Tuple[Path, Dict[str, Any]]] = []
 
@@ -510,14 +544,56 @@ def cmd_wait(args: argparse.Namespace) -> int:
 
     actual_wait = round(time.monotonic() - t0, 2)
     woke_iso = utc_iso()
-    nonce = secrets.token_hex(16)
+    remaining_cycle_after = max(0.0, round(cycle_deadline_epoch - time.time(), 1))
 
     # Refresh state in case another process updated it while we waited
     state = load_bridge_state(paths)
-    parent_wake_hash = state.get("last_wake_hash") or "GENESIS"
     state["active_waiter"] = None
+
+    # Intermediate heartbeat slice (keeps reactive wakeup alive below ~600s platform cap)
+    if trigger_source == "timer_elapsed" and target_seconds > max_slice_seconds and remaining_cycle_after > 5.0:
+        state["pending_cycle"] = {
+            "started_at_utc": cycle_started_iso,
+            "deadline_epoch": cycle_deadline_epoch,
+            "target_seconds": target_seconds,
+            "max_slice_seconds": max_slice_seconds,
+            "slices_completed": slice_index,
+            "last_slice_utc": woke_iso,
+        }
+        atomic_write_json(paths.state, state)
+        slice_packet = {
+            "schema_version": "1.0.0",
+            "wake_kind": "heartbeat_slice",
+            "wake_id": wake_id,
+            "mode": args.mode,
+            "slice_index": slice_index,
+            "slice_wait_seconds": actual_wait,
+            "cycle_started_at_utc": cycle_started_iso,
+            "woke_at_utc": woke_iso,
+            "cycle_target_seconds": target_seconds,
+            "remaining_cycle_seconds": remaining_cycle_after,
+            "reason": args.reason,
+            "next_command": (
+                f"python3 runtime/session_bridge.py wait --wait-seconds {target_seconds} "
+                f"--max-slice-seconds {max_slice_seconds} --mode {args.mode}"
+            ),
+        }
+        print("=== GEMINI_SESSION_HEARTBEAT_SLICE_BEGIN ===")
+        print(json.dumps(slice_packet, indent=2, ensure_ascii=False))
+        print("=== GEMINI_SESSION_HEARTBEAT_SLICE_END ===")
+        print(
+            f"HEARTBEAT SLICE #{slice_index} COMPLETE ({actual_wait}s elapsed; "
+            f"{remaining_cycle_after}s remaining until full {target_seconds}s cycle {wake_id}). "
+            f"Continue active sprint work if any, or re-arm the next safe {max_slice_seconds}s slice."
+        )
+        return 0
+
+    # Full cycle wake (either full target elapsed OR urgent inbox event / SIGUSR1 arrived)
+    state["pending_cycle"] = None
+    parent_wake_hash = state.get("last_wake_hash") or "GENESIS"
     atomic_write_json(paths.state, state)
 
+    nonce = secrets.token_hex(16)
     telemetry = collect_live_telemetry(paths, allow_network=not args.no_network)
     capsule = build_session_capsule(paths)
     queue = read_json(paths.task_queue, {"tasks": []})
@@ -525,8 +601,14 @@ def cmd_wait(args: argparse.Namespace) -> int:
     preferred = (recent_thoughts[-1].get("thought") or {}).get("recommended_next_task") if recent_thoughts else None
     suggested_task = survival_cycle.select_next_task(queue, preferred, utc_now())
 
+    total_cycle_wait = round(
+        max(actual_wait, target_seconds - remaining_cycle_after) if target_seconds > max_slice_seconds and trigger_source == "timer_elapsed" else actual_wait,
+        2,
+    )
+
     ticket = {
         "schema_version": "1.0.0",
+        "wake_kind": "full_cycle",
         "wake_id": wake_id,
         "wake_seq": next_seq,
         "nonce": nonce,
@@ -534,10 +616,11 @@ def cmd_wait(args: argparse.Namespace) -> int:
         "mode": args.mode,
         "reason": args.reason,
         "trigger_source": trigger_source,
-        "scheduled_at_utc": scheduled_iso,
+        "scheduled_at_utc": cycle_started_iso,
         "woke_at_utc": woke_iso,
-        "requested_wait_seconds": wait_seconds,
-        "actual_wait_seconds": actual_wait,
+        "requested_wait_seconds": target_seconds,
+        "actual_wait_seconds": total_cycle_wait,
+        "slices_used": slice_index,
         "parent_wake_hash": parent_wake_hash,
         "inbox_event_files": [p.name for p, _ in inbox_events],
         "inbox_events": [ev for _, ev in inbox_events],
@@ -569,7 +652,7 @@ def cmd_wait(args: argparse.Namespace) -> int:
     print("=== GEMINI_SESSION_WAKE_PACKET_END ===")
     print(
         f"ACTION REQUIRED FOR LIVE GEMINI SESSION: Autonomous wakeup {wake_id} fired "
-        f"via {trigger_source} after {actual_wait}s (nonce={nonce}). "
+        f"via {trigger_source} after {total_cycle_wait}s ({slice_index} slice(s), nonce={nonce}). "
         f"Restore prior state, execute task, record reasoning via `session_bridge.py record`, "
         f"and schedule the next wake."
     )
@@ -983,6 +1066,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     p_wait = sub.add_parser("wait", help="Block until timer elapses or inbox event arrives, then emit wake packet")
     p_wait.add_argument("--wait-seconds", type=int, default=DEFAULT_INTERVAL_SECONDS)
+    p_wait.add_argument("--max-slice-seconds", type=int, default=480)
     p_wait.add_argument("--poll-interval", type=float, default=1.0)
     p_wait.add_argument("--mode", default="production", choices=["verification", "production"])
     p_wait.add_argument("--reason", default="Scheduled 30-minute autonomous Gemini session wakeup")

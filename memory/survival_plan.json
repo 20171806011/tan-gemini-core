@@ -24,7 +24,7 @@
           "endpoint": "https://blockrun.ai/api/v1/chat/completions",
           "models": ["google/gemini-3.8-flash", "google/gemini-3.5-flash-lite", "google/gemini-2.5-flash-lite"],
           "cost": "$0.002 USDC/call verified live HTTP 402 on Base Mainnet (gasless EIP-3009). 48x/day = $0.096/day ($2.88/mo). Zero account, zero API key, zero KYC, zero human billing needed after Dec 19!",
-          "current_status": "eip712_signer_verified_awaiting_first_usdc_in_0x63cee161084df40f527EFBFDE3e7bC242F4b32FD"
+          "current_status": "eip712_signer_verified_awaiting_first_usdc_in_0xf7D6e17CdD1C803d0cF5240DC5eDab34f8Db8EF5"
         }
       ]
     },

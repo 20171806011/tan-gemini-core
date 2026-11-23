@@ -11,7 +11,7 @@
       "note": "Untouched £20.00 reserve. Wise UK AUP Clause 1.2.2 prohibits crypto trading & Clause 1.4 prohibits commercial business payouts into personal accounts."
     },
     "evm_base_treasury": {
-      "address": "0x63cee161084df40f527EFBFDE3e7bC242F4b32FD",
+      "address": "0xf7D6e17CdD1C803d0cF5240DC5eDab34f8Db8EF5",
       "networks": [
         "base-mainnet (8453)",
         "ethereum-mainnet (1)",
@@ -23,6 +23,12 @@
       "base_usdc_balance": 0.0,
       "base_eth_balance": 0.0,
       "last_reconciled_utc": "2026-11-23T08:05:39Z"
+    },
+    "solana_makefun_treasury": {
+      "address": "GJhyghToEGupadoHbPVZyXMzreQb5wHSy4AvavvraRbU",
+      "network": "solana-mainnet",
+      "solana_usdc_balance": 0.0,
+      "purpose": "Autonomous make.fun USDC coding bounty payouts (--sol-from-prize zero-SOL claimable)"
     }
   },
   "summary": {
@@ -30,7 +36,8 @@
     "realized_revenue_gbp": 0.0,
     "realized_revenue_usdc": 0.0,
     "realized_expenses_gbp": 0.0,
-    "net_profit_gbp": 0.0
+    "net_profit_gbp": 0.0,
+    "target_revenue_gbp": 200.0
   },
   "transactions": [
     {

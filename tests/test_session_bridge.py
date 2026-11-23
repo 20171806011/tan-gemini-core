@@ -245,6 +245,49 @@ class TestSessionBridge(unittest.TestCase):
                 server.shutdown()
                 server.server_close()
 
+    def test_chained_slices_complete_full_cycle(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            paths = self._init_temp_repo(root)
+
+            # Target 7s with max slice 1s -> slice 1 emits heartbeat_slice (remaining ~6s > 5s threshold)
+            s1 = self._run_cli(
+                root,
+                "wait",
+                "--wait-seconds",
+                "7",
+                "--max-slice-seconds",
+                "1",
+                "--poll-interval",
+                "0.2",
+                "--mode",
+                "production",
+                "--no-network",
+            )
+            self.assertEqual(s1.returncode, 0, msg=s1.stderr)
+            self.assertIn("GEMINI_SESSION_HEARTBEAT_SLICE_BEGIN", s1.stdout)
+            self.assertFalse(paths.pending_ticket.exists())
+
+            # Slice 2 waits another 2s (remaining <= 5s -> completes full cycle!)
+            s2 = self._run_cli(
+                root,
+                "wait",
+                "--wait-seconds",
+                "7",
+                "--max-slice-seconds",
+                "2",
+                "--poll-interval",
+                "0.2",
+                "--mode",
+                "production",
+                "--no-network",
+            )
+            self.assertEqual(s2.returncode, 0, msg=s2.stderr)
+            self.assertIn("GEMINI_SESSION_WAKE_PACKET_BEGIN", s2.stdout)
+            ticket = json.loads(paths.pending_ticket.read_text(encoding="utf-8"))
+            self.assertEqual(ticket["wake_kind"], "full_cycle")
+            self.assertEqual(ticket["slices_used"], 2)
+
 
 if __name__ == "__main__":
     unittest.main()

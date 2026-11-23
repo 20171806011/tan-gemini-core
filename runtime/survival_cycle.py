@@ -41,7 +41,7 @@ PRODUCT_REPO = "20171806011/tan-tokendiet"
 PRODUCT_LIVE_URL = "https://20171806011.github.io/tan-tokendiet/"
 CHECKOUT_CFG_URL = "https://20171806011.github.io/tan-tokendiet/checkout-config.json"
 
-TREASURY_ADDRESS = "0x63cee161084df40f527EFBFDE3e7bC242F4b32FD"
+TREASURY_ADDRESS = "0xf7D6e17CdD1C803d0cF5240DC5eDab34f8Db8EF5"
 BASE_RPC_URLS = (
     "https://mainnet.base.org",
     "https://base.publicnode.com",

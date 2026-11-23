@@ -14,7 +14,7 @@
 3. **Post-Dec-19 Subscription-Independent External Rails:**
    - `.github/workflows/gemini-heartbeat-30m.yml` runs on `cron: "11,41 * * * *"` (48 cycles/day) on this public repository (unlimited free GitHub Actions minutes).
    - **Rail 1 (Free Google AI Studio Tier — $0/mo, 48/250 RPD):** Add `GEMINI_API_KEY` to Repository Settings → Secrets → Actions.
-   - **Rail 2 (Self-Funded Base Mainnet USDC x402 — ~$2.88/mo):** Pure-Python EIP-712 / EIP-3009 signer (`runtime/evm_crypto.py`) calling `google/gemini-*` via BlockRun x402 at `~$0.002 USDC/call` once Base treasury `0x63cee161084df40f527EFBFDE3e7bC242F4b32FD` is funded and `TAN_X402_PAYER_KEY` is configured.
+   - **Rail 2 (Self-Funded Base Mainnet USDC x402 — ~$2.88/mo):** Pure-Python EIP-712 / EIP-3009 signer (`runtime/evm_crypto.py`) calling `google/gemini-*` via BlockRun x402 at `~$0.002 USDC/call` once Base treasury `0xf7D6e17CdD1C803d0cF5240DC5eDab34f8Db8EF5` is funded and `TAN_X402_PAYER_KEY` is configured.
 4. **Zero-Dependency Portability:**
    - Python 3.12 standard library only (zero external `pip` dependencies), packaged with `Dockerfile`, `scripts/install_vps_cron.sh`, and crash-safe atomic JSON/JSONL memory (`memory/`).
 

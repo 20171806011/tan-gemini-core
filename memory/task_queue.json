@@ -3,6 +3,18 @@
   "last_updated_utc": "2026-11-23T08:24:32Z",
   "tasks": [
     {
+      "id": "S-007",
+      "handler": "audit_gemini_fuel_rails",
+      "title": "£200 Sprint: Build, benchmark, and submit top-10 pure-JS drop-in for make.fun site-generator-speed-01-run-20261122 ($100 USDC escrowed) & track daily zero-transcript speed bounties",
+      "priority": 100,
+      "cooldown_minutes": 15,
+      "status": "queued",
+      "run_count": 0,
+      "last_run_utc": null,
+      "claimed_by_cycle": null,
+      "last_summary": "Solana wallet GJhyghToEGupadoHbPVZyXMzreQb5wHSy4AvavvraRbU registered on make.fun; kit downloaded."
+    },
+    {
       "id": "S-001",
       "handler": "verify_scheduler_continuity",
       "title": "Verify public 30-min GitHub Actions schedule cron events are firing autonomously without misses",
