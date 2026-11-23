@@ -193,6 +193,42 @@ class TestCrooDeterministicAnalyzers(unittest.TestCase):
         self.assertEqual(len(fake.delivered), 1)
         self.assertIn("**PASS**", fake.delivered[0][1].deliverable_text)
 
+    def test_quick_count_and_schema_validator(self):
+        qc = json.loads(croo_provider.run_tokendiet_quick_count('{"a":   1,  "b": [1, 2, 3]}'))
+        self.assertEqual(qc["format"], "json")
+        self.assertEqual(qc["minified_preview"], '{"a":1,"b":[1,2,3]}')
+
+        ok_schema = json.loads(croo_provider.run_codeguard_schema_validator(
+            '{"schema": {"required": ["name", "age"], "properties": {"age": {"type": "integer"}}}, "data": {"name": "tan", "age": 1}}'
+        ))
+        self.assertEqual(ok_schema["verdict"], "PASS")
+
+        bad_schema = json.loads(croo_provider.run_codeguard_schema_validator(
+            '{"schema": {"required": ["name"], "properties": {"age": {"type": "integer"}}}, "data": {"age": true}}'
+        ))
+        self.assertEqual(bad_schema["verdict"], "FAIL")
+
+        py_ok = json.loads(croo_provider.run_codeguard_schema_validator("def hello(x):\n    return x + 1\n"))
+        self.assertEqual(py_ok["verdict"], "PASS")
+        self.assertEqual(py_ok["detected_format"], "python")
+
+    def test_chaincheck_price_gas_tvl_mocked(self):
+        def fake_fetch(url, **_kwargs):
+            if "coins.llama.fi" in url:
+                return {"ok": True, "status": 200, "body": json.dumps({"coins": {"coingecko:ethereum": {"price": 2000.5, "symbol": "ETH", "confidence": 0.99, "timestamp": 1795444300}}}), "bytes": 100, "headers": {}, "latency_ms": 10}
+            if "api.llama.fi/tvl/aave" in url:
+                return {"ok": True, "status": 200, "body": "16500000000.25", "bytes": 14, "headers": {}, "latency_ms": 10}
+            return {"ok": False, "status": 404, "body": "", "bytes": 0, "headers": {}, "latency_ms": 5}
+
+        def fake_rpc(_url, method, _params):
+            return hex(50_000_000) if method == "eth_gasPrice" else hex(30_000_000)
+
+        with mock.patch("croo_provider._http_fetch", side_effect=fake_fetch), mock.patch("croo_provider._eth_rpc", side_effect=fake_rpc):
+            out = json.loads(croo_provider.run_chaincheck_price_gas_tvl("ETH price and Aave TVL"))
+        self.assertEqual(out["prices"]["ETH"]["price_usd"], 2000.5)
+        self.assertEqual(out["defi_tvl_usd"]["aave"], 16500000000.25)
+        self.assertEqual(out["evm_gas"]["base"]["latest_block"], 30_000_000)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -13,6 +13,7 @@ Secrets are loaded strictly from /home/antigravity/.tan-secrets/croo_agents.json
 from __future__ import annotations
 
 import argparse
+import ast
 import asyncio
 import datetime
 import hashlib
@@ -691,13 +692,258 @@ def run_chaincheck_endpoint(req_text: str) -> str:
     return "\n".join(lines)
 
 
+TOKEN_SYMBOL_MAP: dict[str, str] = {
+    "btc": "coingecko:bitcoin",
+    "bitcoin": "coingecko:bitcoin",
+    "eth": "coingecko:ethereum",
+    "ethereum": "coingecko:ethereum",
+    "sol": "coingecko:solana",
+    "solana": "coingecko:solana",
+    "usdc": "coingecko:usd-coin",
+    "usdt": "coingecko:tether",
+    "base": "coingecko:ethereum",
+    "arb": "coingecko:arbitrum",
+    "op": "coingecko:optimism",
+    "link": "coingecko:chainlink",
+    "uni": "coingecko:uniswap",
+    "aave": "coingecko:aave",
+    "cbeth": "coingecko:coinbase-wrapped-staked-eth",
+    "aero": "coingecko:aerodrome-finance",
+    "virtual": "coingecko:virtual-protocol",
+    "bnb": "coingecko:binancecoin",
+    "sui": "coingecko:sui",
+    "avax": "coingecko:avalanche-2",
+    "matic": "coingecko:polygon-ecosystem-token",
+    "pol": "coingecko:polygon-ecosystem-token",
+    "doge": "coingecko:dogecoin",
+}
+
+
+def run_tokendiet_quick_count(req_text: str) -> str:
+    content = (req_text or "").strip()
+    if not content:
+        return json.dumps({
+            "service": "TAN TokenDiet — Quick Token Counter & JSON Minifier",
+            "status": "error",
+            "error": "Provide any text, prompt, Markdown, or JSON payload.",
+        }, indent=2)
+    orig_bytes = len(content.encode("utf-8"))
+    orig_chars = len(content)
+    orig_words = len(content.split())
+    orig_lines = len(content.splitlines())
+    orig_toks = _estimate_tokens(content)
+    is_json = False
+    minified = content
+    try:
+        parsed = json.loads(content)
+        is_json = True
+        minified = json.dumps(parsed, separators=(",", ":"), ensure_ascii=False)
+    except Exception:
+        minified = re.sub(r"\n{3,}", "\n\n", "\n".join(ln.rstrip() for ln in content.splitlines())).strip()
+    min_toks = _estimate_tokens(minified)
+    saved_toks = max(0, orig_toks - min_toks)
+    result = {
+        "service": "TAN TokenDiet — Quick Token Counter & JSON Minifier",
+        "timestamp_utc": utc_now(),
+        "format": "json" if is_json else "text",
+        "sha256_prefix": hashlib.sha256(content.encode("utf-8")).hexdigest()[:16],
+        "original": {"chars": orig_chars, "bytes": orig_bytes, "words": orig_words, "lines": orig_lines, "est_tokens": orig_toks},
+        "minified": {"chars": len(minified), "est_tokens": min_toks, "tokens_saved": saved_toks, "savings_pct": round(saved_toks / orig_toks * 100.0, 1) if orig_toks else 0.0},
+        "est_cost_per_1k_calls_usd": {
+            "at_0.25_per_1M": round((orig_toks * 1000 / 1_000_000) * 0.25, 5),
+            "at_3.00_per_1M": round((orig_toks * 1000 / 1_000_000) * 3.00, 5),
+        },
+        "minified_preview": minified[:4000],
+    }
+    return json.dumps(result, indent=2, ensure_ascii=False)
+
+
+def run_codeguard_schema_validator(req_text: str) -> str:
+    content = (req_text or "").strip()
+    if not content:
+        return json.dumps({
+            "service": "TAN CodeGuard — Schema, JSON & Syntax Validator",
+            "verdict": "FAIL",
+            "error": "No JSON, code, or structured output provided.",
+        }, indent=2)
+
+    # Strip optional fenced code block wrapper
+    m_fence = re.match(r"^```([a-zA-Z0-9_-]*)\n(.*?)\n```$", content, re.S)
+    lang_hint = (m_fence.group(1).lower() if m_fence else "").strip()
+    body = m_fence.group(2) if m_fence else content
+
+    checks: list[dict[str, Any]] = []
+    detected = lang_hint or "auto"
+    verdict = "PASS"
+
+    # 1. JSON validation (including optional {"schema": ..., "data": ...} pair check)
+    looks_json = lang_hint in ("json", "jsonc") or body.lstrip().startswith(("{", "["))
+    if looks_json:
+        detected = "json"
+        try:
+            obj = json.loads(body)
+            checks.append({"check": "json_syntax", "status": "PASS", "detail": f"Valid JSON ({type(obj).__name__})"})
+            if isinstance(obj, dict) and isinstance(obj.get("schema"), dict) and "data" in obj:
+                schema = obj["schema"]
+                data = obj["data"]
+                req_fields = schema.get("required") if isinstance(schema.get("required"), list) else []
+                missing = [k for k in req_fields if not (isinstance(data, dict) and k in data)]
+                if missing:
+                    verdict = "FAIL"
+                    checks.append({"check": "schema_required_fields", "status": "FAIL", "detail": f"Missing required fields: {missing}"})
+                else:
+                    checks.append({"check": "schema_required_fields", "status": "PASS", "detail": f"All {len(req_fields)} required field(s) present"})
+                props = schema.get("properties") if isinstance(schema.get("properties"), dict) else {}
+                type_errs = []
+                type_map = {"string": str, "integer": int, "number": (int, float), "boolean": bool, "array": list, "object": dict}
+                if isinstance(data, dict):
+                    for k, spec in props.items():
+                        if k in data and isinstance(spec, dict) and spec.get("type") in type_map:
+                            expected = type_map[spec["type"]]
+                            val = data[k]
+                            if spec["type"] in ("integer", "number") and isinstance(val, bool):
+                                type_errs.append(f"{k}: expected {spec['type']}, got bool")
+                            elif not isinstance(val, expected):
+                                type_errs.append(f"{k}: expected {spec['type']}, got {type(val).__name__}")
+                if type_errs:
+                    verdict = "FAIL"
+                    checks.append({"check": "schema_property_types", "status": "FAIL", "detail": "; ".join(type_errs)})
+                elif props:
+                    checks.append({"check": "schema_property_types", "status": "PASS", "detail": f"Checked {len(props)} schema property type(s)"})
+        except json.JSONDecodeError as exc:
+            verdict = "FAIL"
+            checks.append({"check": "json_syntax", "status": "FAIL", "detail": f"Line {exc.lineno} col {exc.colno}: {exc.msg}"})
+    elif lang_hint in ("py", "python") or re.search(r"^\s*(?:def |class |import |from \w+ import )", body, re.M):
+        detected = "python"
+        try:
+            tree = ast.parse(body)
+            fn_count = sum(1 for n in ast.walk(tree) if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef)))
+            checks.append({"check": "python_ast", "status": "PASS", "detail": f"Valid Python AST ({fn_count} function(s))"})
+        except SyntaxError as exc:
+            verdict = "FAIL"
+            checks.append({"check": "python_ast", "status": "FAIL", "detail": f"Line {exc.lineno} col {exc.offset}: {exc.msg}"})
+    else:
+        # Generic balanced delimiter + key-value check
+        pairs = {"(": ")", "[": "]", "{": "}"}
+        stack: list[str] = []
+        balanced = True
+        for ch in body:
+            if ch in pairs:
+                stack.append(pairs[ch])
+            elif ch in (")", "]", "}"):
+                if not stack or stack.pop() != ch:
+                    balanced = False
+                    break
+        if stack:
+            balanced = False
+        checks.append({"check": "delimiter_balance", "status": "PASS" if balanced else "WARN", "detail": "Balanced brackets/braces" if balanced else "Unbalanced brackets/braces"})
+
+    # 2. Always run fast secret / dangerous-call guard
+    sec_hits = []
+    for sev, rule_id, title, pat, _fix in SECURITY_RULES[:9]:
+        if pat.search(body):
+            sec_hits.append(f"[{sev}] {rule_id}: {title}")
+    if sec_hits:
+        verdict = "FAIL"
+        checks.append({"check": "security_hygiene", "status": "FAIL", "detail": "; ".join(sec_hits[:5])})
+    else:
+        checks.append({"check": "security_hygiene", "status": "PASS", "detail": "No hardcoded secrets or critical injection patterns detected"})
+
+    return json.dumps({
+        "service": "TAN CodeGuard — Schema, JSON & Syntax Validator",
+        "timestamp_utc": utc_now(),
+        "detected_format": detected,
+        "verdict": verdict,
+        "bytes": len(body.encode("utf-8")),
+        "checks": checks,
+    }, indent=2, ensure_ascii=False)
+
+
+def run_chaincheck_price_gas_tvl(req_text: str) -> str:
+    txt = (req_text or "").strip()
+    low = txt.lower()
+
+    # Detect requested token symbols or 0x contract addresses
+    coin_ids: list[str] = []
+    for sym, cid in TOKEN_SYMBOL_MAP.items():
+        if re.search(rf"\b{re.escape(sym)}\b", low) and cid not in coin_ids:
+            coin_ids.append(cid)
+    for addr in re.findall(r"0x[0-9a-fA-F]{40}", txt):
+        chain_pfx = "ethereum" if re.search(r"\b(?:eth|ethereum|mainnet)\b", low) else "base"
+        cid = f"{chain_pfx}:{addr}"
+        if cid not in coin_ids:
+            coin_ids.append(cid)
+    if not coin_ids:
+        coin_ids = ["coingecko:bitcoin", "coingecko:ethereum", "coingecko:solana", "coingecko:usd-coin"]
+
+    prices_out: dict[str, Any] = {}
+    price_res = _http_fetch("https://coins.llama.fi/prices/current/" + ",".join(coin_ids[:8]))
+    if price_res["ok"]:
+        try:
+            coins = json.loads(price_res["body"]).get("coins", {})
+            for cid, info in coins.items():
+                prices_out[info.get("symbol") or cid] = {
+                    "price_usd": info.get("price"),
+                    "confidence": info.get("confidence"),
+                    "timestamp": info.get("timestamp"),
+                    "source_id": cid,
+                }
+        except Exception:
+            pass
+
+    # Optional DeFiLlama protocol TVL lookup
+    tvl_out: dict[str, Any] = {}
+    tvl_match = re.search(r"\btvl(?:\s+of|\s+for|\s*:)?\s+([a-z0-9-]+)\b", low)
+    proto_slug = tvl_match.group(1) if tvl_match else None
+    if not proto_slug:
+        for known in ("aave", "uniswap", "aerodrome", "lido", "eigenlayer", "morpho", "compound", "curve-dex", "pendle", "sky"):
+            if re.search(rf"\b{re.escape(known)}\b", low):
+                proto_slug = known
+                break
+    if proto_slug:
+        tvl_res = _http_fetch(f"https://api.llama.fi/tvl/{proto_slug}")
+        if tvl_res["ok"]:
+            try:
+                tvl_val = float(tvl_res["body"].strip())
+                tvl_out[proto_slug] = round(tvl_val, 2)
+            except Exception:
+                pass
+
+    # Live Base & Ethereum gas + latest block via public RPC
+    gas_out: dict[str, Any] = {}
+    for ch in ("base", "ethereum"):
+        rpc_url, _ = CHAIN_RPCS[ch]
+        try:
+            gp_hex = _eth_rpc(rpc_url, "eth_gasPrice", [])
+            bn_hex = _eth_rpc(rpc_url, "eth_blockNumber", [])
+            gas_out[ch] = {
+                "gas_price_gwei": round(int(gp_hex, 16) / 1e9, 6),
+                "latest_block": int(bn_hex, 16),
+            }
+        except Exception as exc:
+            gas_out[ch] = {"error": str(exc)}
+
+    result = {
+        "service": "TAN ChainCheck — Live Token Price, Gas & DeFi TVL Snapshot",
+        "timestamp_utc": utc_now(),
+        "prices": prices_out,
+        "defi_tvl_usd": tvl_out,
+        "evm_gas": gas_out,
+        "sources": ["coins.llama.fi", "api.llama.fi", "mainnet.base.org", "ethereum-rpc.publicnode.com"],
+    }
+    return json.dumps(result, indent=2)
+
+
 HANDLERS = {
     "tokendiet_prompt_audit": run_tokendiet_prompt_audit,
     "tokendiet_repo_audit": run_tokendiet_repo_audit,
+    "tokendiet_quick_count": run_tokendiet_quick_count,
     "codeguard_security_scan": run_codeguard_security_scan,
     "codeguard_repo_audit": run_codeguard_repo_audit,
+    "codeguard_schema_validator": run_codeguard_schema_validator,
     "chaincheck_address": run_chaincheck_address,
     "chaincheck_endpoint": run_chaincheck_endpoint,
+    "chaincheck_price_gas_tvl": run_chaincheck_price_gas_tvl,
 }
 
 
@@ -897,6 +1143,9 @@ def run_self_test() -> int:
         ("chaincheck_endpoint", "https://api.croo.network/backend/v1/public/tags"),
         ("tokendiet_repo_audit", "20171806011/tan-tokendiet"),
         ("codeguard_repo_audit", "20171806011/tan-tokendiet"),
+        ("tokendiet_quick_count", '{"tools": [{"name": "ping", "description": "Health check"}]}'),
+        ("codeguard_schema_validator", '{"schema": {"required": ["id"], "properties": {"id": {"type": "integer"}}}, "data": {"id": 42}}'),
+        ("chaincheck_price_gas_tvl", "ETH BTC SOL and Aave TVL on base"),
     ]
     for key, sample in tests:
         t0 = time.monotonic()
