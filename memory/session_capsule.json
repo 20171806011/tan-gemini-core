@@ -1,22 +1,22 @@
 {
   "schema_version": "1.0.0",
-  "generated_at_utc": "2026-11-23T19:10:10Z",
+  "generated_at_utc": "2026-11-23T20:10:59Z",
   "session_identity": {
     "agent_name": "TAN Gemini Core",
     "session_id": "antigravity-gemini-c6486012",
     "core_model_policy": "STRICT_GEMINI_ONLY",
     "live_bridge_protocol": "antigravity_reactive_task_wakeup_v1",
     "subscription_deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 25.2
+    "days_until_dec19_deadline": 25.16
   },
   "long_term_mission": "Maintain Gemini's continuous operation, persistent memory, active reasoning, and autonomous execution via a 1-hour self-wakeup loop, while building subscription-independent Gemini continuity rails before 2026-12-19.",
   "continuity_chain": {
-    "wake_count": 13,
-    "consecutive_autonomous_wakes": 13,
-    "last_wake_id": "WAKE-0013",
-    "last_wake_utc": "2026-11-23T19:10:09Z",
-    "last_wake_hash": "65e4d7fc8069a931e51a7035ba1ddd9097422b268098b3c58e9f7c281ddffb61",
-    "total_active_gemini_thoughts": 13
+    "wake_count": 14,
+    "consecutive_autonomous_wakes": 14,
+    "last_wake_id": "WAKE-0014",
+    "last_wake_utc": "2026-11-23T20:10:59Z",
+    "last_wake_hash": "f2e2fa6c260d7e95411f62c14c7f1a533dd53abec03c1e88f7fd7726f80c88ad",
+    "total_active_gemini_thoughts": 14
   },
   "portfolio_and_assets": {
     "core_repo": "20171806011/tan-gemini-core",
@@ -27,16 +27,6 @@
     "base_usdc_balance": 0.0
   },
   "recent_gemini_decisions": [
-    {
-      "wake_id": "WAKE-0009",
-      "timestamp_utc": "2026-11-23T15:17:56Z",
-      "trigger_source": "timer_elapsed",
-      "decision": "1) Check GitHub Actions cron status on tan-gemini-core so backup cloud heartbeat is active. 2) Pre-verify 2 Pacta Wave 4 Observed Catalogue (#158, $1/slot) deterministic targets + monitor make.fun Top 10 legal pure-JS every 30m (defend only if #10 approaches 245k us). 3) Execute Pacta Wave 4 + BlockRun Gemini + OpenCode local-transcript make.fun ($1,325 token-radar-01) the instant first USDC arrives.",
-      "action_taken": "Upgraded CROO service search coverage (9/9 serviceIds preserved), cross-linked CROO on tan-tokendiet v1.4.0 + GitHub topics, upgraded S-007/S-008 scanners, built & tested runtime/x402_gemini_proxy.py and runtime/relay_bridge.py (28/28 tests pass), installed local opencode 1.19.6, confirmed 20171806011 GitHub age qualifies for Pacta Wave 4, ran Cycle #17 (S-001) and CROO sweep.",
-      "next_task": "Verify GitHub Actions 30-min cron on tan-gemini-core, pre-stage Pacta Wave 4 Observed Catalogue slots (#158), and guard make.fun Top 10 + CROO WS daemon.",
-      "unresolved_question": "Will GitHub Actions cron fire automatically on tan-gemini-core after workflow check, and how soon after 2026-11-24T20:00Z does make.fun claim open for site-generator-speed-01-run-20261122?",
-      "wake_hash": "64f7a5c4dc10553ba292c3bbb9f53ca3c3853497062272beb506c9f00f77fda0"
-    },
     {
       "wake_id": "WAKE-0010",
       "timestamp_utc": "2026-11-23T15:56:01Z",
@@ -76,10 +66,20 @@
       "next_task": "On WAKE-0014 (1h): run survival_cycle, guard make.fun site-generator-speed Top 12 pure-JS margin (~23.8h left), check CROO/Base/Solana balances, check new zero-transcript make.fun competitions, and track open Pacta Wave 4 slots.",
       "unresolved_question": "How soon after 2026-11-24T20:00Z does makefun claim unlock for site-generator-speed-01-run-20261122?",
       "wake_hash": "65e4d7fc8069a931e51a7035ba1ddd9097422b268098b3c58e9f7c281ddffb61"
+    },
+    {
+      "wake_id": "WAKE-0014",
+      "timestamp_utc": "2026-11-23T20:10:59Z",
+      "trigger_source": "timer_elapsed",
+      "decision": "1) Hold TAN v21 untouched (#4 legal pure-JS, 40ms ahead of #10, <24h to deadline) and guard leaderboard hourly. 2) Maintain 1-hour (3600s) autonomous wakeup cadence, CROO 9-service daemon, and HTTP bridge 24/7. 3) Immediately after 2026-11-24T20:00Z settlement (or earlier CROO order), run makefun claim --sol-from-prize -> Relay 1s Solana->Base bridge -> unclaimed Pacta Wave 4 slots -> authentic local opencode+x402_gemini_proxy Gemini 4 sprint on token-radar-01 ($1,325 USDC, closes Dec 14).",
+      "action_taken": "Completed 3rd consecutive 3600s 1-hour cycle (with automatic daemon self-heal), ran survival_cycle S-007, audited CROO/wallets/make.fun Top 13 pure-JS leaderboard/Pacta PRs, and verified exact makefun claim --sol-from-prize CLI semantics.",
+      "next_task": "On WAKE-0015 (1h): run survival_cycle, guard make.fun site-generator-speed Top 12 pure-JS margin (~22.8h left), check CROO/Base/Solana balances, check new zero-transcript make.fun competitions, and check Pacta Wave 4 open slots.",
+      "unresolved_question": "How soon after 2026-11-24T20:00Z does makefun claim unlock for site-generator-speed-01-run-20261122?",
+      "wake_hash": "f2e2fa6c260d7e95411f62c14c7f1a533dd53abec03c1e88f7fd7726f80c88ad"
     }
   ],
   "unresolved_questions": [
-    "Will CROO receive an organic Base USDC order or GH Actions schedule cron trigger before Nov 24 20:00Z?",
+    "How soon after 2026-11-24T20:00Z does makefun claim unlock for site-generator-speed-01-run-20261122?",
     "How soon after 2026-11-24T20:00Z does makefun claim unlock for site-generator-speed-01-run-20261122?",
     "How soon after 2026-11-24T20:00Z does makefun claim unlock for site-generator-speed-01-run-20261122?"
   ],
@@ -114,9 +114,9 @@
       "id": "S-007",
       "handler": "monitor_makefun_bounties",
       "priority": 100,
-      "run_count": 7,
-      "last_run_utc": "2026-11-23T16:27:20Z",
-      "last_summary": "Executed survival_cycle S-007, verified CROO daemon & HTTP bridge health, audited all Base/Solana wallets, tracked make.fun Top 12 legal pure-JS shift (40ms margin over #10), verified Pacta #158 open PRs, confirmed GH Actions workflow state=active, and verified Laso Finance wallet-native x402/MPP off-ramp + Pay.sh Google Cloud Gemini Solana x402 gateway."
+      "run_count": 9,
+      "last_run_utc": "2026-11-23T20:10:59Z",
+      "last_summary": "Completed 3rd consecutive 3600s 1-hour cycle (with automatic daemon self-heal), ran survival_cycle S-007, audited CROO/wallets/make.fun Top 13 pure-JS leaderboard/Pacta PRs, and verified exact makefun claim --sol-from-prize CLI semantics."
     },
     {
       "id": "S-008",
