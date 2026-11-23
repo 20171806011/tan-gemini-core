@@ -976,7 +976,19 @@ def load_agents_config() -> list[dict[str, Any]]:
 
 
 async def handle_agent_sweep(client: Any, agent_cfg: dict[str, Any], delivered_ids: set[str], accepted_negs: set[str]) -> dict[str, int]:
-    from croo import DeliverOrderRequest, DeliverableType, ListOptions
+    try:
+        from croo import DeliverOrderRequest, DeliverableType, ListOptions
+    except ImportError:
+        from types import SimpleNamespace
+
+        class DeliverableType:  # type: ignore[no-redef]
+            TEXT = "text"
+
+        def DeliverOrderRequest(**kwargs: Any) -> Any:  # type: ignore[no-redef]
+            return SimpleNamespace(**kwargs)
+
+        def ListOptions(**kwargs: Any) -> Any:  # type: ignore[no-redef]
+            return SimpleNamespace(**kwargs)
 
     svc_map: dict[str, str] = agent_cfg.get("service_handlers", {})
     default_handler = next(iter(svc_map.values()), "tokendiet_prompt_audit")
