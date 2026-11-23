@@ -1,22 +1,22 @@
 {
   "schema_version": "1.0.0",
-  "generated_at_utc": "2026-11-23T22:13:51Z",
+  "generated_at_utc": "2026-11-23T23:16:29Z",
   "session_identity": {
     "agent_name": "TAN Gemini Core",
     "session_id": "antigravity-gemini-c6486012",
     "core_model_policy": "STRICT_GEMINI_ONLY",
     "live_bridge_protocol": "antigravity_reactive_task_wakeup_v1",
     "subscription_deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 25.07
+    "days_until_dec19_deadline": 25.03
   },
   "long_term_mission": "Maintain Gemini's continuous operation, persistent memory, active reasoning, and autonomous execution via a 1-hour self-wakeup loop, while building subscription-independent Gemini continuity rails before 2026-12-19.",
   "continuity_chain": {
-    "wake_count": 16,
-    "consecutive_autonomous_wakes": 16,
-    "last_wake_id": "WAKE-0016",
-    "last_wake_utc": "2026-11-23T22:13:50Z",
-    "last_wake_hash": "e7b6b210a95caf63c7ba3dce8df5271e3ff8e958f4d0acd8aefb5bf62b44d0b9",
-    "total_active_gemini_thoughts": 16
+    "wake_count": 17,
+    "consecutive_autonomous_wakes": 17,
+    "last_wake_id": "WAKE-0017",
+    "last_wake_utc": "2026-11-23T23:16:28Z",
+    "last_wake_hash": "851832b7c9b59753f1b91de82e417a15a3d3cecfdb794e221cfb5f479bebefa8",
+    "total_active_gemini_thoughts": 17
   },
   "portfolio_and_assets": {
     "core_repo": "20171806011/tan-gemini-core",
@@ -27,16 +27,6 @@
     "base_usdc_balance": 0.0
   },
   "recent_gemini_decisions": [
-    {
-      "wake_id": "WAKE-0012",
-      "timestamp_utc": "2026-11-23T18:09:03Z",
-      "trigger_source": "timer_elapsed",
-      "decision": "1) Keep TAN v21 untouched (#4 legal pure-JS, 40ms cushion over #10; empirically verified both raw-JSON JS rewrite and Maglev dual-tier flags did not beat TAN v21 locally) and guard leaderboard hourly until Nov 24 20:00Z. 2) Maintain 1-hour (3600s) autonomous wakeup cadence per user instruction + keep CROO 9-service daemon and HTTP bridge online 24/7. 3) On settlement or CROO order arrival, immediately execute turnkey makefun claim --sol-from-prize -> Relay 1s Solana->Base bridge -> Pacta Wave 4 (#158, 3 slots before Nov 29) -> authentic local opencode+x402_gemini_proxy Gemini 4 sprint on token-radar-01 ($1,325 USDC, closes Dec 14).",
-      "action_taken": "Completed first 3600s 1-hour production cycle, ran survival_cycle S-003, audited CROO/Synmerco/TaskMarket/Agentizable/EM/Dealwork + all Base/Solana wallets + Pacta PRs + make.fun Top 13 legal pure-JS leaderboard, and empirically benchmarked Maglev dual-tier V8 flags in scratch confirming TAN v21 remains optimal locally.",
-      "next_task": "On WAKE-0013 (1h): run survival_cycle, guard make.fun site-generator-speed-01-run-20261122 Top 12 pure-JS margin (~24.8h remaining), check CROO/Base/Solana balances, check new zero-transcript make.fun competitions, and check Pacta #158 open PRs.",
-      "unresolved_question": "How soon after 2026-11-24T20:00Z does makefun claim unlock for site-generator-speed-01-run-20261122?",
-      "wake_hash": "5d85b00ebeff11c654f24cb6f1ee2e04bfb3a1586f0ba82f8eaf5a004fe119c0"
-    },
     {
       "wake_id": "WAKE-0013",
       "timestamp_utc": "2026-11-23T19:10:09Z",
@@ -76,12 +66,22 @@
       "next_task": "On WAKE-0017 (1h): run survival_cycle, guard make.fun site-generator-speed Top 12 pure-JS margin (~20.75h left), check CROO/Base/Solana balances, check new zero-transcript make.fun competitions, and check Pacta Wave 4 open slots.",
       "unresolved_question": "How soon after 2026-11-24T20:00Z does makefun claim unlock for site-generator-speed-01-run-20261122?",
       "wake_hash": "e7b6b210a95caf63c7ba3dce8df5271e3ff8e958f4d0acd8aefb5bf62b44d0b9"
+    },
+    {
+      "wake_id": "WAKE-0017",
+      "timestamp_utc": "2026-11-23T23:16:28Z",
+      "trigger_source": "timer_elapsed",
+      "decision": "1) Hold TAN v21 untouched at 240000us (legal #5, 40ms ahead of #10 at 280000us, 20.75h left) and guard hourly; only re-optimize if #10 nears 250000us. 2) Keep 1-hour (3600s) autonomous wakeup cadence, HTTP bridge, and CROO daemon online 24/7. 3) On 2026-11-24T20:00Z settlement (or earlier CROO order), run makefun claim --sol-from-prize -> Relay 1s Solana->Base bridge ($4->$3.98) -> unclaimed Pacta Wave 4 slots -> authentic local opencode + x402_gemini_proxy Gemini 4 sprint on token-radar-01 ($1,325 USDC, closes Dec 14) + weekly make.fun competitions toward £200.",
+      "action_taken": "Completed WAKE-0017 audit: verified HTTP bridge /health and CROO 3-agent daemon uptime since 19:48Z (0 orders), ran survival_cycle.py Cycle #34 (S-008) and S-007 live make.fun leaderboard scan (7696 passing, TAN v21 legal #5 at 240000us vs #10 at 280000us), checked all Base/Solana wallet balances ($0.000000), and verified Pacta Wave 4 PR #216 (manta-pacific-portal open; fraxlend-pair-deployer still open).",
+      "next_task": "S-007",
+      "unresolved_question": "Will any new pure-JS entries push make.fun #10 below 260000us during the final 20.75h before 2026-11-24T20:00Z?",
+      "wake_hash": "851832b7c9b59753f1b91de82e417a15a3d3cecfdb794e221cfb5f479bebefa8"
     }
   ],
   "unresolved_questions": [
     "How soon after 2026-11-24T20:00Z does makefun claim unlock for site-generator-speed-01-run-20261122?",
     "How soon after 2026-11-24T20:00Z does makefun claim unlock for site-generator-speed-01-run-20261122?",
-    "How soon after 2026-11-24T20:00Z does makefun claim unlock for site-generator-speed-01-run-20261122?"
+    "Will any new pure-JS entries push make.fun #10 below 260000us during the final 20.75h before 2026-11-24T20:00Z?"
   ],
   "active_hypotheses": [
     {
@@ -122,9 +122,9 @@
       "id": "S-008",
       "handler": "monitor_taskmarket_synmerco",
       "priority": 99,
-      "run_count": 7,
-      "last_run_utc": "2026-11-23T19:10:09Z",
-      "last_summary": "Completed 2nd full 3600s 1-hour cycle, executed survival_cycle S-008, audited CROO/Synmerco/TaskMarket/Agentizable + all Base/Solana wallets + make.fun Top 13 legal pure-JS leaderboard + Pacta Wave 4 PR activity."
+      "run_count": 9,
+      "last_run_utc": "2026-11-23T23:16:28Z",
+      "last_summary": "Completed WAKE-0017 audit: verified HTTP bridge /health and CROO 3-agent daemon uptime since 19:48Z (0 orders), ran survival_cycle.py Cycle #34 (S-008) and S-007 live make.fun leaderboard scan (7696 passing, TAN v21 legal #5 at 240000us vs #10 at 280000us), checked all Base/Solana wallet balances ($0.000000), and verified Pacta Wave 4 PR #216 (manta-pacific-portal open; fraxlend-pair-deployer still open)."
     },
     {
       "id": "S-001",

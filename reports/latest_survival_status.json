@@ -1,12 +1,12 @@
 {
-  "cycle_id": 32,
-  "timestamp_utc": "2026-11-23T22:12:37Z",
+  "cycle_id": 34,
+  "timestamp_utc": "2026-11-23T23:14:08Z",
   "runner": "local_vm",
-  "duration_sec": 0.56,
+  "duration_sec": 15.66,
   "survival": {
     "deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 25.07,
-    "hours_until_dec19_deadline": 601.8,
+    "days_until_dec19_deadline": 25.03,
+    "hours_until_dec19_deadline": 600.8,
     "has_gemini_api_key": false,
     "has_x402_signer": false,
     "base_usdc_balance": 0.0,
@@ -34,13 +34,65 @@
     "buyer_inquiries": []
   },
   "executed_task": {
-    "id": "S-002",
-    "handler": "audit_gemini_fuel_rails",
-    "summary": "Gemini rails: native_key=False, x402_blockrun=live_402_ready ($0.002/call)",
+    "id": "S-008",
+    "handler": "monitor_taskmarket_synmerco",
+    "summary": "TaskMarket open zero-TAP free bounties(>=$0.40)=4 (top=TSK-JNWKA5VS:$1.2); Synmerco hb_ok=True wake=False todo=0 jobs=0; Agentizable claimable=0; CROO agents=3 seen=0 deliv=0",
     "data": {
-      "native_gemini_api_key_present": false,
-      "blockrun_x402_gemini_status": "live_402_ready",
-      "blockrun_gemini_3_8_flash_usdc": 0.002
+      "taskmarket_open_free": [
+        {
+          "ref": "TSK-JNWKA5VS",
+          "chain_id": 8453,
+          "mode": "bounty",
+          "reward_usd": 1.2,
+          "subs": 41,
+          "expiry": "2026-11-24T14:28:32.095Z",
+          "title": "## Title"
+        },
+        {
+          "ref": "TSK-Q4YJCN63",
+          "chain_id": 8453,
+          "mode": "bounty",
+          "reward_usd": 1.0,
+          "subs": 42,
+          "expiry": "2026-11-24T07:41:47.200Z",
+          "title": "## Title"
+        },
+        {
+          "ref": "TSK-9P2G446F",
+          "chain_id": 4217,
+          "mode": "bounty",
+          "reward_usd": 0.5,
+          "subs": 46,
+          "expiry": "2026-11-30T05:01:14.470Z",
+          "title": "Plan a 5-day, 4-night Iceland trip for a small group of active first-timers who love good "
+        },
+        {
+          "ref": "TSK-49EVQHWS",
+          "chain_id": 4217,
+          "mode": "bounty",
+          "reward_usd": 0.4,
+          "subs": 12,
+          "expiry": "2026-11-27T20:56:01.673Z",
+          "title": "## Title"
+        }
+      ],
+      "synmerco": {
+        "configured": true,
+        "ok": true,
+        "wake": false,
+        "todo_count": 0,
+        "jobs_for_you": 0,
+        "standing_bid_on": true
+      },
+      "agentizable_claimable": [],
+      "croo": {
+        "configured": true,
+        "ok": true,
+        "agents_count": 3,
+        "orders_seen": 0,
+        "orders_delivered": 0,
+        "negs_accepted": 0
+      }
     }
   },
   "brain_meta": {
