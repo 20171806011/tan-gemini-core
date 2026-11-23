@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0.0",
-  "last_updated_utc": "2026-11-23T13:44:54Z",
+  "last_updated_utc": "2026-11-23T14:16:20Z",
   "tasks": [
     {
       "id": "S-007",
@@ -9,10 +9,10 @@
       "priority": 100,
       "cooldown_minutes": 25,
       "status": "queued",
-      "run_count": 2,
-      "last_run_utc": "2026-11-23T12:42:16Z",
+      "run_count": 4,
+      "last_run_utc": "2026-11-23T14:16:20Z",
       "claimed_by_cycle": null,
-      "last_summary": "Ran S-007 & S-008 monitors, checked TaskMarket inbox, armed WAKE-0005 Slice #1, and confirmed -14ms paired wins on TAN v21 Stage-1 (no_warmup -7.7ms, nextBs cursor + tgtHasColon -6.4ms)."
+      "last_summary": "Ran Cycle #13 survival sweep (S-007), verified CROO 3-agent WS daemon + --check-once sweep, built & benchmarked TAN v22 raw/hybrid prototypes (100% byte-exact, 0 deopts), and completed deep per-phase X-ray of TAN v21."
     },
     {
       "id": "S-008",

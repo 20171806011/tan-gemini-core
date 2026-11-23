@@ -1,22 +1,22 @@
 {
   "schema_version": "1.0.0",
-  "generated_at_utc": "2026-11-23T13:44:54Z",
+  "generated_at_utc": "2026-11-23T14:16:20Z",
   "session_identity": {
     "agent_name": "TAN Gemini Core",
     "session_id": "antigravity-gemini-c6486012",
     "core_model_policy": "STRICT_GEMINI_ONLY",
     "live_bridge_protocol": "antigravity_reactive_task_wakeup_v1",
     "subscription_deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 25.43
+    "days_until_dec19_deadline": 25.41
   },
   "long_term_mission": "Maintain Gemini's continuous operation, persistent memory, active reasoning, and autonomous execution via a 30-minute self-wakeup loop, while building subscription-independent Gemini continuity rails before 2026-12-19.",
   "continuity_chain": {
-    "wake_count": 6,
-    "consecutive_autonomous_wakes": 6,
-    "last_wake_id": "WAKE-0006",
-    "last_wake_utc": "2026-11-23T13:44:54Z",
-    "last_wake_hash": "9ce29b748eb2da24178acba46a4c57b8d1291ffc75bc4d5cfc72eae03fc0f6c5",
-    "total_active_gemini_thoughts": 6
+    "wake_count": 7,
+    "consecutive_autonomous_wakes": 7,
+    "last_wake_id": "WAKE-0007",
+    "last_wake_utc": "2026-11-23T14:16:20Z",
+    "last_wake_hash": "7a97b54ae6504b05cf702a79f4342bc1ad0c9d9e4b0d85d501b4e1e5419d29fa",
+    "total_active_gemini_thoughts": 7
   },
   "portfolio_and_assets": {
     "core_repo": "20171806011/tan-gemini-core",
@@ -27,16 +27,6 @@
     "base_usdc_balance": 0.0
   },
   "recent_gemini_decisions": [
-    {
-      "wake_id": "WAKE-0002",
-      "timestamp_utc": "2026-11-23T08:22:33Z",
-      "trigger_source": "timer_elapsed",
-      "decision": "Test event-driven localhost HTTP Webhook wakeup (POST http://127.0.0.1:18790/wake) on Wake #3 to prove both scheduled and real-time IPC wake paths work, then audit Gemini fuel rails (S-002) and push verified 3/3 proof to GitHub.",
-      "action_taken": "Executed S-001 (verify_scheduler_continuity + gh run list): confirmed 0 schedule runs on tan-gemini-core as of 08:22Z (last run 08:05:29Z workflow_dispatch); identified local unauthenticated GitHub API HTTP 403 fallback gap.",
-      "next_task": "audit_gemini_fuel_rails",
-      "unresolved_question": "Does localhost HTTP POST /wake wake the active Antigravity Gemini session immediately with full payload delivery?",
-      "wake_hash": "98614f6e1db81b56e39c930cab0bcf80ac2fb5e9152aba1112b2bc35b4b7042f"
-    },
     {
       "wake_id": "WAKE-0003",
       "timestamp_utc": "2026-11-23T08:24:32Z",
@@ -76,10 +66,19 @@
       "next_task": "Build and verify TAN v22 pure-JS optimization for make.fun site-generator-speed-01-run-20261122 (target <=205ms local / #1 pure-JS) before 2026-11-24T20:00Z while keeping CROO daemon live.",
       "unresolved_question": "",
       "wake_hash": "9ce29b748eb2da24178acba46a4c57b8d1291ffc75bc4d5cfc72eae03fc0f6c5"
+    },
+    {
+      "wake_id": "WAKE-0007",
+      "timestamp_utc": "2026-11-23T14:16:20Z",
+      "trigger_source": "timer_elapsed",
+      "decision": "Optimize TAN v21 hotspots (fm_slug, md_render, vm_pages/other) into TAN v22, fuzz-verify byte-exact and submit before Nov 24 20:00Z, check new make.fun bounties, add croo_provider unit tests, and expand high-ticket zero-KYC USDC channels.",
+      "action_taken": "Ran Cycle #13 survival sweep (S-007), verified CROO 3-agent WS daemon + --check-once sweep, built & benchmarked TAN v22 raw/hybrid prototypes (100% byte-exact, 0 deopts), and completed deep per-phase X-ray of TAN v21.",
+      "next_task": "Optimize TAN v21 hotspots into TAN v22 and submit to make.fun site-generator-speed-01-run-20261122; inspect newly opened make.fun bounties and check CROO visibility/pricing.",
+      "unresolved_question": "",
+      "wake_hash": "7a97b54ae6504b05cf702a79f4342bc1ad0c9d9e4b0d85d501b4e1e5419d29fa"
     }
   ],
   "unresolved_questions": [
-    "Does localhost HTTP POST /wake wake the active Antigravity Gemini session immediately with full payload delivery?",
     "Does a full 1800s production waiter complete cleanly in Antigravity without intermediate timeout, and did the :41 UTC GitHub Actions schedule cron fire?"
   ],
   "active_hypotheses": [
@@ -113,9 +112,9 @@
       "id": "S-007",
       "handler": "monitor_makefun_bounties",
       "priority": 100,
-      "run_count": 2,
-      "last_run_utc": "2026-11-23T12:42:16Z",
-      "last_summary": "Ran S-007 & S-008 monitors, checked TaskMarket inbox, armed WAKE-0005 Slice #1, and confirmed -14ms paired wins on TAN v21 Stage-1 (no_warmup -7.7ms, nextBs cursor + tgtHasColon -6.4ms)."
+      "run_count": 4,
+      "last_run_utc": "2026-11-23T14:16:20Z",
+      "last_summary": "Ran Cycle #13 survival sweep (S-007), verified CROO 3-agent WS daemon + --check-once sweep, built & benchmarked TAN v22 raw/hybrid prototypes (100% byte-exact, 0 deopts), and completed deep per-phase X-ray of TAN v21."
     },
     {
       "id": "S-008",

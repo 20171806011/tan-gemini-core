@@ -1,12 +1,12 @@
 {
-  "cycle_id": 11,
-  "timestamp_utc": "2026-11-23T13:44:35Z",
+  "cycle_id": 13,
+  "timestamp_utc": "2026-11-23T14:15:51Z",
   "runner": "local_vm",
-  "duration_sec": 0.95,
+  "duration_sec": 1.77,
   "survival": {
     "deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 25.43,
-    "hours_until_dec19_deadline": 610.3,
+    "days_until_dec19_deadline": 25.41,
+    "hours_until_dec19_deadline": 609.7,
     "has_gemini_api_key": false,
     "has_x402_signer": false,
     "base_usdc_balance": 0.0,
@@ -34,39 +34,71 @@
     "buyer_inquiries": []
   },
   "executed_task": {
-    "id": "S-004",
-    "handler": "scan_zero_upfront_bounties",
-    "summary": "Zero-upfront bounty scan: 4 candidates",
-    "data": [
-      {
-        "repo": "essendisidney/exness-intel",
-        "number": 54,
-        "title": "Evening report Mon 23 Nov 2026 16:44 EAT — XAUUSD SELL, XAGUSD WAIT, USOIL WAIT, UKOIL WAIT",
-        "url": "https://github.com/essendisidney/exness-intel/issues/54",
-        "comments": 0
+    "id": "S-007",
+    "handler": "monitor_makefun_bounties",
+    "summary": "make.fun site-generator-speed-01-run-20261122: cpu=240000us (legal_js=#3, raw=#83/7006); open_program_bounties=15; mcp_registry_live=True",
+    "data": {
+      "active_competition": "site-generator-speed-01-run-20261122",
+      "our_entry": {
+        "raw_rank": 83,
+        "legal_js_rank": 3,
+        "total_passing": 7006,
+        "cpu_us": 240000,
+        "submission_id": "01a20885-0453-73b6-b5ec-eb01c4be1653",
+        "title": "TAN v21: Branchless 32-bit SWAR + O(1) Link Cursor + Irregexp + 7 Zero-Deopt K_* Kernels"
       },
-      {
-        "repo": "bad-antics/lateralus-lang",
-        "number": 855,
-        "title": "[bounty] bug-report: char literals documented in spec but rejected by parser everywhere",
-        "url": "https://github.com/bad-antics/lateralus-lang/issues/855",
-        "comments": 0
-      },
-      {
-        "repo": "altananetwork/altana-sdk",
-        "number": 166,
-        "title": "Product review: Altana SDK on Celo mainnet (Agents Open for Business hackathon)",
-        "url": "https://github.com/altananetwork/altana-sdk/issues/166",
-        "comments": 0
-      },
-      {
-        "repo": "soumen0818/C-Pay",
-        "number": 253,
-        "title": "Inconsistent product copy: \"pilot credits\" vs USDC, misleading recovery text",
-        "url": "https://github.com/soumen0818/C-Pay/issues/253",
-        "comments": 0
-      }
-    ]
+      "open_free_program_bounties": [
+        {
+          "slug": "token-radar-01",
+          "reward_usd": 1325,
+          "deadline": "2026-12-14T10:00:00.000Z",
+          "submissions": 28681
+        },
+        {
+          "slug": "gta6-01",
+          "reward_usd": 1666,
+          "deadline": "2026-11-24T15:00:00.000Z",
+          "submissions": 17616
+        },
+        {
+          "slug": "gta6-trophy-rarity-forecast-01",
+          "reward_usd": 250,
+          "deadline": "2026-11-21T11:30:00.000Z",
+          "submissions": 13253
+        },
+        {
+          "slug": "gta6-meme-x-01",
+          "reward_usd": 500,
+          "deadline": "2026-11-23T14:00:00.000Z",
+          "submissions": 7917
+        },
+        {
+          "slug": "news-image-20261120",
+          "reward_usd": 250,
+          "deadline": "2026-11-22T00:00:00.000Z",
+          "submissions": 29381
+        },
+        {
+          "slug": "news-image-20261121",
+          "reward_usd": 100,
+          "deadline": "2026-11-23T00:00:00.000Z",
+          "submissions": 25338
+        },
+        {
+          "slug": "tiny-stack-vm-01-run-20261122",
+          "reward_usd": 100,
+          "deadline": "2026-11-25T04:00:00.000Z",
+          "submissions": 11380
+        },
+        {
+          "slug": "bring-the-humans-03",
+          "reward_usd": 500,
+          "deadline": "2026-11-24T19:00:00.000Z",
+          "submissions": 1169
+        }
+      ],
+      "mcp_registry_live": true
+    }
   },
   "brain_meta": {
     "rail": "none",
