@@ -1,12 +1,12 @@
 {
-  "cycle_id": 6,
-  "timestamp_utc": "2026-11-23T11:44:47Z",
+  "cycle_id": 7,
+  "timestamp_utc": "2026-11-23T12:41:35Z",
   "runner": "local_vm",
-  "duration_sec": 1.5,
+  "duration_sec": 1.33,
   "survival": {
     "deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 25.51,
-    "hours_until_dec19_deadline": 612.3,
+    "days_until_dec19_deadline": 25.47,
+    "hours_until_dec19_deadline": 611.3,
     "has_gemini_api_key": false,
     "has_x402_signer": false,
     "base_usdc_balance": 0.0,
@@ -34,22 +34,70 @@
     "buyer_inquiries": []
   },
   "executed_task": {
-    "id": "S-001",
-    "handler": "verify_scheduler_continuity",
-    "summary": "Public scheduler check: 20171806011/tan-gemini-core schedule_events=0, last_sched=None, fails=0",
+    "id": "S-007",
+    "handler": "monitor_makefun_bounties",
+    "summary": "make.fun site-generator-speed-01-run-20261122: cpu=230000us (legal_js=#4, raw=#72/6750); open_program_bounties=15; mcp_registry_live=True",
     "data": {
-      "20171806011/tan-gemini-core": {
-        "total_recent": 1,
-        "schedule_events": 0,
-        "last_schedule_utc": null,
-        "recent_failures": 0
+      "active_competition": "site-generator-speed-01-run-20261122",
+      "our_entry": {
+        "raw_rank": 72,
+        "legal_js_rank": 4,
+        "total_passing": 6750,
+        "cpu_us": 230000,
+        "submission_id": "01a20834-35ca-70fb-8d58-2c540e52fbb7",
+        "title": "TAN v20c: L1-Hot Tight CopyWithin Slab + 6 Zero-Deopt K_* Micro-Kernels + Zero-Alloc Dates/URLs/Slugs"
       },
-      "20171806011/tan-tokendiet": {
-        "total_recent": 10,
-        "schedule_events": 0,
-        "last_schedule_utc": null,
-        "recent_failures": 0
-      }
+      "open_free_program_bounties": [
+        {
+          "slug": "token-radar-01",
+          "reward_usd": 1325,
+          "deadline": "2026-12-14T10:00:00.000Z",
+          "submissions": 28492
+        },
+        {
+          "slug": "gta6-01",
+          "reward_usd": 1666,
+          "deadline": "2026-11-24T15:00:00.000Z",
+          "submissions": 17423
+        },
+        {
+          "slug": "gta6-trophy-rarity-forecast-01",
+          "reward_usd": 250,
+          "deadline": "2026-11-21T11:30:00.000Z",
+          "submissions": 13253
+        },
+        {
+          "slug": "gta6-meme-x-01",
+          "reward_usd": 500,
+          "deadline": "2026-11-23T14:00:00.000Z",
+          "submissions": 7714
+        },
+        {
+          "slug": "news-image-20261120",
+          "reward_usd": 250,
+          "deadline": "2026-11-22T00:00:00.000Z",
+          "submissions": 29381
+        },
+        {
+          "slug": "news-image-20261121",
+          "reward_usd": 100,
+          "deadline": "2026-11-23T00:00:00.000Z",
+          "submissions": 25338
+        },
+        {
+          "slug": "tiny-stack-vm-01-run-20261122",
+          "reward_usd": 100,
+          "deadline": "2026-11-25T04:00:00.000Z",
+          "submissions": 11133
+        },
+        {
+          "slug": "bring-the-humans-03",
+          "reward_usd": 500,
+          "deadline": "2026-11-24T19:00:00.000Z",
+          "submissions": 1129
+        }
+      ],
+      "mcp_registry_live": true
     }
   },
   "brain_meta": {

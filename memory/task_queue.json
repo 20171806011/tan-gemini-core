@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0.0",
-  "last_updated_utc": "2026-11-23T11:44:47Z",
+  "last_updated_utc": "2026-11-23T12:42:16Z",
   "tasks": [
     {
       "id": "S-007",
@@ -9,10 +9,10 @@
       "priority": 100,
       "cooldown_minutes": 25,
       "status": "queued",
-      "run_count": 0,
-      "last_run_utc": null,
+      "run_count": 2,
+      "last_run_utc": "2026-11-23T12:42:16Z",
       "claimed_by_cycle": null,
-      "last_summary": "Round 4 TAN v20c scored 230,000 us median (220k low, 3/3 pass, prize_eligible=true); tan-tokendiet v1.4.0 live on Official MCP Registry."
+      "last_summary": "Ran S-007 & S-008 monitors, checked TaskMarket inbox, armed WAKE-0005 Slice #1, and confirmed -14ms paired wins on TAN v21 Stage-1 (no_warmup -7.7ms, nextBs cursor + tgtHasColon -6.4ms)."
     },
     {
       "id": "S-008",

@@ -3,13 +3,13 @@
   "bridge_protocol": "antigravity_reactive_task_wakeup_v1",
   "session_id": "antigravity-gemini-c6486012",
   "target_interval_seconds": 1800,
-  "wake_count": 3,
-  "consecutive_autonomous_wakes": 3,
-  "last_wake_id": "WAKE-0003",
-  "last_wake_utc": "2026-11-23T08:24:32Z",
-  "last_wake_hash": "9f0f7ebe150234d6358adacd1a61c12df47c889699df00f89dbd2c6e70c9d483",
-  "last_mode": "verification",
-  "last_trigger_source": "inbox_event",
+  "wake_count": 4,
+  "consecutive_autonomous_wakes": 4,
+  "last_wake_id": "WAKE-0004",
+  "last_wake_utc": "2026-11-23T12:42:16Z",
+  "last_wake_hash": "c3663b49bf1cea56187b7b159362c6f6bbaa428aca5c9e27f62009d79e695b64",
+  "last_mode": "production",
+  "last_trigger_source": "timer_elapsed",
   "active_waiter": null,
   "verification_status": {
     "verified": true,
@@ -18,11 +18,10 @@
     "chain_tip_hash": "9f0f7ebe150234d6358adacd1a61c12df47c889699df00f89dbd2c6e70c9d483"
   },
   "pending_cycle": {
-    "started_at_utc": "2026-11-23T08:40:56Z",
-    "deadline_epoch": 1795425056.1690483,
+    "started_at_utc": "2026-11-23T12:41:25Z",
+    "deadline_epoch": 1795439485.2506816,
     "target_seconds": 1800,
     "max_slice_seconds": 480,
-    "slices_completed": 1,
-    "last_slice_utc": "2026-11-23T08:48:56Z"
+    "slices_completed": 0
   }
 }
