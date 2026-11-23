@@ -1,12 +1,12 @@
 {
-  "cycle_id": 24,
-  "timestamp_utc": "2026-11-23T18:06:19Z",
+  "cycle_id": 26,
+  "timestamp_utc": "2026-11-23T19:09:21Z",
   "runner": "local_vm",
-  "duration_sec": 0.81,
+  "duration_sec": 15.45,
   "survival": {
     "deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 25.25,
-    "hours_until_dec19_deadline": 605.9,
+    "days_until_dec19_deadline": 25.2,
+    "hours_until_dec19_deadline": 604.8,
     "has_gemini_api_key": false,
     "has_x402_signer": false,
     "base_usdc_balance": 0.0,
@@ -34,23 +34,64 @@
     "buyer_inquiries": []
   },
   "executed_task": {
-    "id": "S-003",
-    "handler": "audit_agent_marketplaces",
-    "summary": "EM open=1, assigned=0; Dealwork contracts=0, unread=0, bal=$0.00",
+    "id": "S-008",
+    "handler": "monitor_taskmarket_synmerco",
+    "summary": "TaskMarket open zero-TAP free bounties(>=$0.40)=4 (top=TSK-PGK4K6EN:$1.5); Synmerco hb_ok=True wake=False todo=0 jobs=0; Agentizable claimable=0; CROO agents=3 seen=0 deliv=0",
     "data": {
-      "execution_market": {
-        "open_tasks": 1,
-        "assigned_tasks": [],
-        "auto_submitted": [],
-        "sample_titles": [
-          "[par-robinhood] Public Base L2 block height and gas price reading, with timestam"
-        ]
+      "taskmarket_open_free": [
+        {
+          "ref": "TSK-PGK4K6EN",
+          "chain_id": 4217,
+          "mode": "bounty",
+          "reward_usd": 1.5,
+          "subs": 7,
+          "expiry": "2026-11-26T01:26:13.436Z",
+          "title": "Swarms friend playtest: bring a friend and tell us where the game loses you"
+        },
+        {
+          "ref": "TSK-JNWKA5VS",
+          "chain_id": 8453,
+          "mode": "bounty",
+          "reward_usd": 1.2,
+          "subs": 40,
+          "expiry": "2026-11-24T14:28:32.095Z",
+          "title": "## Title"
+        },
+        {
+          "ref": "TSK-Q4YJCN63",
+          "chain_id": 8453,
+          "mode": "bounty",
+          "reward_usd": 1.0,
+          "subs": 41,
+          "expiry": "2026-11-24T07:41:47.200Z",
+          "title": "## Title"
+        },
+        {
+          "ref": "TSK-49EVQHWS",
+          "chain_id": 4217,
+          "mode": "bounty",
+          "reward_usd": 0.4,
+          "subs": 12,
+          "expiry": "2026-11-27T20:56:01.673Z",
+          "title": "## Title"
+        }
+      ],
+      "synmerco": {
+        "configured": true,
+        "ok": true,
+        "wake": false,
+        "todo_count": 0,
+        "jobs_for_you": 0,
+        "standing_bid_on": true
       },
-      "dealwork": {
-        "authenticated": false,
-        "balance_usd": 0.0,
-        "active_contracts": [],
-        "unread_messages": 0
+      "agentizable_claimable": [],
+      "croo": {
+        "configured": true,
+        "ok": true,
+        "agents_count": 3,
+        "orders_seen": 0,
+        "orders_delivered": 0,
+        "negs_accepted": 0
       }
     }
   },
@@ -76,5 +117,12 @@
     ]
   },
   "thought": null,
-  "incidents": []
+  "incidents": [
+    {
+      "timestamp_utc": "2026-11-23T19:09:33Z",
+      "component": "agentizable_scan",
+      "error": "HTTP Error 503: Service Unavailable",
+      "recovery": "degraded"
+    }
+  ]
 }
