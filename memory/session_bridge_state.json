@@ -3,35 +3,19 @@
   "bridge_protocol": "antigravity_reactive_task_wakeup_v1",
   "session_id": "antigravity-gemini-c6486012",
   "target_interval_seconds": 1800,
-  "wake_count": 8,
-  "consecutive_autonomous_wakes": 8,
-  "last_wake_id": "WAKE-0008",
-  "last_wake_utc": "2026-11-23T14:47:13Z",
-  "last_wake_hash": "ab8eedde9e69376186f2bff750183c287ed032ef843aec9cd61dbd0aa21e5a0e",
+  "wake_count": 9,
+  "consecutive_autonomous_wakes": 9,
+  "last_wake_id": "WAKE-0009",
+  "last_wake_utc": "2026-11-23T15:17:56Z",
+  "last_wake_hash": "64f7a5c4dc10553ba292c3bbb9f53ca3c3853497062272beb506c9f00f77fda0",
   "last_mode": "production",
   "last_trigger_source": "timer_elapsed",
-  "active_waiter": {
-    "pid": 158924,
-    "wake_id": "WAKE-0009",
-    "mode": "production",
-    "scheduled_at_utc": "2026-11-23T14:47:23Z",
-    "expected_wake_utc": "2026-11-23T14:55:23Z",
-    "requested_wait_seconds": 1800,
-    "slice_wait_seconds": 480.0,
-    "slice_index": 1,
-    "reason": "Scheduled 30-minute autonomous Gemini session wakeup"
-  },
+  "active_waiter": null,
   "verification_status": {
     "verified": true,
-    "verified_consecutive_wakes": 8,
-    "verified_at_utc": "2026-11-23T14:47:14Z",
-    "chain_tip_hash": "ab8eedde9e69376186f2bff750183c287ed032ef843aec9cd61dbd0aa21e5a0e"
+    "verified_consecutive_wakes": 9,
+    "verified_at_utc": "2026-11-23T15:17:57Z",
+    "chain_tip_hash": "64f7a5c4dc10553ba292c3bbb9f53ca3c3853497062272beb506c9f00f77fda0"
   },
-  "pending_cycle": {
-    "started_at_utc": "2026-11-23T14:47:23Z",
-    "deadline_epoch": 1795447043.9790764,
-    "target_seconds": 1800,
-    "max_slice_seconds": 480,
-    "slices_completed": 0
-  }
+  "pending_cycle": null
 }
