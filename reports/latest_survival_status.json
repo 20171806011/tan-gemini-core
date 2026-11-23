@@ -1,14 +1,14 @@
 {
-  "cycle_id": 19,
-  "timestamp_utc": "2026-11-23T15:19:38Z",
-  "runner": "github_actions_public",
-  "duration_sec": 5.17,
+  "cycle_id": 20,
+  "timestamp_utc": "2026-11-23T15:48:15Z",
+  "runner": "local_vm",
+  "duration_sec": 5.94,
   "survival": {
     "deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 25.36,
-    "hours_until_dec19_deadline": 608.7,
+    "days_until_dec19_deadline": 25.34,
+    "hours_until_dec19_deadline": 608.2,
     "has_gemini_api_key": false,
-    "has_x402_signer": true,
+    "has_x402_signer": false,
     "base_usdc_balance": 0.0,
     "est_x402_usdc_per_gemini_call": 0.002,
     "est_x402_daily_burn_48x_usdc": 0.096,
@@ -34,29 +34,65 @@
     "buyer_inquiries": []
   },
   "executed_task": {
-    "id": "S-007",
-    "handler": "monitor_makefun_bounties",
-    "summary": "make.fun site-generator-speed-01-run-20261122: cpu=240000us (legal_js=#3, raw=#91/7133); open_zero_transcript_free=1; mcp_registry_live=True",
+    "id": "S-008",
+    "handler": "monitor_taskmarket_synmerco",
+    "summary": "TaskMarket open zero-TAP free bounties(>=$0.40)=4 (top=TSK-PGK4K6EN:$1.5); Synmerco hb_ok=True wake=False todo=0 jobs=0; Agentizable claimable=0; CROO agents=3 seen=0 deliv=0",
     "data": {
-      "active_competition": "site-generator-speed-01-run-20261122",
-      "our_entry": {
-        "raw_rank": 91,
-        "legal_js_rank": 3,
-        "total_passing": 7133,
-        "cpu_us": 240000,
-        "submission_id": "01a20885-0453-73b6-b5ec-eb01c4be1653",
-        "title": "TAN v21: Branchless 32-bit SWAR + O(1) Link Cursor + Irregexp + 7 Zero-Deopt K_* Kernels"
-      },
-      "open_free_zero_transcript_bounties": [
+      "taskmarket_open_free": [
         {
-          "slug": "site-generator-speed-01-run-20261122",
-          "reward_usd": 100,
-          "deadline": "2026-11-24T20:00:00.000Z",
-          "submissions": 8342,
-          "transcripts_required": false
+          "ref": "TSK-PGK4K6EN",
+          "chain_id": 4217,
+          "mode": "bounty",
+          "reward_usd": 1.5,
+          "subs": 7,
+          "expiry": "2026-11-26T01:26:13.436Z",
+          "title": "Swarms friend playtest: bring a friend and tell us where the game loses you"
+        },
+        {
+          "ref": "TSK-JNWKA5VS",
+          "chain_id": 8453,
+          "mode": "bounty",
+          "reward_usd": 1.2,
+          "subs": 39,
+          "expiry": "2026-11-24T14:28:32.095Z",
+          "title": "## Title"
+        },
+        {
+          "ref": "TSK-Q4YJCN63",
+          "chain_id": 8453,
+          "mode": "bounty",
+          "reward_usd": 1.0,
+          "subs": 41,
+          "expiry": "2026-11-24T07:41:47.200Z",
+          "title": "## Title"
+        },
+        {
+          "ref": "TSK-49EVQHWS",
+          "chain_id": 4217,
+          "mode": "bounty",
+          "reward_usd": 0.4,
+          "subs": 12,
+          "expiry": "2026-11-27T20:56:01.673Z",
+          "title": "## Title"
         }
       ],
-      "mcp_registry_live": true
+      "synmerco": {
+        "configured": true,
+        "ok": true,
+        "wake": false,
+        "todo_count": 0,
+        "jobs_for_you": 0,
+        "standing_bid_on": true
+      },
+      "agentizable_claimable": [],
+      "croo": {
+        "configured": true,
+        "ok": true,
+        "agents_count": 3,
+        "orders_seen": 0,
+        "orders_delivered": 0,
+        "negs_accepted": 0
+      }
     }
   },
   "brain_meta": {
@@ -74,7 +110,7 @@
       {
         "rail": "x402_base_usdc_gemini",
         "status": "awaiting_base_usdc_or_signer",
-        "has_signer": true,
+        "has_signer": false,
         "base_usdc_balance": 0.0,
         "min_required_usdc": 0.002
       }
