@@ -531,17 +531,48 @@ def task_monitor_makefun_bounties(incidents: List[Dict[str, Any]]) -> Dict[str, 
         incidents.append({"timestamp_utc": utc_iso(), "component": "makefun_leaderboard", "error": str(exc)[:100], "recovery": "degraded"})
 
     try:
-        comps = http_json("https://make.fun/api/competitions?status=open").get("items") or []
+        now_iso = utc_iso()
+        comps = http_json("https://make.fun/api/competitions?status=open&limit=100").get("items") or []
+        def _find_sub_rule(obj: Any) -> Optional[Dict[str, Any]]:
+            if isinstance(obj, dict):
+                if "submission_rule" in obj and isinstance(obj["submission_rule"], dict):
+                    return obj["submission_rule"]
+                for v in obj.values():
+                    found = _find_sub_rule(v)
+                    if found is not None:
+                        return found
+            elif isinstance(obj, list):
+                for v in obj:
+                    found = _find_sub_rule(v)
+                    if found is not None:
+                        return found
+            return None
+
         for it in comps:
             if it.get("entryFeeUsd") not in (None, 0, "0"):
                 continue
-            if it.get("harnessKind") == "program/v1" and not it.get("rulesNote"):
+            due = str(it.get("deadline") or "")
+            if due and due <= now_iso:
+                continue
+            slug = str(it.get("slug") or "")
+            if not slug:
+                continue
+            tr_req: Optional[bool] = None
+            try:
+                det = http_json(f"https://make.fun/api/competitions/{slug}", timeout=8)
+                sr = _find_sub_rule(det)
+                if sr is not None and "transcripts_required" in sr:
+                    tr_req = bool(sr["transcripts_required"])
+            except Exception:
+                pass
+            if tr_req is False:
                 open_free_zero_tr.append(
                     {
-                        "slug": it.get("slug"),
+                        "slug": slug,
                         "reward_usd": it.get("rewardAmount"),
-                        "deadline": it.get("deadline"),
+                        "deadline": due,
                         "submissions": it.get("submissionCount"),
+                        "transcripts_required": False,
                     }
                 )
     except Exception as exc:
@@ -556,14 +587,14 @@ def task_monitor_makefun_bounties(incidents: List[Dict[str, Any]]) -> Dict[str, 
     summary = (
         f"make.fun {active_slug}: cpu={our_entry.get('cpu_us')}us "
         f"(legal_js=#{our_entry.get('legal_js_rank')}, raw=#{our_entry.get('raw_rank')}/{our_entry.get('total_passing')}); "
-        f"open_program_bounties={len(open_free_zero_tr)}; mcp_registry_live={mcp_registry_ok}"
+        f"open_zero_transcript_free={len(open_free_zero_tr)}; mcp_registry_live={mcp_registry_ok}"
     )
     return {
         "summary": summary,
         "data": {
             "active_competition": active_slug,
             "our_entry": our_entry,
-            "open_free_program_bounties": open_free_zero_tr[:8],
+            "open_free_zero_transcript_bounties": open_free_zero_tr[:8],
             "mcp_registry_live": mcp_registry_ok,
         },
     }
@@ -615,6 +646,10 @@ def task_monitor_taskmarket_synmerco(incidents: List[Dict[str, Any]]) -> Dict[st
                 exp_dt = parse_iso(t.get("expiryTime") or t.get("expiresAt"))
                 if exp_dt is not None and exp_dt <= now:
                     continue
+                desc_str = str(t.get("description") or "")
+                desc_low = desc_str.lower()
+                if "no per-worker usdc release" in desc_low or "flapjax only" in desc_low:
+                    continue
                 mode = str(t.get("mode") or "")
                 subs = int(t.get("submissionCount") or 0)
                 rew = round(int(t.get("reward") or 0) / 1e6, 4)
@@ -627,7 +662,7 @@ def task_monitor_taskmarket_synmerco(incidents: List[Dict[str, Any]]) -> Dict[st
                             "reward_usd": rew,
                             "subs": subs,
                             "expiry": t.get("expiryTime"),
-                            "title": str(t.get("description") or "").splitlines()[0][:90],
+                            "title": desc_str.splitlines()[0][:90],
                         }
                     )
         except Exception as exc:
