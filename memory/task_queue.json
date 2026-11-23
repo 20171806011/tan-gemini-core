@@ -1,11 +1,11 @@
 {
   "schema_version": "2.0.0",
-  "last_updated_utc": "2026-11-23T12:42:16Z",
+  "last_updated_utc": "2026-11-23T13:13:43Z",
   "tasks": [
     {
       "id": "S-007",
       "handler": "monitor_makefun_bounties",
-      "title": "£200 Sprint: Monitor make.fun site-generator-speed-01-run-20261122 (TAN v20c 230k us, #3 legal pure-JS), Official MCP Registry listing (tan-tokendiet v1.4.0), and new zero-transcript bounties",
+      "title": "£200 Sprint: Monitor make.fun site-generator-speed-01-run-20261122 (TAN v21 01a20885, -15.7ms vs v20c, interval 190k-290k us), Official MCP Registry listing (tan-tokendiet v1.4.0), and new zero-transcript bounties",
       "priority": 100,
       "cooldown_minutes": 25,
       "status": "queued",
@@ -17,14 +17,14 @@
     {
       "id": "S-008",
       "handler": "monitor_taskmarket_synmerco",
-      "title": "£200 Sprint: Keep Synmerco Base USDC heartbeat/standing-bid online and scan TaskMarket Base+Tempo for zero-TAP open bounties",
+      "title": "£200 Sprint: Keep Synmerco Base USDC heartbeat/standing-bid online and scan TaskMarket Base+Tempo & Agentizable Base for zero-TAP/claimable USDC bounties",
       "priority": 99,
       "cooldown_minutes": 25,
       "status": "queued",
-      "run_count": 0,
-      "last_run_utc": null,
+      "run_count": 2,
+      "last_run_utc": "2026-11-23T13:13:43Z",
       "claimed_by_cycle": null,
-      "last_summary": "Registered on TaskMarket (Base #1226854, Tempo #1232, profile + $25/$40 fixed services) & Synmerco (Base USDC wallet connected, 5/5 starter badge, 85% standing bid armed)."
+      "last_summary": "Shipped TAN v21 Round 5 (01a20885) on make.fun, integrated Agentizable Base Mainnet USDC claimable feed into S-008 (10/10 unit tests passing), cleaned /tmp scratch files, and verified live S-008 with 0 incidents."
     },
     {
       "id": "S-001",

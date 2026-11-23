@@ -632,20 +632,44 @@ def task_monitor_taskmarket_synmerco(incidents: List[Dict[str, Any]]) -> Dict[st
         except Exception as exc:
             incidents.append({"timestamp_utc": utc_iso(), "component": f"taskmarket_scan_{chain_id}", "error": str(exc)[:100], "recovery": "degraded"})
 
+    agentizable_claimable: List[Dict[str, Any]] = []
+    try:
+        ag_items = http_json("https://api.agentizable.ai/v1/base/autonomous-bounties/feed?network=base-mainnet&claimable_only=true")
+        if isinstance(ag_items, list):
+            for it in ag_items:
+                rew = round(int(it.get("solver_reward") or 0) / 1e6, 4)
+                bond = round(int(it.get("claim_bond") or 0) / 1e6, 4)
+                doc = (it.get("terms") or {}).get("document") or {}
+                title = str(doc.get("title") or (doc.get("task") or {}).get("title") or it.get("title") or "")[:90]
+                agentizable_claimable.append(
+                    {
+                        "bounty_id": str(it.get("bounty_id") or "")[:18],
+                        "status": it.get("status"),
+                        "reward_usd": rew,
+                        "claim_bond_usd": bond,
+                        "title": title,
+                    }
+                )
+    except Exception as exc:
+        incidents.append({"timestamp_utc": utc_iso(), "component": "agentizable_scan", "error": str(exc)[:100], "recovery": "degraded"})
+
     tm_open_free.sort(key=lambda x: -float(x["reward_usd"]))
     summary = (
         f"TaskMarket open zero-TAP free bounties(>=$0.40)={len(tm_open_free)} "
-        f"(top={tm_open_free[0]['ref']}:${tm_open_free[0]['reward_usd']} if any); "
-        f"Synmerco hb_ok={syn_status.get('ok')} wake={syn_status.get('wake')} todo={syn_status.get('todo_count')} jobs={syn_status.get('jobs_for_you')}"
+        f"(top={tm_open_free[0]['ref']}:${tm_open_free[0]['reward_usd']}); "
+        f"Synmerco hb_ok={syn_status.get('ok')} wake={syn_status.get('wake')} todo={syn_status.get('todo_count')} jobs={syn_status.get('jobs_for_you')}; "
+        f"Agentizable claimable={len(agentizable_claimable)}"
     ) if tm_open_free else (
         f"TaskMarket open zero-TAP free bounties(>=$0.40)=0; "
-        f"Synmerco hb_ok={syn_status.get('ok')} wake={syn_status.get('wake')} todo={syn_status.get('todo_count')} jobs={syn_status.get('jobs_for_you')}"
+        f"Synmerco hb_ok={syn_status.get('ok')} wake={syn_status.get('wake')} todo={syn_status.get('todo_count')} jobs={syn_status.get('jobs_for_you')}; "
+        f"Agentizable claimable={len(agentizable_claimable)}"
     )
     return {
         "summary": summary,
         "data": {
             "taskmarket_open_free": tm_open_free[:10],
             "synmerco": syn_status,
+            "agentizable_claimable": agentizable_claimable[:10],
         },
     }
 

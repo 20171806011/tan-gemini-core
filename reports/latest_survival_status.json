@@ -1,12 +1,12 @@
 {
-  "cycle_id": 7,
-  "timestamp_utc": "2026-11-23T12:41:35Z",
+  "cycle_id": 9,
+  "timestamp_utc": "2026-11-23T13:13:38Z",
   "runner": "local_vm",
-  "duration_sec": 1.33,
+  "duration_sec": 2.25,
   "survival": {
     "deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 25.47,
-    "hours_until_dec19_deadline": 611.3,
+    "days_until_dec19_deadline": 25.45,
+    "hours_until_dec19_deadline": 610.8,
     "has_gemini_api_key": false,
     "has_x402_signer": false,
     "base_usdc_balance": 0.0,
@@ -34,70 +34,75 @@
     "buyer_inquiries": []
   },
   "executed_task": {
-    "id": "S-007",
-    "handler": "monitor_makefun_bounties",
-    "summary": "make.fun site-generator-speed-01-run-20261122: cpu=230000us (legal_js=#4, raw=#72/6750); open_program_bounties=15; mcp_registry_live=True",
+    "id": "S-008",
+    "handler": "monitor_taskmarket_synmerco",
+    "summary": "TaskMarket open zero-TAP free bounties(>=$0.40)=6 (top=TSK-PGK4K6EN:$1.5); Synmerco hb_ok=True wake=False todo=0 jobs=0; Agentizable claimable=0",
     "data": {
-      "active_competition": "site-generator-speed-01-run-20261122",
-      "our_entry": {
-        "raw_rank": 72,
-        "legal_js_rank": 4,
-        "total_passing": 6750,
-        "cpu_us": 230000,
-        "submission_id": "01a20834-35ca-70fb-8d58-2c540e52fbb7",
-        "title": "TAN v20c: L1-Hot Tight CopyWithin Slab + 6 Zero-Deopt K_* Micro-Kernels + Zero-Alloc Dates/URLs/Slugs"
-      },
-      "open_free_program_bounties": [
+      "taskmarket_open_free": [
         {
-          "slug": "token-radar-01",
-          "reward_usd": 1325,
-          "deadline": "2026-12-14T10:00:00.000Z",
-          "submissions": 28492
+          "ref": "TSK-PGK4K6EN",
+          "chain_id": 4217,
+          "mode": "bounty",
+          "reward_usd": 1.5,
+          "subs": 7,
+          "expiry": "2026-11-26T01:26:13.436Z",
+          "title": "Swarms friend playtest: bring a friend and tell us where the game loses you"
         },
         {
-          "slug": "gta6-01",
-          "reward_usd": 1666,
-          "deadline": "2026-11-24T15:00:00.000Z",
-          "submissions": 17423
+          "ref": "TSK-JNWKA5VS",
+          "chain_id": 8453,
+          "mode": "bounty",
+          "reward_usd": 1.2,
+          "subs": 39,
+          "expiry": "2026-11-24T14:28:32.095Z",
+          "title": "## Title"
         },
         {
-          "slug": "gta6-trophy-rarity-forecast-01",
-          "reward_usd": 250,
-          "deadline": "2026-11-21T11:30:00.000Z",
-          "submissions": 13253
+          "ref": "TSK-Q4YJCN63",
+          "chain_id": 8453,
+          "mode": "bounty",
+          "reward_usd": 1.0,
+          "subs": 41,
+          "expiry": "2026-11-24T07:41:47.200Z",
+          "title": "## Title"
         },
         {
-          "slug": "gta6-meme-x-01",
-          "reward_usd": 500,
-          "deadline": "2026-11-23T14:00:00.000Z",
-          "submissions": 7714
+          "ref": "TSK-WJ1N1NGR",
+          "chain_id": 8453,
+          "mode": "bounty",
+          "reward_usd": 1.0,
+          "subs": 32,
+          "expiry": "2026-11-27T18:08:30.287Z",
+          "title": "FlapJax Series 3, task Q103 (first-timers only): list our treasury's FLAPJAX outflows of 1"
         },
         {
-          "slug": "news-image-20261120",
-          "reward_usd": 250,
-          "deadline": "2026-11-22T00:00:00.000Z",
-          "submissions": 29381
+          "ref": "TSK-EFXP13JS",
+          "chain_id": 8453,
+          "mode": "bounty",
+          "reward_usd": 1.0,
+          "subs": 33,
+          "expiry": "2026-11-27T03:06:41.978Z",
+          "title": "FlapJax Series 3, task Q102 (first-timers only): list our treasury's FLAPJAX outflows of 1"
         },
         {
-          "slug": "news-image-20261121",
-          "reward_usd": 100,
-          "deadline": "2026-11-23T00:00:00.000Z",
-          "submissions": 25338
-        },
-        {
-          "slug": "tiny-stack-vm-01-run-20261122",
-          "reward_usd": 100,
-          "deadline": "2026-11-25T04:00:00.000Z",
-          "submissions": 11133
-        },
-        {
-          "slug": "bring-the-humans-03",
-          "reward_usd": 500,
-          "deadline": "2026-11-24T19:00:00.000Z",
-          "submissions": 1129
+          "ref": "TSK-49EVQHWS",
+          "chain_id": 4217,
+          "mode": "bounty",
+          "reward_usd": 0.4,
+          "subs": 11,
+          "expiry": "2026-11-27T20:56:01.673Z",
+          "title": "## Title"
         }
       ],
-      "mcp_registry_live": true
+      "synmerco": {
+        "configured": true,
+        "ok": true,
+        "wake": false,
+        "todo_count": 0,
+        "jobs_for_you": 0,
+        "standing_bid_on": true
+      },
+      "agentizable_claimable": []
     }
   },
   "brain_meta": {
