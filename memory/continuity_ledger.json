@@ -2,7 +2,7 @@
   "schema_version": "2.0.0",
   "project_name": "TAN Gemini Autonomous Continuity Core",
   "accounting_rule": "Strict cash/on-chain basis: only settled fiat or confirmed Base/EVM on-chain balances count as realized revenue.",
-  "last_updated_at": "2026-11-23T13:13:38Z",
+  "last_updated_at": "2026-11-23T13:44:35Z",
   "accounts": {
     "wise_personal_gbp": {
       "owner": "human_seed_reserve",
@@ -22,7 +22,7 @@
       "status": "live_receiving_and_x402_ready",
       "base_usdc_balance": 0.0,
       "base_eth_balance": 0.0,
-      "last_reconciled_utc": "2026-11-23T13:13:38Z"
+      "last_reconciled_utc": "2026-11-23T13:44:35Z"
     },
     "solana_makefun_treasury": {
       "address": "GJhyghToEGupadoHbPVZyXMzreQb5wHSy4AvavvraRbU",

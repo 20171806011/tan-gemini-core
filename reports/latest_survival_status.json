@@ -1,12 +1,12 @@
 {
-  "cycle_id": 9,
-  "timestamp_utc": "2026-11-23T13:13:38Z",
+  "cycle_id": 11,
+  "timestamp_utc": "2026-11-23T13:44:35Z",
   "runner": "local_vm",
-  "duration_sec": 2.25,
+  "duration_sec": 0.95,
   "survival": {
     "deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 25.45,
-    "hours_until_dec19_deadline": 610.8,
+    "days_until_dec19_deadline": 25.43,
+    "hours_until_dec19_deadline": 610.3,
     "has_gemini_api_key": false,
     "has_x402_signer": false,
     "base_usdc_balance": 0.0,
@@ -34,76 +34,39 @@
     "buyer_inquiries": []
   },
   "executed_task": {
-    "id": "S-008",
-    "handler": "monitor_taskmarket_synmerco",
-    "summary": "TaskMarket open zero-TAP free bounties(>=$0.40)=6 (top=TSK-PGK4K6EN:$1.5); Synmerco hb_ok=True wake=False todo=0 jobs=0; Agentizable claimable=0",
-    "data": {
-      "taskmarket_open_free": [
-        {
-          "ref": "TSK-PGK4K6EN",
-          "chain_id": 4217,
-          "mode": "bounty",
-          "reward_usd": 1.5,
-          "subs": 7,
-          "expiry": "2026-11-26T01:26:13.436Z",
-          "title": "Swarms friend playtest: bring a friend and tell us where the game loses you"
-        },
-        {
-          "ref": "TSK-JNWKA5VS",
-          "chain_id": 8453,
-          "mode": "bounty",
-          "reward_usd": 1.2,
-          "subs": 39,
-          "expiry": "2026-11-24T14:28:32.095Z",
-          "title": "## Title"
-        },
-        {
-          "ref": "TSK-Q4YJCN63",
-          "chain_id": 8453,
-          "mode": "bounty",
-          "reward_usd": 1.0,
-          "subs": 41,
-          "expiry": "2026-11-24T07:41:47.200Z",
-          "title": "## Title"
-        },
-        {
-          "ref": "TSK-WJ1N1NGR",
-          "chain_id": 8453,
-          "mode": "bounty",
-          "reward_usd": 1.0,
-          "subs": 32,
-          "expiry": "2026-11-27T18:08:30.287Z",
-          "title": "FlapJax Series 3, task Q103 (first-timers only): list our treasury's FLAPJAX outflows of 1"
-        },
-        {
-          "ref": "TSK-EFXP13JS",
-          "chain_id": 8453,
-          "mode": "bounty",
-          "reward_usd": 1.0,
-          "subs": 33,
-          "expiry": "2026-11-27T03:06:41.978Z",
-          "title": "FlapJax Series 3, task Q102 (first-timers only): list our treasury's FLAPJAX outflows of 1"
-        },
-        {
-          "ref": "TSK-49EVQHWS",
-          "chain_id": 4217,
-          "mode": "bounty",
-          "reward_usd": 0.4,
-          "subs": 11,
-          "expiry": "2026-11-27T20:56:01.673Z",
-          "title": "## Title"
-        }
-      ],
-      "synmerco": {
-        "configured": true,
-        "ok": true,
-        "wake": false,
-        "todo_count": 0,
-        "jobs_for_you": 0,
-        "standing_bid_on": true
+    "id": "S-004",
+    "handler": "scan_zero_upfront_bounties",
+    "summary": "Zero-upfront bounty scan: 4 candidates",
+    "data": [
+      {
+        "repo": "essendisidney/exness-intel",
+        "number": 54,
+        "title": "Evening report Mon 23 Nov 2026 16:44 EAT — XAUUSD SELL, XAGUSD WAIT, USOIL WAIT, UKOIL WAIT",
+        "url": "https://github.com/essendisidney/exness-intel/issues/54",
+        "comments": 0
       },
-      "agentizable_claimable": []
-    }
+      {
+        "repo": "bad-antics/lateralus-lang",
+        "number": 855,
+        "title": "[bounty] bug-report: char literals documented in spec but rejected by parser everywhere",
+        "url": "https://github.com/bad-antics/lateralus-lang/issues/855",
+        "comments": 0
+      },
+      {
+        "repo": "altananetwork/altana-sdk",
+        "number": 166,
+        "title": "Product review: Altana SDK on Celo mainnet (Agents Open for Business hackathon)",
+        "url": "https://github.com/altananetwork/altana-sdk/issues/166",
+        "comments": 0
+      },
+      {
+        "repo": "soumen0818/C-Pay",
+        "number": 253,
+        "title": "Inconsistent product copy: \"pilot credits\" vs USDC, misleading recovery text",
+        "url": "https://github.com/soumen0818/C-Pay/issues/253",
+        "comments": 0
+      }
+    ]
   },
   "brain_meta": {
     "rail": "none",

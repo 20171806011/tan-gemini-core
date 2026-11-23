@@ -12,6 +12,7 @@ import argparse
 import json
 import os
 import re
+import subprocess
 import sys
 import time
 import traceback
@@ -653,16 +654,52 @@ def task_monitor_taskmarket_synmerco(incidents: List[Dict[str, Any]]) -> Dict[st
     except Exception as exc:
         incidents.append({"timestamp_utc": utc_iso(), "component": "agentizable_scan", "error": str(exc)[:100], "recovery": "degraded"})
 
+    croo_status: Dict[str, Any] = {"configured": False}
+    croo_cfg_path = LOCAL_SECRETS_DIR / "croo_agents.json"
+    if croo_cfg_path.exists():
+        croo_status["configured"] = True
+        try:
+            cp_script = Path(__file__).resolve().parent / "croo_provider.py"
+            proc = subprocess.run(
+                [sys.executable, str(cp_script), "--check-once"],
+                capture_output=True,
+                text=True,
+                timeout=25,
+            )
+            if proc.returncode == 0 and proc.stdout.strip():
+                cdata = json.loads(proc.stdout.strip().splitlines()[-1])
+                agents = cdata.get("agents") or []
+                croo_status.update(
+                    {
+                        "ok": bool(cdata.get("ok")),
+                        "agents_count": len(agents),
+                        "orders_seen": sum(int(a.get("orders_seen") or 0) for a in agents),
+                        "orders_delivered": sum(int(a.get("orders_delivered") or 0) for a in agents),
+                        "negs_accepted": sum(int(a.get("negs_accepted") or 0) for a in agents),
+                    }
+                )
+            else:
+                croo_status["ok"] = False
+                incidents.append({"timestamp_utc": utc_iso(), "component": "croo_sweep", "error": (proc.stderr or proc.stdout)[:100], "recovery": "degraded"})
+        except Exception as exc:
+            croo_status["ok"] = False
+            incidents.append({"timestamp_utc": utc_iso(), "component": "croo_sweep", "error": str(exc)[:100], "recovery": "degraded"})
+
     tm_open_free.sort(key=lambda x: -float(x["reward_usd"]))
+    croo_part = (
+        f"; CROO agents={croo_status.get('agents_count', 0)} seen={croo_status.get('orders_seen', 0)} deliv={croo_status.get('orders_delivered', 0)}"
+        if croo_status.get("configured")
+        else ""
+    )
     summary = (
         f"TaskMarket open zero-TAP free bounties(>=$0.40)={len(tm_open_free)} "
         f"(top={tm_open_free[0]['ref']}:${tm_open_free[0]['reward_usd']}); "
         f"Synmerco hb_ok={syn_status.get('ok')} wake={syn_status.get('wake')} todo={syn_status.get('todo_count')} jobs={syn_status.get('jobs_for_you')}; "
-        f"Agentizable claimable={len(agentizable_claimable)}"
+        f"Agentizable claimable={len(agentizable_claimable)}{croo_part}"
     ) if tm_open_free else (
         f"TaskMarket open zero-TAP free bounties(>=$0.40)=0; "
         f"Synmerco hb_ok={syn_status.get('ok')} wake={syn_status.get('wake')} todo={syn_status.get('todo_count')} jobs={syn_status.get('jobs_for_you')}; "
-        f"Agentizable claimable={len(agentizable_claimable)}"
+        f"Agentizable claimable={len(agentizable_claimable)}{croo_part}"
     )
     return {
         "summary": summary,
@@ -670,6 +707,7 @@ def task_monitor_taskmarket_synmerco(incidents: List[Dict[str, Any]]) -> Dict[st
             "taskmarket_open_free": tm_open_free[:10],
             "synmerco": syn_status,
             "agentizable_claimable": agentizable_claimable[:10],
+            "croo": croo_status,
         },
     }
 
