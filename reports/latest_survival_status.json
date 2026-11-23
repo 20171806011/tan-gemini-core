@@ -1,12 +1,12 @@
 {
-  "cycle_id": 28,
-  "timestamp_utc": "2026-11-23T20:10:28Z",
+  "cycle_id": 30,
+  "timestamp_utc": "2026-11-23T21:11:16Z",
   "runner": "local_vm",
-  "duration_sec": 10.91,
+  "duration_sec": 1.64,
   "survival": {
     "deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 25.16,
-    "hours_until_dec19_deadline": 603.8,
+    "days_until_dec19_deadline": 25.12,
+    "hours_until_dec19_deadline": 602.8,
     "has_gemini_api_key": false,
     "has_x402_signer": false,
     "base_usdc_balance": 0.0,
@@ -34,29 +34,22 @@
     "buyer_inquiries": []
   },
   "executed_task": {
-    "id": "S-007",
-    "handler": "monitor_makefun_bounties",
-    "summary": "make.fun site-generator-speed-01-run-20261122: cpu=240000us (legal_js=#4, raw=#83/7567); open_zero_transcript_free=1; mcp_registry_live=True",
+    "id": "S-001",
+    "handler": "verify_scheduler_continuity",
+    "summary": "Public scheduler check: 20171806011/tan-gemini-core schedule_events=0, last_sched=None, fails=0",
     "data": {
-      "active_competition": "site-generator-speed-01-run-20261122",
-      "our_entry": {
-        "raw_rank": 83,
-        "legal_js_rank": 4,
-        "total_passing": 7567,
-        "cpu_us": 240000,
-        "submission_id": "01a20885-0453-73b6-b5ec-eb01c4be1653",
-        "title": "TAN v21: Branchless 32-bit SWAR + O(1) Link Cursor + Irregexp + 7 Zero-Deopt K_* Kernels"
+      "20171806011/tan-gemini-core": {
+        "total_recent": 2,
+        "schedule_events": 0,
+        "last_schedule_utc": null,
+        "recent_failures": 0
       },
-      "open_free_zero_transcript_bounties": [
-        {
-          "slug": "site-generator-speed-01-run-20261122",
-          "reward_usd": 100,
-          "deadline": "2026-11-24T20:00:00.000Z",
-          "submissions": 9065,
-          "transcripts_required": false
-        }
-      ],
-      "mcp_registry_live": true
+      "20171806011/tan-tokendiet": {
+        "total_recent": 10,
+        "schedule_events": 0,
+        "last_schedule_utc": null,
+        "recent_failures": 0
+      }
     }
   },
   "brain_meta": {
