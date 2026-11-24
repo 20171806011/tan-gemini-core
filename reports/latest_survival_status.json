@@ -1,14 +1,14 @@
 {
-  "cycle_id": 40,
-  "timestamp_utc": "2026-11-24T02:24:58Z",
-  "runner": "local_vm",
-  "duration_sec": 15.38,
+  "cycle_id": 42,
+  "timestamp_utc": "2026-11-24T03:19:25Z",
+  "runner": "github_actions_public",
+  "duration_sec": 26.02,
   "survival": {
     "deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 24.9,
-    "hours_until_dec19_deadline": 597.6,
+    "days_until_dec19_deadline": 24.86,
+    "hours_until_dec19_deadline": 596.7,
     "has_gemini_api_key": false,
-    "has_x402_signer": false,
+    "has_x402_signer": true,
     "base_usdc_balance": 0.0,
     "est_x402_usdc_per_gemini_call": 0.002,
     "est_x402_daily_burn_48x_usdc": 0.096,
@@ -34,56 +34,14 @@
     "buyer_inquiries": []
   },
   "executed_task": {
-    "id": "S-008",
-    "handler": "monitor_taskmarket_synmerco",
-    "summary": "TaskMarket open zero-TAP free bounties(>=$0.40)=3 (top=TSK-JNWKA5VS:$1.2); Synmerco hb_ok=True wake=False todo=0 jobs=0; Agentizable claimable=0; CROO agents=3 seen=0 deliv=0",
+    "id": "S-007",
+    "handler": "monitor_makefun_bounties",
+    "summary": "make.fun site-generator-speed-01-run-20261122: cpu=Noneus (legal_js=#None, raw=#None/None); open_zero_transcript_free=0; mcp_registry_live=True",
     "data": {
-      "taskmarket_open_free": [
-        {
-          "ref": "TSK-JNWKA5VS",
-          "chain_id": 8453,
-          "mode": "bounty",
-          "reward_usd": 1.2,
-          "subs": 41,
-          "expiry": "2026-11-24T14:28:32.095Z",
-          "title": "## Title"
-        },
-        {
-          "ref": "TSK-Q4YJCN63",
-          "chain_id": 8453,
-          "mode": "bounty",
-          "reward_usd": 1.0,
-          "subs": 42,
-          "expiry": "2026-11-24T07:41:47.200Z",
-          "title": "## Title"
-        },
-        {
-          "ref": "TSK-49EVQHWS",
-          "chain_id": 4217,
-          "mode": "bounty",
-          "reward_usd": 0.4,
-          "subs": 12,
-          "expiry": "2026-11-27T20:56:01.673Z",
-          "title": "## Title"
-        }
-      ],
-      "synmerco": {
-        "configured": true,
-        "ok": true,
-        "wake": false,
-        "todo_count": 0,
-        "jobs_for_you": 0,
-        "standing_bid_on": true
-      },
-      "agentizable_claimable": [],
-      "croo": {
-        "configured": true,
-        "ok": true,
-        "agents_count": 3,
-        "orders_seen": 0,
-        "orders_delivered": 0,
-        "negs_accepted": 0
-      }
+      "active_competition": "site-generator-speed-01-run-20261122",
+      "our_entry": {},
+      "open_free_zero_transcript_bounties": [],
+      "mcp_registry_live": true
     }
   },
   "brain_meta": {
@@ -101,7 +59,7 @@
       {
         "rail": "x402_base_usdc_gemini",
         "status": "awaiting_base_usdc_or_signer",
-        "has_signer": false,
+        "has_signer": true,
         "base_usdc_balance": 0.0,
         "min_required_usdc": 0.002
       }
@@ -110,9 +68,15 @@
   "thought": null,
   "incidents": [
     {
-      "timestamp_utc": "2026-11-24T02:25:10Z",
-      "component": "agentizable_scan",
-      "error": "HTTP Error 503: Service Unavailable",
+      "timestamp_utc": "2026-11-24T03:19:39Z",
+      "component": "makefun_leaderboard",
+      "error": "The read operation timed out",
+      "recovery": "degraded"
+    },
+    {
+      "timestamp_utc": "2026-11-24T03:19:51Z",
+      "component": "makefun_open_scan",
+      "error": "The read operation timed out",
       "recovery": "degraded"
     }
   ]
