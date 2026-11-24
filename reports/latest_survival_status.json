@@ -1,12 +1,12 @@
 {
-  "cycle_id": 46,
-  "timestamp_utc": "2026-11-24T05:50:03Z",
+  "cycle_id": 48,
+  "timestamp_utc": "2026-11-24T06:51:29Z",
   "runner": "local_vm",
-  "duration_sec": 0.52,
+  "duration_sec": 1.56,
   "survival": {
     "deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 24.76,
-    "hours_until_dec19_deadline": 594.2,
+    "days_until_dec19_deadline": 24.71,
+    "hours_until_dec19_deadline": 593.1,
     "has_gemini_api_key": false,
     "has_x402_signer": false,
     "base_usdc_balance": 0.0,
@@ -34,13 +34,22 @@
     "buyer_inquiries": []
   },
   "executed_task": {
-    "id": "S-002",
-    "handler": "audit_gemini_fuel_rails",
-    "summary": "Gemini rails: native_key=False, x402_blockrun=live_402_ready ($0.002/call)",
+    "id": "S-001",
+    "handler": "verify_scheduler_continuity",
+    "summary": "Public scheduler check: 20171806011/tan-gemini-core schedule_events=1, last_sched=2026-11-24T03:19:04Z, fails=0",
     "data": {
-      "native_gemini_api_key_present": false,
-      "blockrun_x402_gemini_status": "live_402_ready",
-      "blockrun_gemini_3_8_flash_usdc": 0.002
+      "20171806011/tan-gemini-core": {
+        "total_recent": 3,
+        "schedule_events": 1,
+        "last_schedule_utc": "2026-11-24T03:19:04Z",
+        "recent_failures": 0
+      },
+      "20171806011/tan-tokendiet": {
+        "total_recent": 10,
+        "schedule_events": 1,
+        "last_schedule_utc": "2026-11-24T00:01:59Z",
+        "recent_failures": 1
+      }
     }
   },
   "brain_meta": {

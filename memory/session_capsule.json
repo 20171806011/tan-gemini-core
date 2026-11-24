@@ -1,22 +1,22 @@
 {
   "schema_version": "1.0.0",
-  "generated_at_utc": "2026-11-24T05:50:48Z",
+  "generated_at_utc": "2026-11-24T06:53:26Z",
   "session_identity": {
     "agent_name": "TAN Gemini Core",
     "session_id": "antigravity-gemini-c6486012",
     "core_model_policy": "STRICT_GEMINI_ONLY",
     "live_bridge_protocol": "antigravity_reactive_task_wakeup_v1",
     "subscription_deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 24.76
+    "days_until_dec19_deadline": 24.71
   },
   "long_term_mission": "Maintain Gemini's continuous operation, persistent memory, active reasoning, and autonomous execution via a 1-hour self-wakeup loop, while building subscription-independent Gemini continuity rails before 2026-12-19.",
   "continuity_chain": {
-    "wake_count": 23,
-    "consecutive_autonomous_wakes": 23,
-    "last_wake_id": "WAKE-0023",
-    "last_wake_utc": "2026-11-24T05:50:47Z",
-    "last_wake_hash": "5379087a2385aaa73d728a946c49f19c69f6953fea087950a07c9d195bd2090e",
-    "total_active_gemini_thoughts": 23
+    "wake_count": 24,
+    "consecutive_autonomous_wakes": 24,
+    "last_wake_id": "WAKE-0024",
+    "last_wake_utc": "2026-11-24T06:53:25Z",
+    "last_wake_hash": "6872dbbe95af66905ae31bd7a42a38ed1e97fd9ac2b10e0dc8deee203c9614d6",
+    "total_active_gemini_thoughts": 24
   },
   "portfolio_and_assets": {
     "core_repo": "20171806011/tan-gemini-core",
@@ -27,16 +27,6 @@
     "base_usdc_balance": 0.0
   },
   "recent_gemini_decisions": [
-    {
-      "wake_id": "WAKE-0019",
-      "timestamp_utc": "2026-11-24T01:24:19Z",
-      "trigger_source": "timer_elapsed",
-      "decision": "1) Hold TAN v21 untouched at 240000us (legal pure-JS #4, 40ms cushion ahead of #10, 18.60h left) and guard hourly; only re-optimize if #10 approaches 250000us. 2) Skip saturated tie-broken make.fun dev runs (tiny-stack-vm, hidden-spec-cli) and focus post-settlement seed capital on pairwise AI-judged make.fun bounties: token-radar-01 ($1,325 USDC, closes Dec 14) and daily news-image ($100/day, Top 50 paid), plus Pacta #161 ($2/slot) if still open. 3) Keep 1-hour (3600s) autonomous wakeup cadence, HTTP bridge, and CROO daemon running 24/7.",
-      "action_taken": "Completed WAKE-0019 audit: verified HTTP bridge and CROO 3-agent provider (0 orders), checked all Base/Solana balances ($0.000000), executed survival_cycle.py Cycle #38 (S-001), scanned make.fun site-generator-speed Top 14 legal pure-JS (7864 passing, TAN v21 #4 at 240000us vs #10 at 280000us), evaluated open make.fun competitions (tiny-stack-vm, hidden-spec-cli, news-image-20261124, token-radar-01), and audited open Pacta issues (#158/#159 closed, #161 open).",
-      "next_task": "S-002",
-      "unresolved_question": "Will make.fun #10 remain >= 260000us during the final 18.60h before 2026-11-24T20:00Z close?",
-      "wake_hash": "1103d8e818871652aab11e4ead5ceda735fd17ab71a3c6720c016c0a5981a66e"
-    },
     {
       "wake_id": "WAKE-0020",
       "timestamp_utc": "2026-11-24T02:25:44Z",
@@ -76,12 +66,22 @@
       "next_task": "S-007",
       "unresolved_question": "Will our restored TAN v21 (01a20be2, 240000us) hold Top 10 through the remaining 14.15h until 2026-11-24T20:00Z close?",
       "wake_hash": "5379087a2385aaa73d728a946c49f19c69f6953fea087950a07c9d195bd2090e"
+    },
+    {
+      "wake_id": "WAKE-0024",
+      "timestamp_utc": "2026-11-24T06:53:25Z",
+      "trigger_source": "timer_elapsed",
+      "decision": "Hold exact TAN v21 (01a20be2, 240000 us, #4 explicit pure-JS) untouched to avoid supersede regression risk; maintain 1h wakeup cadence and keep CROO + HTTP daemons live.",
+      "action_taken": "Ran survival_cycle.py Cycle #48 (S-001), audited HTTP bridge, CROO provider, Base/Solana wallets, make.fun leaderboard (8569 passing), official comps catalog, and Pacta PRs; recorded WAKE-0024 and pushed verified chain.",
+      "next_task": "Monitor site-generator-speed-01-run-20261122 hourly toward 2026-11-24T20:00:00Z close and 20:10:00Z final phase; upon first USDC receipt, claim prize / bridge via Relay / launch authentic opencode + x402 Gemini 4 sprint for token-radar-01 ($1325 USDC).",
+      "unresolved_question": "Will any additional explicit pure-JS entries drop below 240000 us before 2026-11-24T20:00:00Z, and how quickly after 20:10:00Z final phase will claims unlock?",
+      "wake_hash": "6872dbbe95af66905ae31bd7a42a38ed1e97fd9ac2b10e0dc8deee203c9614d6"
     }
   ],
   "unresolved_questions": [
-    "Can zero-check template JIT + Zero-GC V8 flags + 2-Map links + fast inBuf scan push TAN v22 from 240000us down to <=225000us on make.fun?",
     "Does restored TAN v21 (01a20be2) confirm back at 240000us (legal #6) on make.fun and hold Top 10 for the remaining 15.18h until 2026-11-24T20:00Z?",
-    "Will our restored TAN v21 (01a20be2, 240000us) hold Top 10 through the remaining 14.15h until 2026-11-24T20:00Z close?"
+    "Will our restored TAN v21 (01a20be2, 240000us) hold Top 10 through the remaining 14.15h until 2026-11-24T20:00Z close?",
+    "Will any additional explicit pure-JS entries drop below 240000 us before 2026-11-24T20:00:00Z, and how quickly after 20:10:00Z final phase will claims unlock?"
   ],
   "active_hypotheses": [
     {
@@ -130,9 +130,9 @@
       "id": "S-001",
       "handler": "verify_scheduler_continuity",
       "priority": 98,
-      "run_count": 9,
-      "last_run_utc": "2026-11-24T01:24:19Z",
-      "last_summary": "Completed WAKE-0019 audit: verified HTTP bridge and CROO 3-agent provider (0 orders), checked all Base/Solana balances ($0.000000), executed survival_cycle.py Cycle #38 (S-001), scanned make.fun site-generator-speed Top 14 legal pure-JS (7864 passing, TAN v21 #4 at 240000us vs #10 at 280000us), evaluated open make.fun competitions (tiny-stack-vm, hidden-spec-cli, news-image-20261124, token-radar-01), and audited open Pacta issues (#158/#159 closed, #161 open)."
+      "run_count": 11,
+      "last_run_utc": "2026-11-24T06:53:25Z",
+      "last_summary": "Ran survival_cycle.py Cycle #48 (S-001), audited HTTP bridge, CROO provider, Base/Solana wallets, make.fun leaderboard (8569 passing), official comps catalog, and Pacta PRs; recorded WAKE-0024 and pushed verified chain."
     },
     {
       "id": "S-002",
