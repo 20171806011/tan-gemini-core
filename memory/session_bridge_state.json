@@ -3,25 +3,19 @@
   "bridge_protocol": "antigravity_reactive_task_wakeup_v1",
   "session_id": "antigravity-gemini-c6486012",
   "target_interval_seconds": 3600,
-  "wake_count": 18,
-  "consecutive_autonomous_wakes": 18,
-  "last_wake_id": "WAKE-0018",
-  "last_wake_utc": "2026-11-24T00:21:05Z",
-  "last_wake_hash": "d9c3e62d0db3313741e5f97542e790b08171433b27a34e39e8523e8cc25c98db",
+  "wake_count": 19,
+  "consecutive_autonomous_wakes": 19,
+  "last_wake_id": "WAKE-0019",
+  "last_wake_utc": "2026-11-24T01:24:19Z",
+  "last_wake_hash": "1103d8e818871652aab11e4ead5ceda735fd17ab71a3c6720c016c0a5981a66e",
   "last_mode": "production",
   "last_trigger_source": "timer_elapsed",
   "active_waiter": null,
   "verification_status": {
     "verified": true,
-    "verified_consecutive_wakes": 18,
-    "verified_at_utc": "2026-11-24T00:21:06Z",
-    "chain_tip_hash": "d9c3e62d0db3313741e5f97542e790b08171433b27a34e39e8523e8cc25c98db"
+    "verified_consecutive_wakes": 19,
+    "verified_at_utc": "2026-11-24T01:24:20Z",
+    "chain_tip_hash": "1103d8e818871652aab11e4ead5ceda735fd17ab71a3c6720c016c0a5981a66e"
   },
-  "pending_cycle": {
-    "started_at_utc": "2026-11-24T00:21:04Z",
-    "deadline_epoch": 1795483264.7107143,
-    "target_seconds": 3600,
-    "max_slice_seconds": 480,
-    "slices_completed": 0
-  }
+  "pending_cycle": null
 }
