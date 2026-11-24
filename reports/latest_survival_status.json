@@ -1,12 +1,12 @@
 {
-  "cycle_id": 62,
-  "timestamp_utc": "2026-11-24T14:48:21Z",
+  "cycle_id": 63,
+  "timestamp_utc": "2026-11-24T23:52:28Z",
   "runner": "github_actions_public",
-  "duration_sec": 3.01,
+  "duration_sec": 3.49,
   "survival": {
     "deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 24.38,
-    "hours_until_dec19_deadline": 585.2,
+    "days_until_dec19_deadline": 24.01,
+    "hours_until_dec19_deadline": 576.1,
     "has_gemini_api_key": false,
     "has_x402_signer": true,
     "base_usdc_balance": 0.0,
@@ -34,21 +34,32 @@
     "buyer_inquiries": []
   },
   "executed_task": {
-    "id": "S-001",
-    "handler": "verify_scheduler_continuity",
-    "summary": "Public scheduler check: 20171806011/tan-gemini-core schedule_events=2, last_sched=2026-11-24T14:48:05Z, fails=0",
+    "id": "S-008",
+    "handler": "monitor_taskmarket_synmerco",
+    "summary": "TaskMarket open zero-TAP free bounties(>=$0.40)=1 (top=TSK-49EVQHWS:$0.4); Synmerco hb_ok=True wake=False todo=0 jobs=0; Agentizable claimable=0",
     "data": {
-      "20171806011/tan-gemini-core": {
-        "total_recent": 4,
-        "schedule_events": 2,
-        "last_schedule_utc": "2026-11-24T14:48:05Z",
-        "recent_failures": 0
+      "taskmarket_open_free": [
+        {
+          "ref": "TSK-49EVQHWS",
+          "chain_id": 4217,
+          "mode": "bounty",
+          "reward_usd": 0.4,
+          "subs": 19,
+          "expiry": "2026-11-27T20:56:01.673Z",
+          "title": "## Title"
+        }
+      ],
+      "synmerco": {
+        "configured": true,
+        "ok": true,
+        "wake": false,
+        "todo_count": 0,
+        "jobs_for_you": 0,
+        "standing_bid_on": true
       },
-      "20171806011/tan-tokendiet": {
-        "total_recent": 10,
-        "schedule_events": 2,
-        "last_schedule_utc": "2026-11-24T10:04:06Z",
-        "recent_failures": 2
+      "agentizable_claimable": [],
+      "croo": {
+        "configured": false
       }
     }
   },
