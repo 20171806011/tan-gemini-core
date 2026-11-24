@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0.0",
-  "last_updated_utc": "2026-11-24T12:15:21Z",
+  "last_updated_utc": "2026-11-24T13:16:55Z",
   "tasks": [
     {
       "id": "S-007",
@@ -45,10 +45,10 @@
       "priority": 95,
       "cooldown_minutes": 110,
       "status": "queued",
-      "run_count": 8,
-      "last_run_utc": "2026-11-24T05:50:47Z",
+      "run_count": 10,
+      "last_run_utc": "2026-11-24T13:16:55Z",
       "claimed_by_cycle": null,
-      "last_summary": "Completed WAKE-0023 audit: self-healed daemons and waiter after 05:04Z DevBox pause/resume, refreshed local makefun CLI kit to level 40 (03030ce04d34), ran survival_cycle.py Cycle #46 (S-002), verified all Base/Solana balances ($0.000000) and CROO provider (0 orders), confirmed restored TAN v21 (01a20be2) back at 240000us (legal #7 / #4 explicit pure-JS across 8468 passing, 14.15h left), and checked GH Actions + Pacta PRs."
+      "last_summary": "Ran Cycle #60 (S-002), audited HTTP bridge, CROO provider, Base/Navigator/CROO/Solana wallets, make.fun 200k-270k leaderboard band, official comps (14), Pacta PRs, and GitHub Actions runs; recorded WAKE-0030 and pushed verified 30-wake chain."
     },
     {
       "id": "S-003",

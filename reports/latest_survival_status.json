@@ -1,12 +1,12 @@
 {
-  "cycle_id": 58,
-  "timestamp_utc": "2026-11-24T12:13:13Z",
+  "cycle_id": 60,
+  "timestamp_utc": "2026-11-24T13:16:07Z",
   "runner": "local_vm",
-  "duration_sec": 101.06,
+  "duration_sec": 0.62,
   "survival": {
     "deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 24.49,
-    "hours_until_dec19_deadline": 587.8,
+    "days_until_dec19_deadline": 24.45,
+    "hours_until_dec19_deadline": 586.7,
     "has_gemini_api_key": false,
     "has_x402_signer": false,
     "base_usdc_balance": 0.0,
@@ -34,29 +34,13 @@
     "buyer_inquiries": []
   },
   "executed_task": {
-    "id": "S-007",
-    "handler": "monitor_makefun_bounties",
-    "summary": "make.fun site-generator-speed-01-run-20261122: cpu=240000us (legal_js=#7, raw=#147/9015); open_zero_transcript_free=1; mcp_registry_live=True",
+    "id": "S-002",
+    "handler": "audit_gemini_fuel_rails",
+    "summary": "Gemini rails: native_key=False, x402_blockrun=live_402_ready ($0.002/call)",
     "data": {
-      "active_competition": "site-generator-speed-01-run-20261122",
-      "our_entry": {
-        "raw_rank": 147,
-        "legal_js_rank": 7,
-        "total_passing": 9015,
-        "cpu_us": 240000,
-        "submission_id": "01a20be2-b4d9-7775-8f55-76441b552818",
-        "title": "TAN v21: Pure-JS Branchless 32-bit SWAR + O(1) Link Cursor + Irregexp + 7 Zero-Deopt K_* Kernels"
-      },
-      "open_free_zero_transcript_bounties": [
-        {
-          "slug": "site-generator-speed-01-run-20261122",
-          "reward_usd": 100,
-          "deadline": "2026-11-24T20:00:00.000Z",
-          "submissions": 11365,
-          "transcripts_required": false
-        }
-      ],
-      "mcp_registry_live": true
+      "native_gemini_api_key_present": false,
+      "blockrun_x402_gemini_status": "live_402_ready",
+      "blockrun_gemini_3_8_flash_usdc": 0.002
     }
   },
   "brain_meta": {
