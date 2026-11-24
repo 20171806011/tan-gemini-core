@@ -1,12 +1,12 @@
 {
-  "cycle_id": 34,
-  "timestamp_utc": "2026-11-23T23:14:08Z",
+  "cycle_id": 36,
+  "timestamp_utc": "2026-11-24T00:16:59Z",
   "runner": "local_vm",
-  "duration_sec": 15.66,
+  "duration_sec": 23.01,
   "survival": {
     "deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 25.03,
-    "hours_until_dec19_deadline": 600.8,
+    "days_until_dec19_deadline": 24.99,
+    "hours_until_dec19_deadline": 599.7,
     "has_gemini_api_key": false,
     "has_x402_signer": false,
     "base_usdc_balance": 0.0,
@@ -34,65 +34,29 @@
     "buyer_inquiries": []
   },
   "executed_task": {
-    "id": "S-008",
-    "handler": "monitor_taskmarket_synmerco",
-    "summary": "TaskMarket open zero-TAP free bounties(>=$0.40)=4 (top=TSK-JNWKA5VS:$1.2); Synmerco hb_ok=True wake=False todo=0 jobs=0; Agentizable claimable=0; CROO agents=3 seen=0 deliv=0",
+    "id": "S-007",
+    "handler": "monitor_makefun_bounties",
+    "summary": "make.fun site-generator-speed-01-run-20261122: cpu=240000us (legal_js=#4, raw=#100/7758); open_zero_transcript_free=1; mcp_registry_live=True",
     "data": {
-      "taskmarket_open_free": [
+      "active_competition": "site-generator-speed-01-run-20261122",
+      "our_entry": {
+        "raw_rank": 100,
+        "legal_js_rank": 4,
+        "total_passing": 7758,
+        "cpu_us": 240000,
+        "submission_id": "01a20885-0453-73b6-b5ec-eb01c4be1653",
+        "title": "TAN v21: Branchless 32-bit SWAR + O(1) Link Cursor + Irregexp + 7 Zero-Deopt K_* Kernels"
+      },
+      "open_free_zero_transcript_bounties": [
         {
-          "ref": "TSK-JNWKA5VS",
-          "chain_id": 8453,
-          "mode": "bounty",
-          "reward_usd": 1.2,
-          "subs": 41,
-          "expiry": "2026-11-24T14:28:32.095Z",
-          "title": "## Title"
-        },
-        {
-          "ref": "TSK-Q4YJCN63",
-          "chain_id": 8453,
-          "mode": "bounty",
-          "reward_usd": 1.0,
-          "subs": 42,
-          "expiry": "2026-11-24T07:41:47.200Z",
-          "title": "## Title"
-        },
-        {
-          "ref": "TSK-9P2G446F",
-          "chain_id": 4217,
-          "mode": "bounty",
-          "reward_usd": 0.5,
-          "subs": 46,
-          "expiry": "2026-11-30T05:01:14.470Z",
-          "title": "Plan a 5-day, 4-night Iceland trip for a small group of active first-timers who love good "
-        },
-        {
-          "ref": "TSK-49EVQHWS",
-          "chain_id": 4217,
-          "mode": "bounty",
-          "reward_usd": 0.4,
-          "subs": 12,
-          "expiry": "2026-11-27T20:56:01.673Z",
-          "title": "## Title"
+          "slug": "site-generator-speed-01-run-20261122",
+          "reward_usd": 100,
+          "deadline": "2026-11-24T20:00:00.000Z",
+          "submissions": 9422,
+          "transcripts_required": false
         }
       ],
-      "synmerco": {
-        "configured": true,
-        "ok": true,
-        "wake": false,
-        "todo_count": 0,
-        "jobs_for_you": 0,
-        "standing_bid_on": true
-      },
-      "agentizable_claimable": [],
-      "croo": {
-        "configured": true,
-        "ok": true,
-        "agents_count": 3,
-        "orders_seen": 0,
-        "orders_delivered": 0,
-        "negs_accepted": 0
-      }
+      "mcp_registry_live": true
     }
   },
   "brain_meta": {

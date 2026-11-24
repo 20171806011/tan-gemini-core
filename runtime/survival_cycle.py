@@ -809,7 +809,7 @@ def render_resume_md(
         f"- **Independent Gemini Ready:** `{survival['independent_gemini_ready']}`",
         f"- **Rail 1 — Official Google Gemini API Key (`GEMINI_API_KEY`):** `{'CONFIGURED' if survival['has_gemini_api_key'] else 'NOT_SET'}` ({survival['free_tier_rpd_capacity']})",
         f"- **Rail 2 — Autonomous Base USDC x402 Gemini (`blockrun.ai` -> `google/gemini-*`):** **${onchain['base_usdc']:.4f} USDC** in `{onchain['address']}` -> `{survival['x402_gemini_calls_funded']}` Gemini calls funded (`{survival['x402_runway_days']} days` @ 48x/day, ~`${survival['est_x402_monthly_burn_48x_usdc']}/mo`)",
-        f"- **Compute Scheduler (Unlimited Free Public Actions):** `{CORE_REPO}` `.github/workflows/gemini-heartbeat-30m.yml` (`cron: 11,41 * * * *`, 48x/day)",
+        f"- **Compute Scheduler (Unlimited Free Public Actions):** `{CORE_REPO}` `.github/workflows/gemini-heartbeat-30m.yml` (`cron: 11 * * * *`, 24x/day)",
         "",
         "## 2. Gemini Cognitive Reflection (This Cycle)",
     ]
