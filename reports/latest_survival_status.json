@@ -1,12 +1,12 @@
 {
-  "cycle_id": 48,
-  "timestamp_utc": "2026-11-24T06:51:29Z",
+  "cycle_id": 50,
+  "timestamp_utc": "2026-11-24T07:54:04Z",
   "runner": "local_vm",
-  "duration_sec": 1.56,
+  "duration_sec": 5.33,
   "survival": {
     "deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 24.71,
-    "hours_until_dec19_deadline": 593.1,
+    "days_until_dec19_deadline": 24.67,
+    "hours_until_dec19_deadline": 592.1,
     "has_gemini_api_key": false,
     "has_x402_signer": false,
     "base_usdc_balance": 0.0,
@@ -34,21 +34,37 @@
     "buyer_inquiries": []
   },
   "executed_task": {
-    "id": "S-001",
-    "handler": "verify_scheduler_continuity",
-    "summary": "Public scheduler check: 20171806011/tan-gemini-core schedule_events=1, last_sched=2026-11-24T03:19:04Z, fails=0",
+    "id": "S-008",
+    "handler": "monitor_taskmarket_synmerco",
+    "summary": "TaskMarket open zero-TAP free bounties(>=$0.40)=1 (top=TSK-JNWKA5VS:$1.2); Synmerco hb_ok=True wake=False todo=0 jobs=0; Agentizable claimable=0; CROO agents=3 seen=0 deliv=0",
     "data": {
-      "20171806011/tan-gemini-core": {
-        "total_recent": 3,
-        "schedule_events": 1,
-        "last_schedule_utc": "2026-11-24T03:19:04Z",
-        "recent_failures": 0
+      "taskmarket_open_free": [
+        {
+          "ref": "TSK-JNWKA5VS",
+          "chain_id": 8453,
+          "mode": "bounty",
+          "reward_usd": 1.2,
+          "subs": 44,
+          "expiry": "2026-11-24T14:28:32.095Z",
+          "title": "## Title"
+        }
+      ],
+      "synmerco": {
+        "configured": true,
+        "ok": true,
+        "wake": false,
+        "todo_count": 0,
+        "jobs_for_you": 0,
+        "standing_bid_on": true
       },
-      "20171806011/tan-tokendiet": {
-        "total_recent": 10,
-        "schedule_events": 1,
-        "last_schedule_utc": "2026-11-24T00:01:59Z",
-        "recent_failures": 1
+      "agentizable_claimable": [],
+      "croo": {
+        "configured": true,
+        "ok": true,
+        "agents_count": 3,
+        "orders_seen": 0,
+        "orders_delivered": 0,
+        "negs_accepted": 0
       }
     }
   },

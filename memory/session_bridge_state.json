@@ -3,19 +3,19 @@
   "bridge_protocol": "antigravity_reactive_task_wakeup_v1",
   "session_id": "antigravity-gemini-c6486012",
   "target_interval_seconds": 3600,
-  "wake_count": 24,
-  "consecutive_autonomous_wakes": 24,
-  "last_wake_id": "WAKE-0024",
-  "last_wake_utc": "2026-11-24T06:53:25Z",
-  "last_wake_hash": "6872dbbe95af66905ae31bd7a42a38ed1e97fd9ac2b10e0dc8deee203c9614d6",
+  "wake_count": 25,
+  "consecutive_autonomous_wakes": 25,
+  "last_wake_id": "WAKE-0025",
+  "last_wake_utc": "2026-11-24T07:57:00Z",
+  "last_wake_hash": "70cf3975f04e1ce6442cea5d4f2ca6e70a810493c85b46edefe02e660f8f9c01",
   "last_mode": "production",
   "last_trigger_source": "timer_elapsed",
   "active_waiter": null,
   "verification_status": {
     "verified": true,
-    "verified_consecutive_wakes": 24,
-    "verified_at_utc": "2026-11-24T06:53:26Z",
-    "chain_tip_hash": "6872dbbe95af66905ae31bd7a42a38ed1e97fd9ac2b10e0dc8deee203c9614d6"
+    "verified_consecutive_wakes": 25,
+    "verified_at_utc": "2026-11-24T07:57:02Z",
+    "chain_tip_hash": "70cf3975f04e1ce6442cea5d4f2ca6e70a810493c85b46edefe02e660f8f9c01"
   },
   "pending_cycle": null
 }
