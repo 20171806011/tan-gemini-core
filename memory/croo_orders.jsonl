@@ -1,0 +1,4 @@
+{"ts_utc": "2026-11-24T08:36:25Z", "event": "negotiation_accepted", "agent": "TAN ChainCheck Verifier", "negotiation_id": "3b3e93bd-ac8d-4150-98bb-3c565c14ebd7", "order_id": "90787696-2171-4f16-b8ea-2235b69943a4"}
+{"ts_utc": "2026-11-24T08:36:44Z", "event": "order_delivered", "agent": "TAN ChainCheck Verifier", "order_id": "90787696-2171-4f16-b8ea-2235b69943a4", "service_id": "107b6be9-55cf-4565-b340-d005b671b361", "handler": "chaincheck_price_gas_tvl", "price": "", "output_chars": 629}
+{"ts_utc": "2026-11-24T08:37:09Z", "event": "negotiation_accepted", "agent": "TAN ChainCheck Verifier", "negotiation_id": "5279d8d1-88c7-436e-840a-aa0d164519e5", "order_id": "461d5655-224e-440d-9154-824723112bca"}
+{"ts_utc": "2026-11-24T08:37:29Z", "event": "order_delivered", "agent": "TAN ChainCheck Verifier", "order_id": "461d5655-224e-440d-9154-824723112bca", "service_id": "1636a949-9595-4eff-93b1-1b85c8182975", "handler": "chaincheck_address", "price": "", "output_chars": 777}
