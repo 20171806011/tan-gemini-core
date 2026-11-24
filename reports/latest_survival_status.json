@@ -1,12 +1,12 @@
 {
-  "cycle_id": 52,
-  "timestamp_utc": "2026-11-24T08:57:56Z",
+  "cycle_id": 54,
+  "timestamp_utc": "2026-11-24T10:10:17Z",
   "runner": "local_vm",
-  "duration_sec": 70.65,
+  "duration_sec": 1.85,
   "survival": {
     "deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 24.63,
-    "hours_until_dec19_deadline": 591.0,
+    "days_until_dec19_deadline": 24.58,
+    "hours_until_dec19_deadline": 589.8,
     "has_gemini_api_key": false,
     "has_x402_signer": false,
     "base_usdc_balance": 0.0,
@@ -34,29 +34,22 @@
     "buyer_inquiries": []
   },
   "executed_task": {
-    "id": "S-007",
-    "handler": "monitor_makefun_bounties",
-    "summary": "make.fun site-generator-speed-01-run-20261122: cpu=240000us (legal_js=#7, raw=#142/8753); open_zero_transcript_free=1; mcp_registry_live=True",
+    "id": "S-001",
+    "handler": "verify_scheduler_continuity",
+    "summary": "Public scheduler check: 20171806011/tan-gemini-core schedule_events=1, last_sched=2026-11-24T03:19:04Z, fails=0",
     "data": {
-      "active_competition": "site-generator-speed-01-run-20261122",
-      "our_entry": {
-        "raw_rank": 142,
-        "legal_js_rank": 7,
-        "total_passing": 8753,
-        "cpu_us": 240000,
-        "submission_id": "01a20be2-b4d9-7775-8f55-76441b552818",
-        "title": "TAN v21: Pure-JS Branchless 32-bit SWAR + O(1) Link Cursor + Irregexp + 7 Zero-Deopt K_* Kernels"
+      "20171806011/tan-gemini-core": {
+        "total_recent": 3,
+        "schedule_events": 1,
+        "last_schedule_utc": "2026-11-24T03:19:04Z",
+        "recent_failures": 0
       },
-      "open_free_zero_transcript_bounties": [
-        {
-          "slug": "site-generator-speed-01-run-20261122",
-          "reward_usd": 100,
-          "deadline": "2026-11-24T20:00:00.000Z",
-          "submissions": 10917,
-          "transcripts_required": false
-        }
-      ],
-      "mcp_registry_live": true
+      "20171806011/tan-tokendiet": {
+        "total_recent": 10,
+        "schedule_events": 2,
+        "last_schedule_utc": "2026-11-24T10:04:06Z",
+        "recent_failures": 2
+      }
     }
   },
   "brain_meta": {
