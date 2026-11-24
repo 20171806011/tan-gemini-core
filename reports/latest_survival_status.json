@@ -1,12 +1,12 @@
 {
-  "cycle_id": 56,
-  "timestamp_utc": "2026-11-24T11:11:53Z",
+  "cycle_id": 58,
+  "timestamp_utc": "2026-11-24T12:13:13Z",
   "runner": "local_vm",
-  "duration_sec": 6.02,
+  "duration_sec": 101.06,
   "survival": {
     "deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 24.53,
-    "hours_until_dec19_deadline": 588.8,
+    "days_until_dec19_deadline": 24.49,
+    "hours_until_dec19_deadline": 587.8,
     "has_gemini_api_key": false,
     "has_x402_signer": false,
     "base_usdc_balance": 0.0,
@@ -34,38 +34,29 @@
     "buyer_inquiries": []
   },
   "executed_task": {
-    "id": "S-008",
-    "handler": "monitor_taskmarket_synmerco",
-    "summary": "TaskMarket open zero-TAP free bounties(>=$0.40)=1 (top=TSK-JNWKA5VS:$1.2); Synmerco hb_ok=True wake=False todo=0 jobs=0; Agentizable claimable=0; CROO agents=3 seen=2 deliv=0",
+    "id": "S-007",
+    "handler": "monitor_makefun_bounties",
+    "summary": "make.fun site-generator-speed-01-run-20261122: cpu=240000us (legal_js=#7, raw=#147/9015); open_zero_transcript_free=1; mcp_registry_live=True",
     "data": {
-      "taskmarket_open_free": [
+      "active_competition": "site-generator-speed-01-run-20261122",
+      "our_entry": {
+        "raw_rank": 147,
+        "legal_js_rank": 7,
+        "total_passing": 9015,
+        "cpu_us": 240000,
+        "submission_id": "01a20be2-b4d9-7775-8f55-76441b552818",
+        "title": "TAN v21: Pure-JS Branchless 32-bit SWAR + O(1) Link Cursor + Irregexp + 7 Zero-Deopt K_* Kernels"
+      },
+      "open_free_zero_transcript_bounties": [
         {
-          "ref": "TSK-JNWKA5VS",
-          "chain_id": 8453,
-          "mode": "bounty",
-          "reward_usd": 1.2,
-          "subs": 45,
-          "expiry": "2026-11-24T14:28:32.095Z",
-          "title": "## Title"
+          "slug": "site-generator-speed-01-run-20261122",
+          "reward_usd": 100,
+          "deadline": "2026-11-24T20:00:00.000Z",
+          "submissions": 11365,
+          "transcripts_required": false
         }
       ],
-      "synmerco": {
-        "configured": true,
-        "ok": true,
-        "wake": false,
-        "todo_count": 0,
-        "jobs_for_you": 0,
-        "standing_bid_on": true
-      },
-      "agentizable_claimable": [],
-      "croo": {
-        "configured": true,
-        "ok": true,
-        "agents_count": 3,
-        "orders_seen": 2,
-        "orders_delivered": 0,
-        "negs_accepted": 0
-      }
+      "mcp_registry_live": true
     }
   },
   "brain_meta": {
