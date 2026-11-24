@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0.0",
-  "last_updated_utc": "2026-11-24T13:16:55Z",
+  "last_updated_utc": "2026-11-24T14:48:21Z",
   "tasks": [
     {
       "id": "S-007",
@@ -33,10 +33,10 @@
       "priority": 98,
       "cooldown_minutes": 55,
       "status": "queued",
-      "run_count": 13,
-      "last_run_utc": "2026-11-24T10:11:11Z",
+      "run_count": 14,
+      "last_run_utc": "2026-11-24T14:48:21Z",
       "claimed_by_cycle": null,
-      "last_summary": "Ran Cycle #54 (S-001), audited HTTP bridge, CROO provider and public store status of all 3 agents, checked Base/Navigator/CROO/Solana balances, make.fun 200k-270k leaderboard band, official comps (14), Pacta PRs, and GitHub Actions runs; recorded WAKE-0027 and pushed verified chain."
+      "last_summary": "Public scheduler check: 20171806011/tan-gemini-core schedule_events=2, last_sched=2026-11-24T14:48:05Z, fails=0"
     },
     {
       "id": "S-002",
