@@ -8,7 +8,7 @@
     "days_until_dec19_deadline": 24.86,
     "hours_until_dec19_deadline": 596.6,
     "has_gemini_api_key": false,
-    "has_x402_signer": false,
+    "has_x402_signer": true,
     "base_usdc_balance": 0.0,
     "est_x402_usdc_per_gemini_call": 0.002,
     "est_x402_daily_burn_48x_usdc": 0.096,
@@ -74,7 +74,7 @@
       {
         "rail": "x402_base_usdc_gemini",
         "status": "awaiting_base_usdc_or_signer",
-        "has_signer": false,
+        "has_signer": true,
         "base_usdc_balance": 0.0,
         "min_required_usdc": 0.002
       }
