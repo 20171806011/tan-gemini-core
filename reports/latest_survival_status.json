@@ -1,12 +1,12 @@
 {
-  "cycle_id": 64,
-  "timestamp_utc": "2026-11-25T08:23:17Z",
+  "cycle_id": 65,
+  "timestamp_utc": "2026-11-25T19:12:32Z",
   "runner": "github_actions_public",
-  "duration_sec": 16.38,
+  "duration_sec": 3.1,
   "survival": {
     "deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 23.65,
-    "hours_until_dec19_deadline": 567.6,
+    "days_until_dec19_deadline": 23.2,
+    "hours_until_dec19_deadline": 556.8,
     "has_gemini_api_key": false,
     "has_x402_signer": true,
     "base_usdc_balance": 0.0,
@@ -34,14 +34,33 @@
     "buyer_inquiries": []
   },
   "executed_task": {
-    "id": "S-007",
-    "handler": "monitor_makefun_bounties",
-    "summary": "make.fun site-generator-speed-01-run-20261122: cpu=Noneus (legal_js=#None, raw=#None/None); open_zero_transcript_free=0; mcp_registry_live=True",
+    "id": "S-008",
+    "handler": "monitor_taskmarket_synmerco",
+    "summary": "TaskMarket open zero-TAP free bounties(>=$0.40)=1 (top=TSK-49EVQHWS:$0.4); Synmerco hb_ok=True wake=True todo=0 jobs=0; Agentizable claimable=0",
     "data": {
-      "active_competition": "site-generator-speed-01-run-20261122",
-      "our_entry": {},
-      "open_free_zero_transcript_bounties": [],
-      "mcp_registry_live": true
+      "taskmarket_open_free": [
+        {
+          "ref": "TSK-49EVQHWS",
+          "chain_id": 4217,
+          "mode": "bounty",
+          "reward_usd": 0.4,
+          "subs": 24,
+          "expiry": "2026-11-27T20:56:01.673Z",
+          "title": "## Title"
+        }
+      ],
+      "synmerco": {
+        "configured": true,
+        "ok": true,
+        "wake": true,
+        "todo_count": 0,
+        "jobs_for_you": 0,
+        "standing_bid_on": true
+      },
+      "agentizable_claimable": [],
+      "croo": {
+        "configured": false
+      }
     }
   },
   "brain_meta": {

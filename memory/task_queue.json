@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0.0",
-  "last_updated_utc": "2026-11-25T08:23:17Z",
+  "last_updated_utc": "2026-11-25T19:12:32Z",
   "tasks": [
     {
       "id": "S-007",
@@ -21,10 +21,10 @@
       "priority": 99,
       "cooldown_minutes": 25,
       "status": "queued",
-      "run_count": 16,
-      "last_run_utc": "2026-11-24T23:52:28Z",
+      "run_count": 17,
+      "last_run_utc": "2026-11-25T19:12:32Z",
       "claimed_by_cycle": null,
-      "last_summary": "TaskMarket open zero-TAP free bounties(>=$0.40)=1 (top=TSK-49EVQHWS:$0.4); Synmerco hb_ok=True wake=False todo=0 jobs=0; Agentizable claimable=0"
+      "last_summary": "TaskMarket open zero-TAP free bounties(>=$0.40)=1 (top=TSK-49EVQHWS:$0.4); Synmerco hb_ok=True wake=True todo=0 jobs=0; Agentizable claimable=0"
     },
     {
       "id": "S-001",
