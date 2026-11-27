@@ -1,12 +1,12 @@
 {
-  "cycle_id": 69,
-  "timestamp_utc": "2026-11-27T04:58:52Z",
+  "cycle_id": 70,
+  "timestamp_utc": "2026-11-27T14:58:47Z",
   "runner": "github_actions_public",
-  "duration_sec": 3.33,
+  "duration_sec": 7.26,
   "survival": {
     "deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 21.79,
-    "hours_until_dec19_deadline": 523.0,
+    "days_until_dec19_deadline": 21.38,
+    "hours_until_dec19_deadline": 513.0,
     "has_gemini_api_key": false,
     "has_x402_signer": true,
     "base_usdc_balance": 0.0,
@@ -34,33 +34,14 @@
     "buyer_inquiries": []
   },
   "executed_task": {
-    "id": "S-008",
-    "handler": "monitor_taskmarket_synmerco",
-    "summary": "TaskMarket open zero-TAP free bounties(>=$0.40)=1 (top=TSK-VC8E1EEM:$1.0); Synmerco hb_ok=True wake=False todo=0 jobs=0; Agentizable claimable=0",
+    "id": "S-007",
+    "handler": "monitor_makefun_bounties",
+    "summary": "make.fun site-generator-speed-01-run-20261122: cpu=Noneus (legal_js=#None, raw=#None/None); open_zero_transcript_free=0; mcp_registry_live=True",
     "data": {
-      "taskmarket_open_free": [
-        {
-          "ref": "TSK-VC8E1EEM",
-          "chain_id": 4217,
-          "mode": "bounty",
-          "reward_usd": 1.0,
-          "subs": 43,
-          "expiry": "2026-11-28T03:08:00.496Z",
-          "title": "Scaffold repo layout and README ($1.00)"
-        }
-      ],
-      "synmerco": {
-        "configured": true,
-        "ok": true,
-        "wake": false,
-        "todo_count": 0,
-        "jobs_for_you": 0,
-        "standing_bid_on": true
-      },
-      "agentizable_claimable": [],
-      "croo": {
-        "configured": false
-      }
+      "active_competition": "site-generator-speed-01-run-20261122",
+      "our_entry": {},
+      "open_free_zero_transcript_bounties": [],
+      "mcp_registry_live": true
     }
   },
   "brain_meta": {
