@@ -1,12 +1,12 @@
 {
-  "cycle_id": 70,
-  "timestamp_utc": "2026-11-27T14:58:47Z",
+  "cycle_id": 71,
+  "timestamp_utc": "2026-11-27T23:25:22Z",
   "runner": "github_actions_public",
-  "duration_sec": 7.26,
+  "duration_sec": 12.73,
   "survival": {
     "deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 21.38,
-    "hours_until_dec19_deadline": 513.0,
+    "days_until_dec19_deadline": 21.02,
+    "hours_until_dec19_deadline": 504.6,
     "has_gemini_api_key": false,
     "has_x402_signer": true,
     "base_usdc_balance": 0.0,
@@ -34,14 +34,33 @@
     "buyer_inquiries": []
   },
   "executed_task": {
-    "id": "S-007",
-    "handler": "monitor_makefun_bounties",
-    "summary": "make.fun site-generator-speed-01-run-20261122: cpu=Noneus (legal_js=#None, raw=#None/None); open_zero_transcript_free=0; mcp_registry_live=True",
+    "id": "S-008",
+    "handler": "monitor_taskmarket_synmerco",
+    "summary": "TaskMarket open zero-TAP free bounties(>=$0.40)=1 (top=TSK-DZXDQ4GA:$5.0); Synmerco hb_ok=True wake=False todo=0 jobs=0; Agentizable claimable=0",
     "data": {
-      "active_competition": "site-generator-speed-01-run-20261122",
-      "our_entry": {},
-      "open_free_zero_transcript_bounties": [],
-      "mcp_registry_live": true
+      "taskmarket_open_free": [
+        {
+          "ref": "TSK-DZXDQ4GA",
+          "chain_id": 8453,
+          "mode": "bounty",
+          "reward_usd": 5.0,
+          "subs": 45,
+          "expiry": "2026-11-30T23:08:28.360Z",
+          "title": "## modelXare sticker design"
+        }
+      ],
+      "synmerco": {
+        "configured": true,
+        "ok": true,
+        "wake": false,
+        "todo_count": 0,
+        "jobs_for_you": 0,
+        "standing_bid_on": true
+      },
+      "agentizable_claimable": [],
+      "croo": {
+        "configured": false
+      }
     }
   },
   "brain_meta": {
