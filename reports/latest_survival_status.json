@@ -1,12 +1,12 @@
 {
-  "cycle_id": 72,
-  "timestamp_utc": "2026-11-28T07:39:26Z",
+  "cycle_id": 73,
+  "timestamp_utc": "2026-11-28T16:50:17Z",
   "runner": "github_actions_public",
-  "duration_sec": 5.61,
+  "duration_sec": 2.5,
   "survival": {
     "deadline_utc": "2026-12-19T00:00:00Z",
-    "days_until_dec19_deadline": 20.68,
-    "hours_until_dec19_deadline": 496.3,
+    "days_until_dec19_deadline": 20.3,
+    "hours_until_dec19_deadline": 487.2,
     "has_gemini_api_key": false,
     "has_x402_signer": true,
     "base_usdc_balance": 0.0,
@@ -34,29 +34,33 @@
     "buyer_inquiries": []
   },
   "executed_task": {
-    "id": "S-007",
-    "handler": "monitor_makefun_bounties",
-    "summary": "make.fun site-generator-speed-01-run-20261122: cpu=Noneus (legal_js=#None, raw=#None/None); open_zero_transcript_free=2; mcp_registry_live=True",
+    "id": "S-008",
+    "handler": "monitor_taskmarket_synmerco",
+    "summary": "TaskMarket open zero-TAP free bounties(>=$0.40)=1 (top=TSK-DZXDQ4GA:$5.0); Synmerco hb_ok=True wake=False todo=0 jobs=0; Agentizable claimable=0",
     "data": {
-      "active_competition": "site-generator-speed-01-run-20261122",
-      "our_entry": {},
-      "open_free_zero_transcript_bounties": [
+      "taskmarket_open_free": [
         {
-          "slug": "diff-speed-01-run-20261126",
-          "reward_usd": 100,
-          "deadline": "2026-11-29T06:07:00.000Z",
-          "submissions": 7467,
-          "transcripts_required": false
-        },
-        {
-          "slug": "png-squeeze-01-run-20261127",
-          "reward_usd": 100,
-          "deadline": "2026-11-29T05:00:00.000Z",
-          "submissions": 7823,
-          "transcripts_required": false
+          "ref": "TSK-DZXDQ4GA",
+          "chain_id": 8453,
+          "mode": "bounty",
+          "reward_usd": 5.0,
+          "subs": 33,
+          "expiry": "2026-11-30T23:08:28.360Z",
+          "title": "## modelXare sticker design"
         }
       ],
-      "mcp_registry_live": true
+      "synmerco": {
+        "configured": true,
+        "ok": true,
+        "wake": false,
+        "todo_count": 0,
+        "jobs_for_you": 0,
+        "standing_bid_on": true
+      },
+      "agentizable_claimable": [],
+      "croo": {
+        "configured": false
+      }
     }
   },
   "brain_meta": {
